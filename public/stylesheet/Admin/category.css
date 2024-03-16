@@ -568,3 +568,12 @@ label .notification .selected:before {
 }
 /* Add category */
 
+.categoryName{
+    overflow: auto;
+    width: 250px;
+   
+}
+
+.categoryName::-webkit-scrollbar {
+    display: none;
+}

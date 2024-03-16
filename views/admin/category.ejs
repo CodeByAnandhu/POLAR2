@@ -77,7 +77,9 @@
           <% categories.forEach((category, index) => { %>
             <div class="catogaryValue">
               <li class="<%= category.isVisible ? 'Visbile-list' : 'Hide-list' %>"><%= index + 1 %></li> 
+              <div class="categoryName">
               <li class="<%= category.isVisible ? 'Visbile-list' : 'Hide-list' %>"><%= category.categoryName %></li>
+            </div>
               <form method="POST" action="/deleteCategory/<%= category._id %>">
               <button class="<%= category.isVisible ? 'Visbile-Category' : 'Hide-Category' %>" type="submit" ><% if (category.isVisible) { %>
                 Visible
@@ -94,6 +96,8 @@
       </div>
     </div>
   </main>
+
+
 </body>
 
 </html>
