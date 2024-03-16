@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Polar</title>
+    <script src="https://kit.fontawesome.com/1069728e6a.js" crossorigin="anonymous"></script>
+
+    <style>
+#error p{
+  color: #a90202;
+  padding: 25px;
+  font-size: 20px;
+  font-weight: 600;
+  
+}
+
+#errrormessege{
+    background-color:rgba(229, 225, 225, 0.443);
+    width: 250px;
+    left: 200px;
+    position: absolute;
+    left: 700px;
+    top: 100px;
+    padding: 10px;
+    border-radius: 25px;
+}
+
+
+
+/* pop up messege */
+.popup-containerForError {
+  font-family: "Poppins", sans-serif;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.7);
+  background-color: #bd1919c5;
+  border-radius: 30px;
+  padding: 20px;
+  box-shadow: 25px 25px 52px 2px rgba(69, 69, 69, 0.48);
+  opacity: 0;
+  animation: popIn 0.8s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards;
+  z-index: 9999;
+}
+
+.popup-containerForError h4 {
+  margin: 0;
+  padding: 10px;
+  font-size: 18px;
+  text-align: center;
+  color: #ffffff;
+  font-weight: 600;
+}
+.popup-containerForError i{
+  color: #fefefe;
+}
+
+@keyframes popIn {
+  0% { opacity: 0; transform: translate(-50%, -50%) scale(0.7); }
+  70% { opacity: 1; transform: translate(-50%, -50%) scale(1.05); }
+  100% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+}
+
+@keyframes popOut {
+  0% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+  100% { opacity: 0; transform: translate(-50%, -50%) scale(0.7); }
+}
+
+
+
+
+/* For success */
+.popup-containerForSuccess {
+  font-family: "Poppins", sans-serif;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.7);
+  background-color: #fff;
+  border-radius: 30px;
+  padding: 20px;
+  box-shadow: 25px 25px 52px 2px rgba(69, 69, 69, 0.48);
+  opacity: 0;
+  animation: popIn 0.8s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards;
+  z-index: 9999;
+}
+
+.popup-containerForSuccess h4 {
+  margin: 0;
+  padding: 10px;
+  font-size: 18px;
+  text-align: center;
+  color: #10a765;
+  font-weight: bolder;
+}
+
+
+.popup-containerForSuccess i{
+  color: #10a765;;
+}
+
+
+/* For success */
+/* pop up messege */
+
+    </style>
+    
+</head>
+
+<link rel="stylesheet" href="/stylesheet/profile.css">
+<body>
+    
+
+    <section class="profile">
+
+        <script>
+document.addEventListener('DOMContentLoaded', function() {
+    var addAmountModal = document.getElementById("addAmountModal");
+    var openAddAmountModalBtn = document.getElementById("openAddAmountModal");
+
+    openAddAmountModalBtn.onclick = function() {
+        addAmountModal.style.display = "block";
+    }
+
+    // Close add amount modal when the close button is clicked
+    document.querySelector("#addAmountModal .close").onclick = function() {
+        addAmountModal.style.display = "none";
+    }
+
+    // Close add amount modal when clicking outside the modal
+    window.onclick = function(event) {
+        if (event.target == addAmountModal) {
+            addAmountModal.style.display = "none";
+        }
+    }
+
+    // Handle add amount confirmation
+    document.getElementById("confirmAddAmount").addEventListener("click", function() {
+        var amount = document.getElementById("amountInput").value;
+        // Process add amount logic here
+        addAmountModal.style.display = "none";
+    });
+});
+
+           
+           </script>
+        <header>
+
+
+            <img class="shopIcon" src="/img/ShopIconBlack.png" alt="">
+            <h1 class="profileHeading">Profile</h1>
+            <h3 class="subheading">
+                Welcome Back <%=userData.name%>
+            </h3>
+            <%if(userData.profileImage==""){%>
+             <h1></h1>
+            <%}else{%>
+              <img src="<%=userData.profileImage%>" alt="userProfile" class="userProfile">
+              <%}%>
+            <h3 class="userName">Hello <%=userData.name%></h3>
+        </header>
+
+        <label class="ui-switch">
+            <input type="checkbox" id="darkModeToggle">
+            <div class="slider">
+              <div class="circle"></div>
+            </div>
+        </label>
+
+      <div class="leftBar">
+        <a href="/getHome" class="address"><i class="fa-solid fa-house"></i></i>Home</a>
+        <a href="/editProfile" class="editProfile"><i class="fa-solid fa-user"></i>EditProfile</a>
+        <a href="/address" class="address"><i class="fa-solid fa-address-card"></i>Address</a>
+        <a href="/orderDetailsUser" class="orders"><i class="fa-solid fa-bag-shopping"></i>Orders</a>
+        <a href="/couponsUser" class="wishlist"><i class="fa-solid fa-ticket-simple"></i>Coupons</a>
+      </div>
+     
+
+   
+
+
+
+      <% if (typeof errorMessage !== 'undefined' && errorMessage.length > 0) { %>
+        <div id="popupmessegeError" class="popup-containerForError">
+            <h4><%= errorMessage %> <i class="fa-solid fa-circle-exclamation"></i></h4>
+        </div>
+    <% } %>
+    
+    <% if (typeof successMessage !== 'undefined' && successMessage.length > 0) { %>
+        <div id="popupmessegeSuccess" class="popup-containerForSuccess">
+            <h4> <%= successMessage %>  <i class="fa-solid fa-circle-check"></i></h4>
+        </div>
+    <% } %>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var popupError = document.getElementById('popupmessegeError');
+            var popupSuccess = document.getElementById('popupmessegeSuccess');
+    
+            setTimeout(function() {
+                if (popupError) {
+                    popupError.style.animation = 'popOut 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards';
+                    setTimeout(function() {
+                        popupError.remove();
+                    }, 300);
+                }
+                if (popupSuccess) {
+                    popupSuccess.style.animation = 'popOut 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards';
+                    setTimeout(function() {
+                        popupSuccess.remove();
+                    }, 300);
+                }
+            }, 4000);
+        });
+    </script>
+
+
+
+        <!-- SideBar -->
+        <div class="slide-bar" id="slideBar">
+          <h2>Wallet History</h2>
+
+          
+  <div class="container">
+    <div class="tabs">
+      <input type="radio" id="radio-1" name="tabs" checked="">
+      <label class="tab" for="radio-1">Deposit</label>
+      <input type="radio" id="radio-2" name="tabs">
+      <label class="tab" for="radio-2">withdrawal</label>
+      <input type="radio" id="radio-3" name="tabs">
+      <label class="tab" for="radio-3">refund</label>
+      <!-- <input type="radio" id="radio-4" name="tabs">
+      <label class="tab" for="radio-4">World</label>
+      <input type="radio" id="radio-5" name="tabs">
+      <label class="tab" for="radio-5">World</label> -->
+      <span class="glider"></span>
+    </div>
+  </div>
+
+          
+  
+        <% walletData.forEach((data)=>{%>
+
+          <%
+            const timestamp = data.timestamp;
+            const orderDate = new Date(timestamp);
+            const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+            const dayName = days[orderDate.getDay()];
+            const dayOfMonth = ('0' + orderDate.getDate()).slice(-2);
+            const formattedDate = `${dayName} ${dayOfMonth}`;
+          %>
+
+          <div class="productList" id="productList">
+
+            <div id="Deposit" class="contents">
+              <span class="dateOfTransaction"><%= formattedDate %></span>
+              <span class="Transaction"><%= data.type %></span>
+              <span class="transactionAmount">₹<%= data.amount %></span>
+            </div>
+
+        </div>
+
+        <%})%>
+
+<!-- 
+           <div id="withdrawal" class="contents">
+            <span class="dateOfTransaction">Fri 23</span>
+             <span class="Transaction">Deposit</span>
+             <span class="transactionAmount">$100</span>
+          </div>
+           
+
+           <div id="refund" class="contents">
+            <span class="dateOfTransaction">Fri 23</span>
+            <span class="Transaction">Deposit</span>
+            <span class="transactionAmount">$100</span>
+          </div> -->
+
+           
+
+          </div>
+        </div>
+        
+        
+      
+        
+      <!-- SideBar -->
+
+
+
+
+
+
+
+
+      <div class="center">
+       <!-- <img class="leafBg" src="/public/img/Leaf bg.png" alt="Leaf bg.png"> -->
+       <div class="card1">
+        <h3 class="myprofile">
+            
+        </h3>
+       </div>
+       <div class="card2">
+        <%if(AddressFirstIndex){%>
+        <a href="/editAddress/<%=AddressFirstIndex._id%>">
+        <button class="button">
+            <?xml version="1.0" ?><svg class="bell"   viewBox="0 0 576 512" xmlns="http://www.w3.org/2000/svg"><path d="M575.8 255.5C575.8 273.5 560.8 287.6 543.8 287.6H511.8L512.5 447.7C512.5 450.5 512.3 453.1 512 455.8V472C512 494.1 494.1 512 472 512H456C454.9 512 453.8 511.1 452.7 511.9C451.3 511.1 449.9 512 448.5 512H392C369.9 512 352 494.1 352 472V384C352 366.3 337.7 352 320 352H256C238.3 352 224 366.3 224 384V472C224 494.1 206.1 512 184 512H128.1C126.6 512 125.1 511.9 123.6 511.8C122.4 511.9 121.2 512 120 512H104C81.91 512 64 494.1 64 472V360C64 359.1 64.03 358.1 64.09 357.2V287.6H32.05C14.02 287.6 0 273.5 0 255.5C0 246.5 3.004 238.5 10.01 231.5L266.4 8.016C273.4 1.002 281.4 0 288.4 0C295.4 0 303.4 2.004 309.5 7.014L564.8 231.5C572.8 238.5 576.9 246.5 575.8 255.5L575.8 255.5z"/>
+            </svg>Edit Now
+           <div class="arrow">›</div>
+         </button>
+        </a>
+       
+        <div class="CardDtils">
+          
+            
+   <h5>Address:</h5>
+          <p>
+            <%=AddressFirstIndex.address%><br>
+        </p>
+         
+    </div>
+
+    <%}else{%>
+
+      <div class="CardDtils">
+
+        <a href="/addAddress">
+          <button class="button" style="position: relative;">
+              <?xml version="1.0" ?><svg class="bell"   viewBox="0 0 576 512" xmlns="http://www.w3.org/2000/svg"><path d="M575.8 255.5C575.8 273.5 560.8 287.6 543.8 287.6H511.8L512.5 447.7C512.5 450.5 512.3 453.1 512 455.8V472C512 494.1 494.1 512 472 512H456C454.9 512 453.8 511.1 452.7 511.9C451.3 511.1 449.9 512 448.5 512H392C369.9 512 352 494.1 352 472V384C352 366.3 337.7 352 320 352H256C238.3 352 224 366.3 224 384V472C224 494.1 206.1 512 184 512H128.1C126.6 512 125.1 511.9 123.6 511.8C122.4 511.9 121.2 512 120 512H104C81.91 512 64 494.1 64 472V360C64 359.1 64.03 358.1 64.09 357.2V287.6H32.05C14.02 287.6 0 273.5 0 255.5C0 246.5 3.004 238.5 10.01 231.5L266.4 8.016C273.4 1.002 281.4 0 288.4 0C295.4 0 303.4 2.004 309.5 7.014L564.8 231.5C572.8 238.5 576.9 246.5 575.8 255.5L575.8 255.5z"/>
+              </svg>Add Now
+             <div class="arrow">›</div>
+           </button>
+          </a>
+         
+
+        <p style="position: relative; left:90px; top:40px;">No Address Added</p>
+      </div>
+    <%}%>
+       </div>
+       <!-- Inside the card3 div -->
+       <div id="slideBarToggle" class="card3">
+        
+        <h3 class="Wallet">Wallet</h3>
+        <div class="availableBalance">Your available balance</div>
+        <div class="Amount">₹<%=userData.walletAmount%></div>
+
+
+       
+        
+        
+        <!-- Card Animation-->
+        <div class="notification"></div>
+        <div class="notititle">
+            <div class="NameOfTheUser"><%=userData.name%></div>
+        </div>
+        <div class="notibody"><%=userData.email%></div>
+        <!-- Modal for adding amount -->
+       
+    </div>
+    <button id="openAddAmountModal" class="addAmound">Add amount</button>
+     <div id="addAmountModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <label for="amountInput">Add amount:</label>
+                <input type="number" id="amountInput" class="amountInput" placeholder="Enter amount" name="walletAmount"  min="1">
+
+                <button id="confirmAddAmount" type="submit">Add amount</button>
+            </div>
+        </div>
+
+
+
+        <div id="withdrawalModal" class="modal">
+            <form action="/withdrawalAmount" method="post">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <label for="withdrawalAmount">Withdraw amount:</label>
+                <input type="number" id="withdrawalAmount" class="amountInput" placeholder="Enter amount" name="withdrawalAmount" >
+                <button id="confirmWithdrawal" type="submit">Withdraw</button>
+            </div>
+        </form>
+        </div>
+
+<button class="Withdraw">Withdraw</button>
+               <!-- Card Animation-->
+
+
+       </div>
+
+
+
+
+
+
+
+
+
+
+
+
+               <!-- Card Animation-->
+       </div>
+
+      </div>
+
+      <div class="user-card">
+        <%if(userData.profileImage==""){%>
+          <h1></h1>
+
+          <%}else{%>
+<div class="user-image"> 
+            <img src="<%=userData.profileImage%>" alt="">
+        </div>
+            <%}%>
+        
+        <div class="user-info">
+          <span class="user-name"><%=userData.name%></span>
+          <p class="user-title">Polar</p>
+        </div>
+
+        
+
+    </section>
+
+
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+
+    
+
+    <!-- slideBar -->
+    <script>
+      const slideBar = document.getElementById('slideBar');
+      const slideBarToggle = document.getElementById('slideBarToggle');
+    
+      
+      slideBarToggle.addEventListener('click', function() {
+        slideBar.classList.toggle('open');
+      });
+    
+      renderProducts(topProducts);
+    </script>
+    <!-- slideBar -->
+
+
+
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+    // Existing code
+    var withdrawalModal = document.getElementById("withdrawalModal");
+    var openWithdrawalModalBtn = document.querySelector(".Withdraw");
+
+    openWithdrawalModalBtn.onclick = function() {
+        withdrawalModal.style.display = "block";
+    }
+
+    // Close withdrawal modal when the close button is clicked
+    document.querySelector("#withdrawalModal .close").onclick = function() {
+        withdrawalModal.style.display = "none";
+    }
+
+    // Close withdrawal modal when clicking outside the modal
+    window.onclick = function(event) {
+        if (event.target == withdrawalModal) {
+            withdrawalModal.style.display = "none";
+        }
+    }
+
+    // Handle withdrawal confirmation
+    document.getElementById("confirmWithdrawal").addEventListener("click", function() {
+        var withdrawalAmount = document.getElementById("withdrawalAmount").value;
+        // Process withdrawal logic here
+        withdrawalModal.style.display = "none";
+    });
+});
+
+    </script>
+
+
+
+
+
+    <script>
+       document.getElementById('confirmAddAmount').addEventListener('click', function() {
+    var amount = document.getElementById('amountInput').value;
+
+    var options = {
+        key: "rzp_test_rEnMoJdll9h6tI",
+        amount: amount * 100, 
+        currency: 'INR',
+        name: 'POLAR',
+        description: 'Online Payment',
+        handler: function(response) {
+            var form = document.createElement('form');
+            form.method = 'post';
+            form.action = '/walletTopUp'; 
+
+            // Create hidden input for the amount
+            var amountInput = document.createElement('input');
+            amountInput.type = 'hidden';
+            amountInput.name = 'amount'; // Name it as needed in your server-side code
+            amountInput.value = amount;
+            form.appendChild(amountInput);
+
+            var paymentIdInput = document.createElement('input');
+            paymentIdInput.type = 'hidden';
+            paymentIdInput.name = 'razorpay_payment_id';
+            paymentIdInput.value = response.razorpay_payment_id;
+            form.appendChild(paymentIdInput);
+            document.body.appendChild(form);
+            form.submit();
+        }
+    };
+    var rzp1 = new Razorpay(options);
+    rzp1.open();
+});
+
+        </script>
+
+
+    <script>
+document.getElementById('darkModeToggle').addEventListener('change', function() {
+    toggleDarkMode();
+});
+function toggleDarkMode() {
+    document.body.classList.toggle('dark-mode');
+    const cards = document.querySelectorAll('.card1, .card2, .card3,.leftBar,.profileHeading,.subheading,.shopIcon,.userName');
+    cards.forEach(card => {
+        card.classList.toggle('dark-mode');
+    });
+   }
+    </script>
+
+
+
+<!-- RadioButton show and hide -->
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+      var addAmountModal = document.getElementById("addAmountModal");
+      var openAddAmountModalBtn = document.getElementById("openAddAmountModal");
+
+      openAddAmountModalBtn.onclick = function() {
+          addAmountModal.style.display = "block";
+      }
+
+      // Close add amount modal when the close button is clicked
+      document.querySelector("#addAmountModal .close").onclick = function() {
+          addAmountModal.style.display = "none";
+      }
+
+      // Close add amount modal when clicking outside the modal
+      window.onclick = function(event) {
+          if (event.target == addAmountModal) {
+              addAmountModal.style.display = "none";
+          }
+      }
+
+      // Handle add amount confirmation
+      document.getElementById("confirmAddAmount").addEventListener("click", function() {
+          var amount = document.getElementById("amountInput").value;
+          // Process add amount logic here
+          addAmountModal.style.display = "none";
+      });
+  });
+</script>
+<!-- RadioButton show and hide -->
+
+
+</body>
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="My First project" />
+    <meta name="author" content="Anandhu Aji Gopinath" />
+    <title>POLAR</title>
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="/public/img/Favicon.png" />
+    <!-- google Icons -->
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <!-- google Icons -->
+    <!-- Bootstrap icons-->
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <!-- fontAwsome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+        integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofnP+4zfuJeq8z6EegFjN5XgVi7z1aX6j" crossorigin="anonymous">
+    <!-- fontAwsome -->
+    <!-- <link href="css/styles.css" rel="stylesheet" /> -->
+    <link rel="stylesheet" href="/stylesheet/productDetails.css">
+
+</head>
+
+<body>
+
+
+    <div class="Main">
+         
+        <div class="square">
+            <h4 class="priceProduct">₹<%=productdetails.price%>.0</h4>
+            <div class="buttonss">
+                <form action="/addToCart/<%= productdetails._id %>" method="POST">
+                 <button type="submit" class="BuyBtn">AddToCart</button>
+                </form>
+                
+                 <form action="/wishlist/<%=productdetails._id%>" method="post">
+                    <button type="submit" class="cartBtn">Add To WishList</button>
+                   </form>
+            </div>
+           
+                
+            <img class="imgMain" src="<%= productdetails.productImage %>" alt="Chocolate">
+            <div class="imgsm1">
+            <img class="imgsm" src="<%= productdetails.productImage %>" alt="Chocolate">
+            <img class="imgsm" src="<%= productdetails.productImage %>" alt="Chocolate">
+            <img class="imgsm" src="<%= productdetails.productImage %>" alt="Chocolate">
+           </div>
+        </div>
+        <div class="cardsm">
+            <div class="card"></div>
+            <div class="card1"></div>
+            <div class="card1"></div>
+            <div class="card1"></div>
+            </div>
+        <div class="discription">
+
+            <h1 class="productName"><%= productdetails.productName %></h1
+            
+                <h4><%= productdetails.description %></h4>
+            
+                
+        </div>
+       
+         </div>
+
+        
+
+</body>
+
+</html>

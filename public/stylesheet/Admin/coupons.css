@@ -1,0 +1,550 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+@import url(https://fonts.googleapis.com/css?family=Ubuntu:400,700);
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #F9FAFC;
+    display: flex;
+    flex-direction: column;
+    font-family: 'Poppins', sans-serif;
+    overflow: hidden;
+}
+
+header{
+    background-color: #ffffff;
+    color: white;
+    padding: 1em;
+    text-align: center;
+    width: 97.8%;
+    font-family: 'Poppins', sans-serif;
+    height: 55px;
+    position: relative;
+
+}
+
+header h1{
+    width: 210px;
+    font-size: 9;
+    padding-left: 300px; 
+    position: absolute;
+    top: 26%; /* Adjust as needed */
+    left: 18%; /* Adjust as needed */
+    transform: translate(-50%, -50%);
+}
+header img{
+    width: 100px;
+   padding-bottom: 20px;
+   margin-right: 1350px;
+}
+
+
+.profilePic {
+
+  position: absolute;
+  top: 26%; /* Adjust as needed */
+  left: 18%; /* Adjust as needed */
+  transform: translate(-50%, -50%);
+}
+
+
+nav{
+    background-color: #ffffff;
+    color: white;
+    padding: 1px;
+    display: flex;
+    flex-direction: column;
+    width: 15%;
+    height: 640px;
+   
+}
+
+nav a{
+    color: #454242;
+    text-decoration: none;
+    padding: 1.4em 0;
+    display: flex;
+    align-items: center;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    padding-left: 50px;
+
+}
+
+nav a i{
+    margin-right: 10px;
+    
+}
+.dashboard{
+    width: 120px;
+    height: 35px;
+    background-color: #168e5e;
+    border-radius: 20px;
+    padding-left: 9%;
+    padding-bottom:0px;
+    font-size:17px;
+    color: rgb(255, 255, 255);
+    font-weight: 600;
+    margin-left: 24px;
+    padding-right: 0px;
+    padding-top: 10px;
+    font-family: 'Poppins', sans-serif;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.259);
+}
+#Coupons{
+    background-color: #168e5e;
+    width: 110px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+    border-radius: 30px;
+    margin-left: 40px;
+    box-shadow: 0 0 20px rgba(132, 132, 132, 0.42);
+}
+
+#Coupons  a{
+
+    padding-right: 45px;
+    color: white;
+}
+
+
+main{
+ 
+    /* display: flex; */
+    flex-direction: column;
+    /* align-items: center; */
+    margin: 20px;
+     width: 40%; 
+    min-height: 70%; 
+    margin-left: 20%;
+    margin-top: -549px;
+}
+
+.panel{
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(244, 244, 244, 0.03);
+    margin-bottom: 20px;
+}
+
+.product-details {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    
+}
+
+.sale-info{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.total-revenue{
+    margin-bottom: 20px;
+}
+
+table{
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+th, td{
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+th{
+    background-color: #333;
+    color: white;
+}
+
+@media only screen and (max-width: 800px) {
+    body {
+        flex-direction: column;
+    }
+
+    nav {
+        width: 100%;
+    }
+
+    main {
+        width: 100%;
+    }
+}
+
+ header h1{
+
+    color: #269367;
+}
+
+.panel.product-details{
+    justify-content: center;
+   height: 120px;
+   width: 50%;
+   margin-bottom: 40px;
+   position: relative;
+   border-radius: 25px;
+   background-color: #269367;
+   box-shadow: 0 0 14px rgba(154, 152, 152, 0.182);
+   /* border: 1px solid #ccc; */
+}
+
+
+
+
+
+
+/* SearchBox */
+.form button {
+  border: none;
+  background: none;
+  color: #8b8ba7;
+}
+/* styling of whole input container */
+.form {
+  --timing: 0.3s;
+  --width-of-input: 200px;
+  --height-of-input: 40px;
+  --border-height: 2px;
+  --input-bg: #eaeaea;
+  /* --border-color: #2f2ee9; */
+  --border-radius: 30px;
+  --after-border-radius: 1px;
+  position: relative;
+  width: var(--width-of-input);
+  height: var(--height-of-input);
+  display: flex;
+  align-items: center;
+  padding-inline: 0.8em;
+  border-radius: var(--border-radius);
+  transition: border-radius 10.5s ease;
+  background: var(--input-bg,#fff);
+  margin-left: 600px;
+  position: absolute;
+  top: 50%; 
+  left: 18%; 
+  transform: translate(-50%, -50%);
+
+
+
+}
+/* styling of Input */
+.input {
+  font-size: 0.9rem;
+  background-color: transparent;
+  width: 100%;
+  height: 100%;
+  padding-inline: 0.5em;
+  padding-block: 0.7em;
+  border: none;
+}
+/* styling of animated border */
+.form:before {
+  content: "";
+  position: absolute;
+  background: var(--border-color);
+  transform: scaleX(0);
+  transform-origin: center;
+  width: 100%;
+  height: var(--border-height);
+  left: 0;
+  bottom: 0;
+  border-radius: 1px;
+  transition: transform var(--timing) ease;
+}
+/* Hover on Input */
+.form:focus-within {
+  border-radius: var(--after-border-radius);
+}
+
+input:focus {
+  outline: none;
+}
+/* here is code of animated border */
+.form:focus-within:before {
+  transform: scale(1);
+}
+/* styling of close button */
+/* == you can click the close button to remove text == */
+.reset {
+  border: none;
+  background: none;
+  opacity: 0;
+  visibility: hidden;
+}
+/* close button shown when typing */
+input:not(:placeholder-shown) ~ .reset {
+  opacity: 1;
+  visibility: visible;
+}
+/* sizing svg icons */
+.form svg {
+  width: 17px;
+  margin-top: 3px;
+}
+
+/* SearchBox */
+
+
+
+
+.background{
+  border-radius: 30px;
+  z-index: -1;
+  position:absolute;
+  height: 550px;
+  background-color: #ffffff;
+  width: 1200px;
+  bottom: 80px;
+  top: 115px;
+  left: 260px;
+  height: 588px;
+  
+  
+}
+
+
+.fa-xmark{
+  color: rgb(247, 247, 247);
+  position: relative;
+  left: 252px;
+}
+
+.fa-receipt{
+  position: relative;
+  top:34px;
+  left:-37px;
+  color: #ffffff;
+  font-size: 50px;
+}
+
+.Discount{
+  position: relative;
+  top: 5px;
+  left: -20px;
+  color: #2b2b2b;
+  font-weight: 600;
+}
+
+.Percentage{
+  position: relative;
+  top: 45px;
+  left: 25px;
+  font-size: 35px;
+  color: #ebebeb;
+  font-weight: 700;
+}
+.couponCode{
+  position: absolute;
+  top: 4.3rem;
+  left: 5.4rem;
+  font-weight: 600;
+  font-size: 18px;
+  color: #075b1f; 
+}
+
+.addcoupon{
+  position: relative;
+  bottom: 39px;
+  left: 4px;
+  border:none;
+  border-radius: 20px;
+  width: 120px;
+  padding: 8px;
+  background-color: #269367;
+  color: white;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Modal */
+/* Styles for the modal */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: 10% auto;
+  padding: 20px;
+  border-radius: 30px;
+  width: 60%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.close {
+  color: #282727;
+  float: right;
+  font-size: 29px;
+
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.modal h2 {
+  margin-top: 0;
+  color: #15682c;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+label {
+  font-weight: 600;
+  display: block;
+  color: #6a6464;
+}
+
+.form-group input[type="text"],
+.form-group input[type="number"],
+.form-group input[type="date"] {
+  width: 100%;
+  padding: 17px;
+  border-radius: 25px;
+  background-color: #f0f0f0;
+  border: none;
+  box-sizing: border-box;
+}
+
+button {
+  background-color: #269367;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #d8ead9;
+  color: #075b1f;
+  transition: 0.80s;
+}
+
+/* Modal */
+
+
+.couponExpiry{
+  font-size: 12px;
+  position: relative;
+  top:-40px;
+  left: -95px;
+  padding: 30px;
+  font-weight: 600;
+  color: #d3d3d3; 
+}
+
+
+
+
+
+
+/* pop up messege */
+.popup-containerForError {
+  font-family: "Poppins", sans-serif;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.7);
+  background-color: #bd1919c5;
+  border-radius: 30px;
+  padding: 20px;
+  box-shadow: 25px 25px 52px 2px rgba(201,201,201,0.48);
+  opacity: 0;
+  animation: popIn 0.8s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards;
+  z-index: 9999;
+}
+
+.popup-containerForError h4 {
+  margin: 0;
+  padding: 10px;
+  font-size: 18px;
+  text-align: center;
+  color: #ffffff;
+  font-weight: 600;
+}
+.popup-containerForError i{
+  color: #fefefe;
+}
+
+@keyframes popIn {
+  0% { opacity: 0; transform: translate(-50%, -50%) scale(0.7); }
+  70% { opacity: 1; transform: translate(-50%, -50%) scale(1.05); }
+  100% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+}
+
+@keyframes popOut {
+  0% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+  100% { opacity: 0; transform: translate(-50%, -50%) scale(0.7); }
+}
+
+
+
+
+/* For success */
+.popup-containerForSuccess {
+  font-family: "Poppins", sans-serif;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.7);
+  background-color: #fff;
+  border-radius: 30px;
+  padding: 20px;
+  box-shadow: 25px 25px 52px 2px rgba(201,201,201,0.48);
+  opacity: 0;
+  animation: popIn 0.8s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards;
+  z-index: 9999;
+}
+
+.popup-containerForSuccess h4 {
+  margin: 0;
+  padding: 10px;
+  font-size: 18px;
+  text-align: center;
+  color: #10a765;
+  font-weight: bolder;
+}
+
+
+.popup-containerForSuccess i{
+  color: #10a765;;
+}
+
+
+/* For success */
+/* pop up messege */
+
+.align{
+  display: flex;
+}
+
+#gearicon{
+  color: rgb(255, 255, 255);
+  position: fixed;
+  z-index: 2;
+  margin-top: 25px;
+  margin-left: 16rem;
+ 
+}
+

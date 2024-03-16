@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>POLAR</title>
+  <script src="https://kit.fontawesome.com/1069728e6a.js" crossorigin="anonymous"></script>
+</head>
+
+<link rel="stylesheet" href="/stylesheet/ordersUser.css">
+
+<body>
+
+
+  <!-- Modal -->
+  <div id="cancelOrderModal" class="modal" style="display: none;">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2>Cancel Order</h2>
+      <form id="cancelOrderForm" method="post">
+        <label for="reason">Select reason for cancellation:</label><br>
+        <label class="radio-container" for="reasonInput">Enter reason</label>
+        <input type="text" class="reasonInput" name="reason" id="reasonInput"><br>
+        <label class="radio-container" for="reason4">
+          <input type="radio" id="reason4" name="reason" value="Wrong item">
+          Wrong item
+          <span class="checkmark"></span>
+        </label><br>
+        <!-- Add more reasons as needed -->
+        <button type="submit">Send</button>
+      </form>
+    </div>
+  </div>
+  <!-- Modal -->
+
+
+
+  
+
+<section class="profile">
+
+
+    <header>
+      <img class="shopIcon" src="/img/ShopIconBlack.png" alt="">
+      <h1 class="profileHeading">Profile</h1>
+      <h3 class="subheading">
+        Welcome Back Anandhu
+      </h3>
+      <%if(userData.profileImage==""){%>
+        <h1></h1>
+       <%}else{%>
+         <img src="<%=userData.profileImage%>" alt="userProfile" class="userProfile">
+         <%}%>      <h3 class="userName">Hello <%=userData.name%></h3>
+    </header>
+
+    <label class="ui-switch">
+      <input type="checkbox" id="darkModeToggle">
+      <div class="slider">
+        <div class="circle"></div>
+      </div>
+    </label>
+
+    <div class="leftBar">
+      <a href="/getHome" class="address"><i class="fa-solid fa-house"></i></i>Home</a>
+      <a href="/editProfile" class="editProfile"><i class="fa-solid fa-user"></i>EditProfile</a>
+      <a href="/address" class="address"><i class="fa-solid fa-address-card"></i>Address</a>
+      <a href="" class="orders"><i class="fa-solid fa-bag-shopping"></i>Orders</a>
+      <a href="/couponsUser" class="wishlist"><i class="fa-solid fa-ticket-simple"></i>Coupons</a>
+    </div>
+
+    <div class="center">
+      <!-- <img class="leafBg" src="/public/img/Leaf bg.png" alt="Leaf bg.png"> -->
+
+   
+
+      <%if(orderData.length==0){%>
+        <h1 class="empty-order"><i class="fa-solid fa-heart-crack"></i> Orders Empty</h1>
+          <a href="/getEnergy">
+            <button class="AddAnother">
+               Shop Now
+               <div class="arrow-wrapper">
+                 <div class="arrow"></div>
+               </div>
+            </button>
+           </a>
+           <%}%>
+        
+                 <% orderData.forEach((items, index)=> { %>
+                 <div class="contents">
+                    <% items.products.forEach((element, productIndex)=> { %>
+                    <div class="cardLarge">
+                     
+                      <div class="productImg">
+                       <img src="<%= element.productImage %>" alt="">
+                        </div>
+                         <div class="productDetails">
+                          <!-- <p class="orderId">Order id:<%= items.orderNumber %></p> -->
+                         <h4><%= element.productName %></h4>
+                         <p>Price: ₹<%= element.price %></p>
+                        <p class="qty">Qty: <%= element.quantity %></p>
+                      </div>
+                      <div class="more">
+                        <i class="more-btn fa-solid fa-ellipsis"></i>
+                          <div class="more-options">
+                            <ul>
+                              <% if (element.status==="Delivered" || element.status==="delivered") { %>
+                                <li><a href="/moreDetailsOrder/<%= items._id %>">More Details</a></li>
+                                <li><a href="#">Rate Now</a></li>
+                                <li><a href="/resonForReturn?productId=<%= element.productId %>&orderNumber=<%= items.orderNumber %>">Return Order</a></li>
+                                <% }%> 
+                                
+
+                                  <% if (element.status==="Pending" || element.status==="pending") { %>
+                                    <li><a href="/moreDetailsOrder/<%= items._id %>">More Details</a></li>
+                                    <li><a href="#" class="cancel-order-link" data-product-id="<%= element.productId %>" data-order-number="<%= items.orderNumber %>">Cancel Order</a></li>
+                                    <% }%> 
+
+                                    <% if (element.status==="processing" || element.status==="Processing") { %>
+                                      <li><a href="/moreDetailsOrder/<%= items._id %>">More Details</a></li>
+                                      <li><a href="#" class="cancel-order-link" data-product-id="<%= element.productId %>" data-order-number="<%= items.orderNumber %>">Cancel Order</a></li>
+                                      <% }%>
+                                       
+                                    <% if (element.status==="shipped" || element.status==="Shipped") { %>
+                                      <li><a href="/moreDetailsOrder/<%= items._id %>">More Details</a></li>
+                                      <li><a href="#" class="cancel-order-link" data-product-id="<%= element.productId %>" data-order-number="<%= items.orderNumber %>">Cancel Order</a></li>
+                                      <% }%> 
+
+                                    <% if (element.status==="returned" || element.status==="Returned") { %>
+                                      <li><a href="/moreDetailsOrder/<%= items._id %>">More Details</a></li>
+                                      <li><a href="#">Rate Now</a></li>
+                                      <% }%> 
+
+                                    <% if (element.status==="cancelled" || element.status==="Cancelled") { %>
+                                      <li><a href="/moreDetailsOrder/<%= items._id %>">More Details</a></li>
+                                      <% }%>   
+                            </ul>
+                          </div>
+                       </div>
+                      <% if (element.status==="Delivered" || element.status==="delivered") { %>
+                      <div class="status">
+                        <p>Delivered</p>
+                      </div>
+                      <% } %>
+                      <% if (element.status==="pending" || element.status==="Pending") { %>
+                        <div class="status">
+                          <p style="font-size: 13px;
+                          background-color: #c8c803d2;
+                          padding: 4px 10px;
+                          border-radius: 23px;
+                          color: #ffffff;">Pending</p>
+                        </div>
+                      <% } %> 
+
+                      <% if (element.status==="processing" || element.status==="Processing") { %>
+                        <div class="status">
+                          <p style="font-size: 13px;
+                          background-color: #ffaa0080;
+                          padding: 4px 10px;
+                          border-radius: 23px;
+                          color: #ffffff;">Processing</p>
+                        </div>
+                      <% } %> 
+
+                      <% if (element.status==="Shipped" || element.status==="shipped") { %>
+                        <div class="status">
+                          <p style="font-size: 13px;
+                          background-color: #00aeff80;
+                          padding: 4px 10px;
+                          border-radius: 23px;
+                          color: #ffffff;">Shipped</p>
+                        </div>
+                      <% } %> 
+
+                      <% if (element.status==="Cancelled" || element.status==="cancelled") { %>
+                        <div class="status">
+                          <p style="font-size: 13px;
+                          background-color: #ff0000a2;
+                          padding: 4px 10px;
+                          border-radius: 23px;
+                          color: #ffffff;">Cancelled</p>
+                        </div>
+                      <% } %> 
+
+                      <% if (element.status==="Returned" || element.status==="returned") { %>
+                        <div class="status">
+                          <p style="font-size: 13px;
+                          background-color: #9900ffa2;
+                          padding: 4px 10px;
+                          border-radius: 23px;
+                          color: #ffffff;">Returned</p>
+                        </div>
+                      <% } %> 
+                                        
+              
+
+                     
+                    </div>
+                  <%});%>
+                </div>
+                <% }); %> 
+
+
+                <div class="pagination">
+                  <% if (currentPage > 1) { %>
+                    <a href="?page=<%= currentPage - 1 %>" class="prev"> <i class="fa-solid fa-arrow-left"></i> Previous</a>
+                  <% } %>
+                  <% if (currentPage < totalPages) { %>
+                    <a href="?page=<%= currentPage + 1 %>" class="next">Next <i class="fa-solid fa-arrow-right"></i></a>
+                  <% } %>
+                </div>
+                
+
+                     </div>
+                         </section>
+
+
+
+
+
+                            <script>
+                              document.getElementById('darkModeToggle').addEventListener('change', function () {
+                                toggleDarkMode();
+                              });
+                              function toggleDarkMode() {
+                                document.body.classList.toggle('dark-mode');
+                                const cards = document.querySelectorAll('.card1, .card2, .card3,.leftBar,.profileHeading,.subheading,.shopIcon,.userName');
+                                cards.forEach(card => {
+                                  card.classList.toggle('dark-mode');
+                                });
+                              }
+                            </script>
+
+<!-- More -->
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+  const moreContainers = document.querySelectorAll('.more');
+
+  moreContainers.forEach(function(container) {
+    const moreBtn = container.querySelector('.more-btn');
+    const moreOptions = container.querySelector('.more-options');
+
+    container.addEventListener('mouseenter', function() {
+      moreOptions.style.display = 'block';
+      moreOptions.style.opacity = 1;
+    });
+
+    container.addEventListener('mouseleave', function(event) {
+      if (!isMouseOver(event, moreBtn) && !isMouseOver(event, moreOptions)) {
+        moreOptions.style.display = 'none';
+        moreOptions.style.opacity = 0;
+      }
+    });
+
+    function isMouseOver(event, element) {
+      return event.relatedTarget === element || element.contains(event.relatedTarget);
+    }
+  });
+});
+
+    </script>
+<!-- More -->
+
+
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const cancelOrderLinks = document.querySelectorAll('.cancel-order-link');
+    const closeButton = document.querySelector('#cancelOrderModal .close');
+    const modal = document.getElementById('cancelOrderModal');
+
+    cancelOrderLinks.forEach(function(link) {
+      link.addEventListener('click', function(event) {
+        event.preventDefault();
+        const productId = link.dataset.productId;
+        const orderNumber = link.dataset.orderNumber;
+        const form = document.getElementById('cancelOrderForm');
+
+        // Update form action dynamically
+        form.action = `/cancelOrder/${productId}/${orderNumber}`;
+
+        // Open the modal
+        modal.style.display = 'block';
+      });
+    });
+
+    // Add click event listener to the close button
+    closeButton.addEventListener('click', function() {
+      // Close the modal by hiding it
+      modal.style.display = 'none';
+    });
+  });
+</script>
+
+<!-- More details Modal -->
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const detailLinks = document.querySelectorAll('.more-details-link');
+    const closeDetailButton = document.querySelector('#detailModal .close-detail');
+    const detailModal = document.getElementById('detailModal');
+
+    detailLinks.forEach(function(link) {
+      link.addEventListener('click', function(event) {
+        event.preventDefault();
+        const orderId = link.dataset.orderId;
+        const orderAddress = link.dataset.orderAddress;
+        const totalQuantity = link.dataset.totalQuantity;
+        const totalPrice = link.dataset.totalPrice;
+        
+        // Update modal content dynamically
+        const orderDetailsContent = document.getElementById('orderDetailsContent');
+        orderDetailsContent.innerHTML = `
+          <p><strong>Order ID:</strong> ${orderId}</p>
+          <p><strong>Address:</strong> ${orderAddress}</p>
+          <p><strong>Total Quantity:</strong> ${totalQuantity}</p>
+          <p><strong>Total Price:</strong> ${totalPrice}</p>
+        `;
+
+        // Open the modal
+        detailModal.style.display = 'block';
+      });
+    });
+
+    // Add click event listener to the close button
+    closeDetailButton.addEventListener('click', function() {
+      // Close the modal by hiding it
+      detailModal.style.display = 'none';
+    });
+  });
+</script>
+<!-- More details Modal -->
+
+
+
+</body>
+
+</html>

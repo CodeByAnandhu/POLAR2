@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel</title>
+    <link rel="stylesheet" href="/stylesheet/Admin/salesReport.css">
+    <script src="https://kit.fontawesome.com/6293a1580a.js" crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+
+    <header>
+        <img src="/img/ShopIconBlack.png" alt="ShopIcon">
+        <h1>Admin Panel</h1>
+
+        </div>
+
+       <!-- Searchbar -->
+<form class="form" action="/search" method="GET">
+    <button type="submit">
+        <svg width="17" height="16" fill="none" xmlns="http://www.w3.org/2000/svg" role="img"
+            aria-labelledby="search">
+            <path d="M7.667 12.667A5.333 5.333 0 107.667 2a5.333 5.333 0 000 10.667zM14.334 14l-2.9-2.9"
+                stroke="currentColor" stroke-width="1.333" stroke-linecap="round" stroke-linejoin="round">
+            </path>
+        </svg>
+    </button>
+    <input class="input" name="search" placeholder="Type your text" required="" type="text">
+    <button class="reset" type="reset">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+            stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
+        </svg>
+    </button>
+</form>
+<!-- Searchbar -->
+
+
+
+    </header>
+
+    <nav>
+        <h1 class="dashboard">Dash Board</h1>
+        <div class="utility">>
+            <div id="insite">
+                <a href="/Insite"><i class="fa-solid fa-chart-simple"></i></i>Insite</a>
+            </div>
+            
+              <div id="Products">
+                <a href="/products"><i class="fa-solid fa-bag-shopping"></i></i>Products</a>
+              </div>
+        
+              <div id="salesReport">
+                <a href="#"><i class="fa-solid fa-align-left"></i>Orders</a>
+              </div>
+
+           
+            
+            <a href="/userManage"><i class="fa-solid fa-user-plus"></i>User Manage</a>
+            <a href="/offer"><i class="fa-solid fa-gear"></i>Offers</a>
+            <a href="/coupon"><i class="fa-solid fa-ticket-simple"></i></i>Coupons</a>
+            <a href="/adminlogin"><i class="fa-solid fa-right-from-bracket"></i></i>Logout</a>
+          
+        </div>
+        
+    </nav>
+    <main>
+
+       
+        <!-- <div class="bdbag">
+            <div class="container2342">
+                <div class="dropdown345">
+                    <a href="#" class="dropbtn678">Filter By</a>
+                    <div class="dropdown345-content">
+                        <a href="/salesReport?sort=daily">Daily</a>
+                        <a href="/salesReport?sort=weekly">Weekly</a>
+                        <a href="/salesReport?sort=yearly">Yearly</a>
+                        <input type="date" id="custom-date" name="customDate">
+                        <button class="customdateBtn" onclick="applyCustomDate()">Apply</button>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+        
+        
+        
+        
+   <!-- BreadCrumbs -->
+ 
+    <div class="breadCrumbs">
+        
+        <div class="home">
+            <a href="/AdminOrderDetails">Orders</a>
+        </div>
+        <i class="fa-solid fa-chevron-right"></i>
+        <div class="current">
+            <a href="#">Sales Report</a>
+        </div>
+
+    </div>
+    
+    <!-- BreadCrumbs -->
+
+    
+
+
+<!-- Table -->
+
+<div class="container">
+    
+<div class="downloadOptions">
+    <div class="downlodbtn">
+        <a href="/download-sales-report" target="_blank"><span>Download</span><span>PDF</span></a>
+    </div>
+    <div class="downlodbtnExcel">
+        <a href="/download-sales-report-excel" target="_blank"><span>Download</span><span>Excel</span></a>
+    </div>
+</div>
+
+    <div class="filter">
+        <label for="filter">Filter:</label>
+        <select id="filter" onchange="redirectToSelected()">
+            <option>By</option>
+            <option value="daily">Daily</option>
+            <option value="weekly">Weekly</option>
+            <option value="monthly">Monthly</option>
+            <option value="yearly">Yearly</option>
+            <option value="custom">Custom Date</option>
+        </select>
+        <input type="date" id="customDate" style="display: none;">
+        <button class="customdateBtn" id="applyButton" style="display: none;" onclick="applyCustomDate()">Apply</button>
+    </div>
+  
+    <% if (orderData.length > 0) { %>
+    <table id="data">
+      <thead>
+        <tr>
+          <th>Sl No</th>
+          <th>Username</th>
+          <th>Billing Address</th>
+          <th>Total Quantity</th>
+          <th>Total Price</th>
+          <th>Payment Method</th>
+          <th>Date</th>
+        </tr>
+      </thead>
+      <% orders.forEach((order, index) => { %>
+      <tbody>
+       
+          <tr>
+              <td><%= index + 1 + (page - 1) * limit %></td>
+              <td><%= order.address.name %></td>
+              <td>
+                  <%= order.address.address%>, <br>
+                  <%= order.address.locality%>, 
+                  <%= order.address.phone%> ,
+                  <%= order.address.pincode%>,
+                  <%= order.address.state%>.
+              </td>
+            
+              <td><%= order.totalQuantity %></td>
+              <td>₹<%= order.totalPrice %></td>
+              <td><%= order.paymentMethod %></td>
+              <td><%= order.orderDate.toLocaleDateString("en-US", { year: 'numeric', month: '2-digit', day: '2-digit' }) %></td>
+          </tr>
+        
+      </tbody>
+      <% }); %>
+    </table>
+
+    <div class="pagination">
+      <% if (page > 1) { %>
+        <a href="?page=<%= page - 1 %>" class="active">&laquo; Prev</a>
+      <% } %>
+      <% for (let i = 1; i <= Math.ceil(orderData.length / limit); i++) { %>
+        <a href="?page=<%= i %>" class="<%= i === page ? 'active' : '' %>"><%= i %></a>
+      <% } %>
+      <% if (page < Math.ceil(orderData.length / limit)) { %>
+        <a href="?page=<%= page + 1 %>" class="active">Next &raquo;</a>
+      <% } %>
+    </div>
+    <% } else { %>
+    <p>No orders found.</p>
+    <% } %>
+</div>
+  
+<!-- Table -->
+
+
+
+
+
+
+ 
+
+
+    </main>
+
+
+
+    <script>
+        document.getElementById('filter').addEventListener('change', function() {
+          var customDateInput = document.getElementById('customDate');
+          var applyButton = document.getElementById('applyButton');
+          if (this.value === 'custom') {
+            customDateInput.style.display = 'inline-block';
+            applyButton.style.display = 'inline-block';
+          } else {
+            customDateInput.style.display = 'none';
+            applyButton.style.display = 'none';
+          }
+        });
+        </script>
+
+
+
+
+
+<script>
+function applyCustomDate() {
+        const customDate = document.getElementById('custom-date').value;
+        const url = `/salesReport?sort=custom&date=${customDate}`;
+        window.location.href = url;
+    }
+    
+</script>
+    
+    
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+<script>
+    document.getElementById('download-pdf').addEventListener('click', function () {
+        // Create a new jsPDF instance
+        const pdf = new jsPDF();
+
+        // Define content for the PDF document
+        const content = document.querySelector('main').innerHTML;
+
+        // Generate PDF from the HTML content
+        pdf.html(content, {
+            callback: function (pdf) {
+                // Save the PDF file with a name
+                pdf.save('sales_report.pdf');
+            }
+        });
+    });
+</script>
+
+
+
+<script>
+    function redirectToSelected() {
+        var filterValue = document.getElementById("filter").value;
+        if (filterValue === "custom") {
+            // Handle custom date logic if needed
+            document.getElementById("customDate").style.display = "block";
+            document.getElementById("applyButton").style.display = "block";
+        } else {
+            // Redirect to the appropriate URL based on the selected option
+            var url = "/salesReport?sort=" + filterValue;
+            window.location.href = url;
+        }
+    }
+
+    function applyCustomDate() {
+        // Implement custom date logic if needed
+        var customDate = document.getElementById("customDate").value;
+        // Redirect to the appropriate URL with custom date parameter
+        var url = "/salesReport?sort=custom&date=" + customDate;
+        window.location.href = url;
+    }
+</script>
+
+
+<script>
+    // Add this function to handle the search form submission
+document.querySelector('.form').addEventListener('submit', function(event) {
+    event.preventDefault(); // Prevent default form submission
+    const searchTerm = this.querySelector('.input').value.trim(); // Get the search term
+    if (searchTerm !== '') {
+        const url = `/salesReport?search=${encodeURIComponent(searchTerm)}`; // Encode search term and create URL
+        window.location.href = url; // Redirect to the search URL
+    }
+});
+
+</script>
+    
+
+</body>
+
+</html>

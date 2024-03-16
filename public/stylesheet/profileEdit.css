@@ -1,0 +1,979 @@
+
+.account-settings .user-profile {
+    margin: 0 0 1rem 0;
+    padding-bottom: 1rem;
+    text-align: center;
+}
+.account-settings .user-profile .user-avatar {
+    margin: 0 0 1rem 0;
+}
+.account-settings .user-profile .user-avatar img {
+    width: 90px;
+    height: 90px;
+    -webkit-border-radius: 100px;
+    -moz-border-radius: 100px;
+    border-radius: 100px;
+}
+.account-settings .user-profile h5.user-name {
+    margin: 0 0 0.5rem 0;
+}
+.account-settings .user-profile h6.user-email {
+    margin: 0;
+    font-size: 0.8rem;
+    font-weight: 400;
+    color: #9fa8b9;
+}
+.account-settings .about {
+    margin: 2rem 0 0 0;
+    text-align: center;
+}
+.account-settings .about h5 {
+    margin: 0 0 15px 0;
+    color: #007ae1;
+}
+.account-settings .about p {
+    font-size: 0.825rem;
+}
+.form-control {
+   
+    border-radius: 20px;
+    font-size: .825rem;
+    background: #ffffff;
+    color: #2e323c69;
+}
+
+.card {
+    background: #ffffff;
+    -webkit-border-radius: 25px;
+    -moz-border-radius: 25px;
+    border-radius: 5px;
+   
+    margin-bottom: 1rem;
+}
+
+
+
+
+/* Profile Update */
+.object-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .profile-pic {
+    color: transparent;
+    transition: all 0.3s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    top: 40px;
+    transition: all 0.3s ease;
+  }
+
+  .profile-pic input {
+    display: none;
+  }
+
+  .profile-pic img {
+    position: absolute;
+    object-fit: cover;
+    width: 165px;
+    height: 165px;
+    box-shadow: 0 0 10px 0 rgba(255, 255, 255, 0.35);
+    border-radius: 100px;
+    z-index: 0;
+  }
+  .profile-pic .-label {
+    cursor: pointer;
+    height: 165px;
+    width: 165px;
+  }
+  .profile-pic:hover .-label {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 10000;
+    color: rgb(250, 250, 250);
+    transition: background-color 0.2s ease-in-out;
+    border-radius: 100px;
+    margin-bottom: 0;
+  }
+  .profile-pic span {
+    display: inline-flex;
+    padding: 0.2em;
+    height: 2em;
+  }
+ 
+  
+/* Profile Update */
+
+.account-settings .user-profile {
+    margin: 0 0 1rem 0;
+    padding-bottom: 1rem;
+    text-align: center;
+}
+.account-settings .user-profile .user-avatar {
+    margin: 0 0 1rem 0;
+}
+.account-settings .user-profile .user-avatar img {
+    width: 90px;
+    height: 90px;
+    -webkit-border-radius: 100px;
+    -moz-border-radius: 100px;
+    border-radius: 100px;
+}
+.account-settings .user-profile h5.user-name {
+    margin: 0 0 0.5rem 0;
+}
+.account-settings .user-profile h6.user-email {
+    margin: 0;
+    font-size: 0.8rem;
+    font-weight: 400;
+    color: #9fa8b9;
+}
+.account-settings .about {
+    margin: 2rem 0 0 0;
+    text-align: center;
+}
+.account-settings .about h5 {
+    margin: 0 0 15px 0;
+    color: #007ae1;
+}
+.account-settings .about p {
+    font-size: 0.825rem;
+}
+.form-control {
+   
+    border-radius: 20px;
+    border: none;
+    font-size: .825rem;
+    background: #f5f5f5c0;
+    color: #000000;
+}
+
+.card {
+    background: #ffffff;
+    -webkit-border-radius:25px;
+    -moz-border-radius: 25px;
+    border-radius: 5px;
+   
+    margin-bottom: 1rem;
+}
+.card10{
+  width:500px;
+    border-radius: 25px;
+    background-color: white;
+}
+.card13{
+    border-radius: 25px;
+    background-color: white;
+}
+.rowgutters{
+
+  position: relative;
+  top: 29px;
+  left: 50px;
+  width: 760px;
+  
+}
+.rowgutters label{
+   font-size: 13px;
+}
+.rowgutters .form-control{
+
+  height: 50px;
+}
+/* Profile Update */
+.object-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .CardButtons{
+    position: absolute;
+    top: 345px;
+    left: 90px;
+  }
+  .CardButtons button{
+    width: 100px;
+    border-radius: 20px;
+    height: 30px;
+    border: none;
+    font-size: small;
+    
+  }
+ 
+  .btnUpdate{
+    color: #007ae1;
+  }
+  .profile-pic {
+    color: transparent;
+    transition: all 0.3s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    transition: all 0.3s ease;
+  }
+  .profile-pic input {
+    display: none;
+  }
+  .profile-pic img {
+    position: absolute;
+    object-fit: cover;
+    width: 165px;
+    height: 165px;
+    box-shadow: 0 0 10px 0 rgba(255, 255, 255, 0.35);
+    border-radius: 100px;
+    z-index: 0;
+  }
+  .profile-pic .-label {
+    cursor: pointer;
+    height: 165px;
+    width: 165px;
+  }
+  .profile-pic:hover .-label {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 10000;
+    color: rgb(250, 250, 250);
+    transition: background-color 0.2s ease-in-out;
+    border-radius: 100px;
+    margin-bottom: 0;
+  }
+  .profile-pic span {
+    display: inline-flex;
+    padding: 0.2em;
+    height: 2em;
+  }
+  
+/* Copy OF profile */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800&display=swap');
+
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    
+   width: 100%;
+   height: 100%;
+   font-family: 'Poppins', sans-serif;
+   background-color: rgb(255, 255, 255);
+  overflow: hidden;
+}
+/* Your existing CSS */
+
+
+
+ul, ol {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+
+
+header{
+    top: 4px;
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.userName{
+    position: absolute;
+    left: 88%;
+    top: 38px;
+    font-weight: 500;
+    font-size: 17px;
+    color: rgb(34, 33, 33);
+}
+
+.userProfile{
+    position: absolute;
+    left: 84.6%;
+    top: 31px;
+    width: 2.6%;
+}
+
+.profileHeading{
+     
+    position: absolute;
+    left: 25.5%;
+    font-size: 28px;
+    font-weight: 600;
+    top: 20px;
+    color: rgb(13, 129, 28);
+}
+
+.subheading{
+    position: absolute;
+    left: 23%;
+    top: 60px;
+    font-weight: 400;
+    font-size: 15px;
+    color: rgb(51, 49, 49);
+}
+
+.leftBar{
+
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 190px;
+    left: 7px;
+    background-color: rgb(255, 255, 255);
+    width: 160px;
+    justify-content: center;
+    
+}
+
+.leftBar a{
+    
+margin-bottom: 50px;
+margin-left: 20px;
+color: rgb(18, 116, 9);
+font-weight: 600;
+font-size: 16px;
+background-color: rgba(255, 255, 255, 0.961);
+border-radius: 20px;
+background: #ffffff;
+box-shadow:  14px 14px 28px #c2bfbf36,-14px -14px 28px #ffffff;
+height: 30px;
+padding-top: 14px;
+padding-left: 19px;
+height: 50px;
+transition: background-color .50s ease, color 0.3s ease;
+}
+
+.leftBar a:hover{
+    background-color: rgba(2, 108, 34, 0.228);
+    color: rgba(5, 87, 5, 0.973);
+}
+.leftBar i{
+
+    margin-right: 16px;
+}
+
+.center{
+    position: relative;
+    background-color: rgba(231, 231, 231, 0.374);
+    /* background-image: url("/public/img/Leaf\ bg.png"); */
+    background-repeat: no-repeat;
+    height: 580px;
+    width: 1290px;
+    left: 200px;
+    bottom: -100px;
+    border-radius: 30px;
+    
+     
+
+}
+
+.card1{
+ 
+    position: absolute;
+    height: 400px;
+    width: 320px;
+    border-radius: 30px;
+    top: 35px;
+    left: 40px;
+    background-color: #fdfdfd;
+    box-shadow: 10px 10px 20px rgba(37, 36, 36, 0.057);
+
+}
+.leafBg{
+    filter: blur(3px);
+  
+}
+
+.card2{
+
+    position: absolute;
+    height: 250px;
+    width: 420px;
+    border-radius: 30px;
+    top: 35px;
+    left: 410px;
+    background-color: #fdfdfd;
+    box-shadow: 10px 10px 20px rgba(37, 36, 36, 0.057);
+}
+
+.card3{
+
+    position: absolute;
+    height: 250px;
+    width: 420px; 
+    border-radius: 30px;
+    top: 305px;
+    left: 410px;
+    background-color: #fdfdfd;
+    box-shadow: 10px 10px 20px rgba(37, 36, 36, 0.057);
+    
+}
+
+.shopIcon{
+    top: 21px;
+    left: 30px;
+    position: absolute;
+    width: 100px;
+}
+
+.CardDtils{
+    position: absolute;
+    top: 30px;
+    left: 30px;
+}
+.CardDtils h5{
+    position: relative;
+    font-size: 17px;
+    top:  0px;
+    left: 10px;
+    
+}
+.CardDtils p{
+    position: relative;
+    top:  10px;
+    left: 10px;
+    font-weight: 500;
+}
+
+.NameOfTheUser{
+  position: absolute;
+  right: 545px;
+  bottom: 194px;
+  color: white;
+  width: 200px;
+}
+
+.dark-mode {
+    background-color: black;
+    color: white; 
+}
+
+.dark-mode .leftBar a {
+    background-color: #000000;
+    color: rgb(8, 184, 43); 
+    box-shadow:  14px 14px 28px #c2bfbf00,-14px -14px 28px #ffffff00;
+
+}
+.dark-mode .leftBar a:hover {
+    color: rgb(255, 255, 255); 
+    background-color: rgb(26, 25, 25);
+    box-shadow:  14px 14px 28px #c2bfbf00,-14px -14px 28px #ffffff00;
+
+}
+
+.dark-mode .rowgutters label{
+    color: rgb(255, 255, 255);
+}
+.dark-mode .rowgutters .form-control{
+    background-color: rgba(177, 167, 167, 0.324);
+    color: white;
+}
+
+.dark-mode .card-body{
+  background-color: black;
+  border-radius: 25px;
+  border:none;
+}
+
+.dark-mode .profileHeading,
+.dark-mode .subheading {
+    color: rgb(232, 226, 226); 
+}
+
+.dark-mode .center{
+
+    background-color: #171616;
+}
+.dark-mode .profileHeading {
+    color:rgb(5, 114, 27);
+}
+
+.dark-mode .shopIcon {
+    filter: invert(1);
+    background: none;
+} 
+
+.dark-mode .button {
+    background-color: #f3f2f2c1;
+    color: #000000;
+}
+
+.dark-mode .notification:before {
+    background: #f3f2f2c1;
+    
+}
+
+.dark-mode .notibody{
+  color: black;
+}
+
+.dark-mode .NameOfTheUser{
+  color: black;
+}
+
+.dark-mode .user-card{
+  background-color: #c5c0c0;
+}
+/*  */
+/* switch settings */
+
+.ui-switch {
+    /* switch */
+    position: absolute;
+    top: 145px;
+    left: 1400px;
+    z-index: 1;
+    --switch-bg: rgb(135, 150, 165);
+    --switch-width: 55px;
+    --switch-height: 25px;
+    /* circle */
+    --circle-diameter: 32px;
+    --circle-bg: rgb(5, 114, 27);
+    --circle-inset: calc((var(--circle-diameter) - var(--switch-height)) / 2);
+  }
+  
+  .ui-switch input {
+    display: none;
+  }
+  
+  .slider {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    width: var(--switch-width);
+    height: var(--switch-height);
+    background: var(--switch-bg);
+    border-radius: 999px;
+    position: relative;
+    cursor: pointer;
+  }
+  
+  .slider .circle {
+    top: calc(var(--circle-inset) * -1);
+    left: 0;
+    width: var(--circle-diameter);
+    height: var(--circle-diameter);
+    position: absolute;
+    background: var(--circle-bg);
+    border-radius: inherit;
+    background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGhlaWdodD0iMjAiIHdpZHRoPSIyMCIgdmlld0JveD0iMCAwIDIwIDIwIj4KICAgIDxwYXRoIGZpbGw9IiNmZmYiCiAgICAgICAgZD0iTTkuMzA1IDEuNjY3VjMuNzVoMS4zODlWMS42NjdoLTEuMzl6bS00LjcwNyAxLjk1bC0uOTgyLjk4Mkw1LjA5IDYuMDcybC45ODItLjk4Mi0xLjQ3My0xLjQ3M3ptMTAuODAyIDBMMTMuOTI3IDUuMDlsLjk4Mi45ODIgMS40NzMtMS40NzMtLjk4Mi0uOTgyek0xMCA1LjEzOWE0Ljg3MiA0Ljg3MiAwIDAwLTQuODYyIDQuODZBNC44NzIgNC44NzIgMCAwMDEwIDE0Ljg2MiA0Ljg3MiA0Ljg3MiAwIDAwMTQuODYgMTAgNC44NzIgNC44NzIgMCAwMDEwIDUuMTM5em0wIDEuMzg5QTMuNDYyIDMuNDYyIDAgMDExMy40NzEgMTBhMy40NjIgMy40NjIgMCAwMS0zLjQ3MyAzLjQ3MkEzLjQ2MiAzLjQ2MiAwIDAxNi41MjcgMTAgMy40NjIgMy40NjIgMCAwMTEwIDYuNTI4ek0xLjY2NSA5LjMwNXYxLjM5aDIuMDgzdi0xLjM5SDEuNjY2em0xNC41ODMgMHYxLjM5aDIuMDg0di0xLjM5aC0yLjA4NHpNNS4wOSAxMy45MjhMMy42MTYgMTUuNGwuOTgyLjk4MiAxLjQ3My0xLjQ3My0uOTgyLS45ODJ6bTkuODIgMGwtLjk4Mi45ODIgMS40NzMgMS40NzMuOTgyLS45ODItMS40NzMtMS40NzN6TTkuMzA1IDE2LjI1djIuMDgzaDEuMzg5VjE2LjI1aC0xLjM5eiIgLz4KPC9zdmc+");
+    background-repeat: no-repeat;
+    background-position: center center;
+    -webkit-transition: left 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, -webkit-transform 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+    -o-transition: left 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, transform 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+    transition: left 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, transform 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, -webkit-transform 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    box-shadow: 0px 2px 1px -1px rgba(0,0,0,0.2), 0px 1px 1px 0px rgba(0,0,0,0.14), 0px 1px 3px 0px rgba(0,0,0,0.12);
+    ;
+  }
+  
+  .slider .circle::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.75);
+    border-radius: inherit;
+    -webkit-transition: all 500ms;
+    -o-transition: all 500ms;
+    transition: all 500ms;
+    opacity: 0;
+  }
+  
+  /* actions */
+  
+  .ui-switch input:checked+.slider .circle {
+    left: calc(100% - var(--circle-diameter));
+    background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGhlaWdodD0iMjAiIHdpZHRoPSIyMCIgdmlld0JveD0iMCAwIDIwIDIwIj4KICAgIDxwYXRoIGZpbGw9IiNmZmYiCiAgICAgICAgZD0iTTQuMiAyLjVsLS43IDEuOC0xLjguNyAxLjguNy43IDEuOC42LTEuOEw2LjcgNWwtMS45LS43LS42LTEuOHptMTUgOC4zYTYuNyA2LjcgMCAxMS02LjYtNi42IDUuOCA1LjggMCAwMDYuNiA2LjZ6IiAvPgo8L3N2Zz4=");
+  }
+  
+  .ui-switch input:active+.slider .circle::before {
+    -webkit-transition: 0s;
+    -o-transition: 0s;
+    transition: 0s;
+    opacity: 1;
+    width: 0;
+    height: 0;
+  }
+/*  */
+
+/* Address Button */
+.button {
+    position: relative;
+    top:170px;
+    left: 39px;
+    width: 200px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 10px;
+    padding: 0px 15px;
+    background-color: rgb(39, 37, 37);
+    border-radius: 10px;
+    color: white;
+    border: none;
+    position: relative;
+    cursor: pointer;
+    transition-duration: .2s;
+  }
+  
+  .bell {
+    width: 13px;
+  }
+  
+  .bell path {
+    fill: rgb(0, 206, 62);
+  }
+  
+  .arrow {
+    position: absolute;
+    right: 0;
+    width: 30px;
+    height: 100%;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .button:hover {
+    background-color: rgb(77, 77, 77);
+    transition-duration: .2s;
+  }
+  
+  .button:hover .arrow {
+    animation: slide-right .6s ease-out both;
+  }
+  /* arrow animation */
+  @keyframes slide-right {
+    0% {
+      transform: translateX(-10px);
+      opacity: 0;
+    }
+  
+    100% {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+  
+  .button:active {
+    transform: translate(1px , 1px);
+    transition-duration: .2s;
+  }
+  
+/* Address Button */
+
+
+
+
+
+
+/* Order Details Card */
+.notification {
+  display: flex;
+  flex-direction: column;
+  isolation: isolate;
+  position: relative;
+  right: 354px;
+  bottom: 10px;
+  width: 18rem;
+  height: 8rem;
+  border-radius: 1rem;
+  overflow: hidden;
+  font-family: 'Poppins', sans-serif;
+  font-size: 16px;
+  --gradient: linear-gradient(to bottom, #069e29b5, #3dff579d, #11dd37d7);
+  --color: rgb(10, 174, 27)
+}
+
+.notification:before {
+  border: none;
+  position: absolute;
+  content: "";
+  inset: 0.0625rem;
+  border-radius: 0.9375rem;
+  background: #085d10;
+  z-index: 2
+  
+  
+}
+
+.notification:after {
+  
+  position: absolute;
+  content: "";
+  width: 0.25rem;
+  inset: 0.65rem auto 0.65rem 0.5rem;
+  border-radius: 0.125rem;
+  background: var(--gradient);
+  transition: transform 300ms ease;
+  z-index: 4;
+}
+
+.notification:hover:after {
+  transform: translateX(0.15rem)
+}
+
+.notititle {
+  color: var(--color);
+  padding: 0.65rem 0.25rem 0.4rem 1.25rem;
+  font-weight: 500;
+  font-size: 1.1rem;
+  transition: transform 300ms ease;
+  z-index: 5;
+  
+}
+
+.notification:hover .notititle {
+  transform: translateX(0.15rem)
+}
+
+.notibody {
+  color: #d5d5d9;
+  padding: 0 1.25rem;
+  transition: transform 300ms ease;
+  z-index: 5;
+  font-size: 14px;
+  font-weight: 300;
+  position: relative;
+  right: 345px;
+  bottom: 88px;
+}
+
+.notification:hover .notibody {
+  transform: translateX(0.25rem)
+}
+
+.notiglow,
+.notiborderglow {
+  position: absolute;
+  width: 20rem;
+  height: 20rem;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle closest-side at center, white, transparent);
+  opacity: 0;
+  transition: opacity 300ms ease;
+  
+}
+
+.notiglow {
+  z-index: 3;
+}
+
+.notiborderglow {
+  z-index: 1;
+}
+
+.notification:hover .notiglow {
+  opacity: 0.1
+}
+
+.notification:hover .notiborderglow {
+  opacity: 0.1
+}
+
+.note {
+  color: var(--color);
+  position: fixed;
+  top: 80%;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  font-size: 0.9rem;
+  width: 75%;
+  
+}
+/* Order Details Card */
+
+/* ProfileBackGround */
+/* Unique selectors for HTML elements */
+
+/* Card container */
+.user-card {
+  
+  width: 200px;
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 10px;
+  background-color: #fffffe;
+  border-radius: 15px;
+  position: absolute;
+  top:180px;
+  right: 1035px;
+  overflow: hidden;
+  transition: all 0.5s ease;
+ 
+}
+
+/* Card image */
+.user-image {
+  width: 80px;
+  height: 80px;
+  background-color: #000000;
+  border-radius: 50%;
+  border: 4px solid #fefefe;
+  margin-top: 30px;
+  transition: all 0.5s ease;
+}
+
+/* Card information container */
+.user-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  transition: all 0.5s ease;
+}
+
+/* Name */
+.user-name {
+  font-weight: 600;
+  font-size: 14px;
+  color: #161A42;
+  margin-top: 15px;
+  line-height: 5px;
+}
+
+/* Job title */
+.user-title {
+  color: rgba(0, 0, 0, 0.5);
+}
+
+/* Follow button */
+.follow-button {
+  text-decoration: none;
+  background-color: #000000;
+  color: rgb(255, 255, 255);
+  padding: 5px 20px;
+  border-radius: 5px;
+  border: 1px solid white;
+  transition: all 0.5s ease;
+}
+
+/* Unique selectors for hover effects */
+
+/* Hover effect on card */
+.user-card:hover {
+  width: 200px;
+  border-radius: 200px;
+}
+
+/* Hover effect on pseudo element */
+.user-card:hover::before {
+  content: "";
+  width: 350px;
+  height: 100px;
+  position: absolute;
+  top: 0;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  border-bottom: 3px solid #fefefe;
+  background-color: #077918;
+  transition: all 0.3s ease;
+}
+.user-image img{
+  width: 80px;
+ position: relative;
+ top: -1px;
+ right: 2px;
+}
+
+/* Hover effect on card info */
+.user-card:hover .user-info {
+  transform: translate(0%,-15%);
+}
+
+/* Hover effect on follow button */
+.follow-button:hover {
+  background-color: #076625;
+  transform: scale(1.1);
+}
+
+.container{
+  position: relative;
+  top: 80px;
+  left: 150px;
+}
+
+.card-body{
+    height: 430px;
+}
+
+
+
+/* Modal */
+.modal-header {
+  background-color: #f8f9fa00;
+  color: #212529;
+  border-bottom: none;
+  font-family: 'Poppins', sans-serif;
+  height: 10px;
+}
+
+/* Customize modal title */
+.modal-title {
+  font-weight: bold;
+  
+}
+
+/* Customize modal body */
+.modal-body {
+  background-color: #ffffff00;
+  color: #212529;
+  height: 30px;
+}
+
+/* Customize modal footer */
+.modal-footer {
+  background-color: #00000028;
+  border-top: none;
+}
+
+/* Customize modal close button */
+.modal-footer button {
+  color: #007bff;
+}
+
+/* Customize modal content */
+.modal-content {
+ 
+  border-radius: 30px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+#modal-message{
+ position: relative;
+ bottom: 27px;
+ color: #076625;
+}
+/* Modal */
+

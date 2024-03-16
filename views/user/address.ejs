@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Polar</title>
+    <script src="https://kit.fontawesome.com/1069728e6a.js" crossorigin="anonymous"></script>
+</head>
+
+<link rel="stylesheet" href="/stylesheet/address.css">
+
+<body>
+
+  <style>
+       .alert-success {
+            position: absolute;
+            bottom: 10rem;
+            left: 23rem;
+    background-color: #0ba346;
+    border-color: #c3e6cb;
+    color: #ffffff;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border: 1px solid transparent;
+    border-radius: 25px;
+}
+  </style>
+
+    <section class="profile">
+   
+ 
+        <header>
+        
+
+            <img class="shopIcon" src="/img/ShopIconBlack.png" alt="">
+            <h1 class="profileHeading">Address</h1>
+            <h3 class="subheading">
+                Welcome Back <%=userData.name%>
+            </h3>
+            <%if(userData.profileImage==""){%>
+              <h1></h1>
+             <%}else{%>
+               <img src="<%=userData.profileImage%>" alt="userProfile" class="userProfile">
+               <%}%>           
+                <h3 class="userName">Hello <%=userData.name%></h3>
+        </header>
+
+        <label class="ui-switch">
+            <input type="checkbox" id="darkModeToggle">
+            <div class="slider">
+              <div class="circle"></div>
+            </div>
+        </label>
+
+      <div class="leftBar">
+        <a href="/getHome" class="address"><i class="fa-solid fa-house"></i></i>Home</a>
+        <a href="/profile" class="editProfile"><i class="fa-solid fa-user"></i>Profile</a>
+        <a href="/address" class="address"><i class="fa-solid fa-address-card"></i>Address</a>
+        <a href="/orderDetailsUser" class="orders"><i class="fa-solid fa-bag-shopping"></i>Orders</a>
+        <a href="/couponsUser" class="wishlist"><i class="fa-solid fa-ticket-simple"></i>Coupons</a>
+      </div>
+     
+      <div class="center">
+       
+       
+        <% if (typeof errorMessage !== 'undefined') { %>
+          <div id="errorMessage" class="Errormsg">
+              <h3 style="color: red; font-weight: 500;"><%= errorMessage %></h3>
+          </div>
+      <% } %>
+      
+      <% if (typeof successMessage !== 'undefined' && successMessage.length > 0) { %>
+          <div id="successMessage" class="alert alert-success">
+              <%= successMessage %>
+          </div>
+      <% } %>
+         
+
+        <div class="card1">
+          <%AddressData.forEach((data, index) => { %>
+            <div class="innerCard2">
+              
+              <form action="/deleteAddress/<%= data._id %>" method="POST" id="deleteForm<%= index %>">
+                <i class="fa-solid fa-xmark" id="closeBtn" data-index="<%= index %>"></i>
+              </form>
+              
+              <h3>Address <%= index + 1 %></h3>
+              <p>Name: <%= data.name %><br>
+                <%= data.address %><br>
+                Locality: <%= data.locality %><br>
+                Phone: <%= data.phone %><br>
+                Pincode: <%= data.pincode %><br>
+                State: <%= data.state %></p>
+              <p></p>
+              <form method="GET" action="/editAddress/<%= data._id %>"> 
+                <button type="submit">
+                  Edit Now
+                  <div class="arrow-wrapper">
+                    <div class="arrow"></div>
+                  </div>
+                </button>
+              </form>
+            </div>
+          <% }); %>
+        </div>
+        
+        <script>
+        document.addEventListener("DOMContentLoaded", function() {
+          var closeBtns = document.querySelectorAll("#closeBtn");
+        
+          // Adding click event listener to each close button
+          closeBtns.forEach(function(btn) {
+            btn.addEventListener("click", function() {
+              var index = this.dataset.index;
+              document.getElementById("deleteForm" + index).submit();
+            });
+          });
+        });
+        </script>
+        
+        
+
+       </div>
+      
+       </div>
+      <a href="/addAddress">
+       <button class="AddAnother">
+          Add Address
+          <div class="arrow-wrapper">
+            <div class="arrow"></div>
+          </div>
+       </button>
+      </a>
+    </section>
+   
+      
+
+
+    <script>
+document.getElementById('darkModeToggle').addEventListener('change', function() {
+    toggleDarkMode();
+});
+function toggleDarkMode() {
+    document.body.classList.toggle('dark-mode');
+    const cards = document.querySelectorAll('.card1, .card2, .card3,.leftBar,.profileHeading,.subheading,.shopIcon,.userName');
+    cards.forEach(card => {
+        card.classList.toggle('dark-mode');
+    });
+   }
+  
+    </script>
+
+<script>
+  
+  setTimeout(function() {
+      var successMessage = document.getElementById('successMessage');
+      if (successMessage) {
+        successMessage.style.display = 'none';
+      }
+  }, 2000);
+</script>
+
+</body>
+</html>

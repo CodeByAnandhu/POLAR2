@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel</title>
+    <link rel="stylesheet" href="/stylesheet/Admin/addProduct.css">
+    <script src="https://kit.fontawesome.com/6293a1580a.js" crossorigin="anonymous"></script>
+    <!-- jquery -->
+        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <!-- jquery -->
+    
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+
+    <style>
+         
+        #flashMessageContainer {
+            position: relative;
+            margin-bottom: 20px; 
+        }
+    
+        /* Style for popup message */
+        #popupMessage {
+            position: fixed;
+            top: 50%; 
+            left: 50%; 
+            transform: translate(-50%, -50%); 
+            background-color: #fff;
+            border: none; 
+            padding: 10px 20px; 
+            color: red;
+            border-radius: 25px; 
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); 
+            z-index: 9999;
+            display: none; 
+        }
+        </style>
+
+    <header>
+        <img src="/img/ShopIconBlack.png" alt="ShopIcon">
+        <h1>Admin Panel</h1>
+
+        </div>
+        <!-- searchbar -->
+        <form class="form">
+            <button>
+                <svg width="17" height="16" fill="none" xmlns="http://www.w3.org/2000/svg" role="img"
+                    aria-labelledby="search">
+                    <path d="M7.667 12.667A5.333 5.333 0 107.667 2a5.333 5.333 0 000 10.667zM14.334 14l-2.9-2.9"
+                        stroke="currentColor" stroke-width="1.333" stroke-linecap="round" stroke-linejoin="round">
+                    </path>
+                </svg>
+            </button>
+            <input class="input" placeholder="Type your text" required="" type="text">
+            <button class="reset" type="reset">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
+        </form>
+        <!-- searchbar -->
+
+
+    </header>
+
+    <nav>
+        <h1 class="dashboard">Dash Board</h1>
+        <div class="utility">>
+            <div id="insite">
+                <a href="/Insite"><i class="fa-solid fa-chart-simple"></i></i>Insite</a>
+            </div>
+            <div id="Products">
+                <a href="/Products"><i class="fa-solid fa-bag-shopping"></i></i>Products</a>
+            </div>
+            <a href="/AdminOrderDetails"><i class="fa-solid fa-align-left"></i>Orders</a>
+            <div id="userMange">
+                <a href="/UserManage"><i class="fa-solid fa-user-plus"></i>User Manage</a>
+            </div>
+
+            <!-- <div id="category">
+                <a href="#"><i class="fa-solid fa-list"></i></i></i>Category Manage</a>
+            </div> -->
+
+            
+            <a href="/offer"><i class="fa-solid fa-gear"></i>Offers</a>
+            <a href="/coupon"><i class="fa-solid fa-ticket-simple"></i></i>Coupons</a>
+            <a href="#"><i class="fa-solid fa-right-from-bracket"></i></i>Logout</a>
+        </div>
+    </nav>
+    <main>
+        <div class="panel product-details">
+
+
+            <form id="productForm" action="/editProduct/<%=items._id%>" method="POST" enctype="multipart/form-data">
+             
+                <div class="prodectText" >
+                    <label>Product Name</label>
+                    <input type="text" placeholder="" value="<%=items.productName%>" name="productName">
+                </div>
+
+                <div class="prodectText">
+                    <label>Price</label>
+                    <input type="text" placeholder="" value="<%=items.price%>" name="price" min="1">
+                </div>
+               
+                <div class="productOffer">
+                    <label>Add Product Offer</label>
+                    <input type="number" placeholder="" value="<%=items.productOffer%>" name="productOffer" max="100" min="0">
+                </div>
+
+                <div class="Discription">
+                    <label>Discription</label>
+                    <textarea rows="5" name="description"><%= items.description.trim() %></textarea>
+
+                </div>
+            
+                <div class="CatogarySelection">
+                    <label>Category</label>
+                    <select name="selectCategory">
+                        <% category.forEach((category) => { %>
+                            <option><%= category.categoryName %></option>
+                        <% }); %>
+                    </select>
+                </div>
+                  
+
+                <div class="PrImageUplode">
+                    <label for="productImage" id="productImagesLabel">Product Images:</label>
+                    <div class="image-preview">
+                        <label id="PreviewOfImage">Image Preview:</label>
+                       <!-- Muliple images showing -->
+                       <% items.productImage.forEach((image, index) => { %>
+                        <img class="selectedImagePreview" src="<%= items.productImage[index] %>" alt="Default Image">
+                    <% }); %>
+                    
+                    </div>
+                    <input type="file" id="productImage" name="productImage" accept="image/*" multiple  onchange="previewImages()">
+                    
+                </div>
+                <div class="StockCount">
+                    <label>Stock Count</label>
+                    <input type="number" placeholder="<%=items.stockCount%>" value="<%=items.stockCount%>" name="stockCount" min="1"/>
+                </div>
+                <button type="submit" class="AddPrSubmitBtn">Submit</button>
+                
+                </form>
+                </div>
+                </div>
+                
+                </div>
+                </div>
+                <div id="flashMessageContainer">
+                    <% if (typeof errorMessage !== 'undefined' && errorMessage.length > 0) { %>
+                    <div class="alert alert-danger">
+                        <%= errorMessage %>
+                    </div>
+                    <% } %>
+                </div>
+                
+                <div id="popupMessage" style="display: none;"></div>
+                
+                </main>
+                
+                 <script>
+        function displayPopupMessage(message) {
+            // Function to display popup messages
+            var popupMessage = document.getElementById("popupMessage");
+            popupMessage.innerHTML = message;
+            popupMessage.style.display = "block";
+
+            setTimeout(function() {
+                popupMessage.style.display = "none";
+            }, 2000);
+        }
+
+        function submitForm() {
+            // Function to handle form submission
+
+            // Capture cropped image data
+            captureCroppedImageData();
+
+            // Get the form and input elements
+            var form = document.getElementById('productForm');
+            var input = document.getElementById('productImage');
+
+            // Clear original image data
+            input.value = '';
+
+            // Add cropped image data to the form as hidden inputs
+            for (var key in croppedImageData) {
+                var hiddenInput = document.createElement('input');
+                hiddenInput.type = 'hidden';
+                hiddenInput.name = 'croppedImages[]'; // Adjust the name as needed
+                hiddenInput.value = croppedImageData[key];
+                form.appendChild(hiddenInput);
+            }
+
+            // Submit the form
+            form.submit();
+        }
+
+        function previewImages() {
+            // Function to preview images and initialize Cropper
+            var input = document.getElementById('productImage');
+            var previewContainer = document.querySelector('.image-preview');
+            previewContainer.innerHTML = '';
+
+            for (var i = 0; i < input.files.length; i++) {
+                var file = input.files[i];
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    var imgContainer = document.createElement('div');
+                    imgContainer.classList.add('preview-item');
+
+                    var img = document.createElement('img');
+                    img.src = e.target.result;
+                    img.alt = 'Selected Image';
+
+                    img.onload = function() {
+                        // Initialize Cropper on the image
+                        var cropper = new Cropper(img, {
+                            aspectRatio: 4 / 4, 
+                            viewMode: 3, 
+                            autoCropArea: 1, 
+                        });
+                    };
+
+                    imgContainer.appendChild(img);
+                    previewContainer.appendChild(imgContainer);
+                };
+
+                reader.readAsDataURL(file);
+            }
+        }
+    </script>
+
+</body>
+
+</html>

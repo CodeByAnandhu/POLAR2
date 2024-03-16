@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Panel</title>
+  <link rel="stylesheet" href="/stylesheet/Admin/category.css">
+  <script src="https://kit.fontawesome.com/6293a1580a.js" crossorigin="anonymous"></script>
+
+  <style>
+
+.custom-link {
+    font-size: 25px; 
+}
+
+.error p{
+  color: #de1a1a;
+  padding-left: 15px;
+  font-size: 20px;
+  font-weight: 300;
+}
+/* .successmessege{
+  color: #de1a1a;
+  padding-left: 15px;
+  font-size: 20px;
+  font-weight: 300;
+} */
+  </style>
+</head>
+
+
+<body>
+
+  <header>
+    <img src="/img/ShopIconBlack.png" alt="ShopIcon">
+    <h1>Admin Panel</h1>
+
+    </div>
+    <!-- searchbar -->
+    <form class="form">
+      <button>
+        <svg width="17" height="16" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="search">
+          <path d="M7.667 12.667A5.333 5.333 0 107.667 2a5.333 5.333 0 000 10.667zM14.334 14l-2.9-2.9"
+            stroke="currentColor" stroke-width="1.333" stroke-linecap="round" stroke-linejoin="round"></path>
+        </svg>
+      </button>
+      <input class="input" placeholder="Type your text" required="" type="text">
+      <button class="reset" type="reset">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+          stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
+        </svg>
+      </button>
+    </form>
+    <!-- searchbar -->
+
+
+  </header>
+
+  <nav>
+    <h1 class="dashboard">Dash Board</h1>
+    <div class="utility">>
+      <div id="insite">
+        <a href="/Insite"><i class="fa-solid fa-chart-simple"></i></i>Insite</a>
+      </div>
+
+      <div id="Products">
+        <a href="/Products"><i class="fa-solid fa-bag-shopping"></i></i>Products</a>
+      </div>
+      <div id="userMange">
+        <a href="/UserManage"><i class="fa-solid fa-user-plus"></i>User Manage</a>
+      </div>
+
+      <div id="category">
+        <a href="/category"><i class="fa-solid fa-list"></i></i></i>Category Manage</a>
+      </div>
+
+      <a href="/AdminOrderDetails"><i class="fa-solid fa-align-left"></i>Orders</a>
+      <a href="/offer"><i class="fa-solid fa-gear"></i>Offers</a>
+      <a href="/coupon"><i class="fa-solid fa-ticket-simple"></i></i>Coupons</a>
+      <a href="#"><i class="fa-solid fa-right-from-bracket"></i></i>Logout</a>
+    </div>
+  </nav>
+  <main>
+    <div class="panel product-details">
+
+      
+      <a href="/Category" class="custom-link" style="color: black;"><i class="fa-solid fa-arrow-left"></i></a>
+ 
+
+        <div class="admin-container">
+              
+        <!-- editCategory.ejs -->
+<% if(errorMessage ) { %>
+  <p class="error" style="color: #de1a1a;"><%= errorMessage %></p>
+<% } %>
+
+
+
+            
+            <h1 class="admin-title">Edit CATEGORY</h1>    
+            <form class="admin-form" action="/editCategory/<%=category._id%>" method="POST">
+              
+              <label class="admin-label" for="categoryName">New Category Name:</label>
+              <input class="admin-input" type="text" id="categoryName" name="categoryName" value="<%=category.categoryName%>" placeholder="">
+              
+              <button class="admin-button" type="submit">Update Category</button>
+          </form>
+         
+            
+        </div>
+
+
+
+
+    </div>
+  </main>
+</body>
+
+</html>

@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <style>
+
+/* Modal */
+    /* Styling for modal */
+/* Modal */
+.modal {
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(249, 249, 249); /* Semi-transparent background */
+}
+
+.modal-content {
+    font-family: "Poppins", sans-serif;
+    background-color: #fefefe;
+    margin: 5% auto; 
+    padding: 40px;
+    width: 80%;
+    max-width: 600px;
+    border-radius: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.close {
+    position: absolute;
+    top: 15px;
+    left: 66rem;
+    color: #413e3e;
+    font-size: 28px;
+    font-weight: 400;
+    cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+}
+
+    /* Styling for form elements */
+    .form-group {
+        margin-bottom: 15px;
+    }
+
+    .form-group label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: 400;
+    }
+
+    .form-group input[type="text"],
+    .form-group input[type="date"] {
+        width: 90%;
+        padding: 15px;
+        border-radius: 25px;
+        border: none;
+        background-color: #f4f4f4;
+    }
+
+    .form-group input[type="text"],
+    .form-group input[type="date"]:focus {
+        outline: none;
+      
+    }
+
+    .form-group input[type="checkbox"] {
+        margin-top: 0px;
+        /* Remove the default checkbox */
+        appearance: none;
+        -webkit-appearance: none;
+        width: 20px;
+        height: 20px;
+        border: 1px solid #fcfcfc;
+        border-radius: 3px;
+        outline: none;
+        cursor: pointer;
+        margin-right: 5px;
+        color: #45a049;
+    }
+
+    .form-group input[type="checkbox"] {
+    margin-top: 0px;
+    /* Remove the default checkbox */
+    appearance: none;
+    -webkit-appearance: none;
+    width: 20px;
+    height: 20px;
+    border: 1px solid #fcfcfc;
+    border-radius: 3px;
+    outline: none;
+    cursor: pointer;
+    margin-right: 5px;
+}
+
+/* Custom checkbox tick */
+.form-group input[type="checkbox"]::before {
+    content: "\2713"; /* Unicode character for checkmark */
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    line-height: 20px;
+    color: transparent; /* Hide the default checkmark */
+    background-color: #0b7249; /* Color of the checkmark */
+    border-radius: 3px;
+}
+
+/* Checkbox checked state */
+.form-group input[type="checkbox"]:checked::before {
+    color: white; /* Color of the checkmark when checked */
+}
+
+
+    .submit-btn {
+        background-color: #0b9157;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    .submit-btn:hover {
+        background-color: #13a86f;
+    }
+
+    select{
+        border: none;
+        background-color: #f4f4f4;
+        width: 95%;
+        padding: 15px;
+        border-radius: 25px;
+    }
+/* Modal */
+    </style>
+
+
+    <div id="myModal" class="modal">
+        <!-- Modal content -->
+        <div class="modal-content">
+          <form action="/editOffer/<%= offerData._id %>" method="POST" id="modalForm">
+          
+          <div class="form-group">
+              <label for="discount">Discount(%):</label>
+              <input type="text" id="discount" name="discount" value="<%= offerData.discount %>">
+          </div>
+          <div class="form-group">
+            <label for="startDate">Start Date:</label>
+            <!-- Convert JavaScript Date object to string in YYYY-MM-DD format -->
+            <input type="date" id="startDate" name="startDate" value="<%= offerData.startDate.toISOString().substring(0, 10) %>">
+        </div>
+        <div class="form-group">
+            <label for="endDate">End Date:</label>
+            <!-- Convert JavaScript Date object to string in YYYY-MM-DD format -->
+            <input type="date" id="endDate" name="endDate" value="<%= offerData.endDate.toISOString().substring(0, 10) %>">
+        </div>
+          <div class="form-group">
+            <label for="category">Category:</label>
+            <select id="category" name="category">
+                <option value=""><%= offerData.category %></option> <!-- Default null option -->
+                <% categoryData.forEach((category) => { %>
+                    <option value="<%= category.categoryName %>"><%= category.categoryName %></option>
+                <% }) %>
+            </select>
+        </div>
+        
+        
+        <div class="form-group">
+            <input type="radio" id="isActiveTrue" name="isActive" value="true">
+            <label for="isActiveTrue">Active</label>
+        </div>
+        <div class="form-group">
+            <input type="radio" id="isActiveFalse" name="isActive" value="false">
+            <label for="isActiveFalse">Inactive</label>
+        </div>
+        
+          <button type="submit" class="submit-btn">Submit</button>
+      </form>
+      
+        </div>
+      </div>
+</body>
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/stylesheet/Admin/addOffer.css">
+</head>
+<body>
+
+    <div id="myModal" class="modal">
+      
+        <!-- Modal content -->
+        <div class="modal-content">
+          <form action="/offer" method="POST" id="modalForm">
+            <div class="form-group">
+                <h2>Product / Category Offer</h2>
+                <label for="type">Type:</label>
+                <select id="type" name="type">
+                    <option value="Product">Product</option>
+                    <option value="Category">Category</option>
+                    <option value="Referral">Referral</option>
+                </select>
+            </div>
+            
+          <div class="form-group">
+              <label for="discount">Discount(%):</label>
+              <input type="number" id="discount" name="discount" min="1">
+          </div>
+          <!-- <div class="form-group">
+              <label for="refferal">Refferal Amount:</label>
+              <input type="number" id="refferal" name="refferalAmound" min="1">
+          </div> -->
+          <div class="form-group">
+              <label for="startDate">Start Date:</label>
+              <input type="date" id="startDate" name="startDate" >
+          </div>
+          <div class="form-group">
+              <label for="endDate">End Date:</label>
+              <input type="date" id="endDate" name="endDate">
+          </div>
+          <div class="form-group">
+            <label for="category">Category:</label>
+            <select id="category" name="category">
+                <option value="">Select a category</option> 
+                <% categoryData.forEach((category) => { %>
+                    <option value="<%= category.categoryName %>"><%= category.categoryName %></option>
+                <% }) %>
+            </select>
+        </div>
+        
+        <div class="form-group">
+            <label for="category">Product:</label>
+            <select id="category" name="product">
+                <option value="">Select a product</option> 
+                <% productData.forEach((product) => { %>
+                    <option value="<%= product.productName %>"><%= product.productName %></option>
+                <% }) %>
+            </select>
+        </div>
+        
+        <div class="form-group">
+            <input type="radio" id="isActiveTrue" name="isActive" value="true">
+            <label for="isActiveTrue">Active</label>
+        </div>
+        <div class="form-group">
+            <input type="radio" id="isActiveFalse" name="isActive" value="false">
+            <label for="isActiveFalse">Inactive</label>
+        </div>
+          <button type="submit" class="submit-btn">Submit</button>
+      </form>
+      
+        </div>
+      </div>
+
+    
+</body>
+</html>

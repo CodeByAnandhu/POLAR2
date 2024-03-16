@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Polar</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://kit.fontawesome.com/1069728e6a.js" crossorigin="anonymous"></script>
+</head>
+
+<link rel="stylesheet" href="/stylesheet/profileEdit.css">
+
+<style>
+    .Errormsg h3{
+        color: #de1a1a;
+        position: absolute;
+        top: 250px;
+        z-index: 1000;
+        left: 90px;
+        bottom: 15rem;
+        padding-left: 15px;
+        font-size: 20px;
+        font-weight: 300;
+    }
+</style>
+
+<body>
+    <section class="profile">
+        <header>
+            <img class="shopIcon" src="/img/ShopIconBlack.png" alt="">
+            <h1 class="profileHeading">Profile</h1>
+            <h3 class="subheading">
+                Welcome Back <%=userData.name%>
+            </h3>
+            <%if(userData.profileImage==""){%>
+                <h1></h1>
+               <%}else{%>
+                 <img src="<%=userData.profileImage%>" alt="userProfile" class="userProfile">
+                 <%}%>            <h3 class="userName">Hello <%=userData.name%></h3>
+        </header>
+
+        <label class="ui-switch">
+            <input type="checkbox" id="darkModeToggle">
+            <div class="slider">
+                <div class="circle"></div>
+            </div>
+        </label>
+
+        <div class="leftBar">
+            <a href="/getHome" class="address"><i class="fa-solid fa-house"></i></i>Home</a>
+            <a href="/profile" class="editProfile"><i class="fa-solid fa-user"></i>Profile</a>
+            <a href="/address" class="address"><i class="fa-solid fa-address-card"></i>Address</a>
+            <a href="/orderDetailsUser" class="orders"><i class="fa-solid fa-bag-shopping"></i>Orders</a>
+            <a href="/couponsUser" class="wishlist"><i class="fa-solid fa-ticket-simple"></i>Coupons</a>
+        </div>
+
+
+        <form action="/editProfile" method="POST" enctype="multipart/form-data" onsubmit="return validateForm()">
+        <div class="center">
+            <div class="container">
+                <div class="row gutters">
+                    <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
+                        <div class="card13 h-100">
+                            <div class="card-body">
+                                <div class="account-settings">
+                                    <div class="profile-pic">
+                                        <label class="-label" for="file">
+                                            <span class="glyphicon glyphicon-camera"></span>
+                                            <span>Change Profile</span>
+                                        </label>
+                                        <input id="file" type="file" name="profileImage" accept="image/*" onchange="loadFile(event)"/>
+                                        <%if(userData.profileImage==""){%>
+                                            <img src="/img/userIcons/userNotUpdateImg.png" id="output" width="200" />
+                                            <h1 style="color: #088a52; position: absolute; font-size: 20px; top: 12rem;">Add Profile image</h1>
+                                        <%}else{%>
+                                            <img src="<%=userData.profileImage%>" id="output" width="200"/>
+                                            
+                                            <%}%>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12">
+                        <div class="card10 h-100">
+                            <div class="card-body">
+                                <div class="rowgutters">
+                                        <div class="sizeadjust">
+                                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                                <h6 class="PersonalDetails">Personal Details</h6>
+                                            </div>
+                                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                                <div class="form-group">
+                                                    <label for="fullName">Name</label>
+                                                    <input type="text" class="form-control" id="fullName" value="<%=userData.name%>" name="name">
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                                <div class="form-group">
+                                                    <label for="eMail">Email</label>
+                                                    <input type="email" class="form-control" id="eMail"  value="<%=userData.email%>" name="email">
+                                                </div>
+                                               
+                                                <% if (typeof errorMessage !== 'undefined') { %>
+                                                    <div class="Errormsg">
+                                                      <h3 style="color: red; position: absolute; top: -5rem; left: 0rem"><%= errorMessage %></h3>
+                                                    </div>
+                                                  <% } %>
+
+                                            </div>
+                                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                                <div class="form-group">
+                                                    <label for="phone">Phone</label>
+                                                    <input type="text" class="form-control" id="phone" value="<%=userData.phone%>" name="phone">
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                                <div class="form-group">
+                                                    <label for="password">Password</label>
+                                                    <input type="password" class="form-control" id="website"  value="<%=userData.password%>" name="password">
+                                                </div>
+                                            </div>
+                                            <div class="CardButtons">
+                                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                                    <div class="text-right">
+                                                        <button type="button" id="cancelButton" class="btnCancel">Cancel</button>
+                                                        <button type="submit" id="submitButton" class="btnUpdate">Update</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-center"> 
+                    <p id="modal-message"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <script>
+        var loadFile = function (event) {
+            var image = document.getElementById("output");
+            image.src = URL.createObjectURL(event.target.files[0]);
+        };
+
+        document.getElementById('darkModeToggle').addEventListener('change', function() {
+            toggleDarkMode();
+        });
+
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+            const cards = document.querySelectorAll('.card1, .card2, .card3,.leftBar,.profileHeading,.subheading,.shopIcon,.userName');
+            cards.forEach(card => {
+                card.classList.toggle('dark-mode');
+            });
+        }
+
+        function validateForm() {
+    var email = document.getElementById("eMail").value.trim();
+    var phone = document.getElementById("phone").value.trim();
+    var name = document.getElementById("fullName").value.trim();
+    var password = document.getElementById("website").value.trim();
+
+    if (name === "") {
+        displayModal("Please enter your name.");
+        return false;
+    }
+    if (name === "") {
+        displayModal("Please enter your name.");
+        return false;
+    }
+    if (password === "") {
+        displayModal("Please enter your Password.");
+        return false;
+    }
+
+    if (email === "" || !validateEmail(email)) {
+        displayModal("Please enter a valid email address.");
+        return false;
+    }
+
+    if (phone === "" || !validatePhone(phone)) {
+        displayModal("Please enter a valid phone number with 10 digits.");
+        return false;
+    }
+
+    return true;
+}
+
+function validateEmail(email) {
+    var re = /\S+@\S+\.\S+/;
+    return re.test(email);
+}
+
+function validatePhone(phone) {
+    var re = /^\d{10}$/;
+    return re.test(phone);
+}
+
+
+        function displayModal(message) {
+            var modalMessage = document.getElementById("modal-message");
+            modalMessage.innerText = message;
+            var myModal = new bootstrap.Modal(document.getElementById('myModal'));
+            myModal.show();
+        }
+    </script>
+</body>
+</html>

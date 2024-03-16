@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>POLAR</title>
+    <link rel="stylesheet" href="/stylesheet/userRegister.css">
+    <style>
+        .error-message {
+            color: rgb(244, 244, 244);
+            position: absolute;
+            font-size: 14px;
+            right: 500px;
+            width: 210px;
+            border-radius: 20px;
+            background-color: rgba(255, 255, 255, 0.123);
+        }
+    </style>
+    <script>
+       function validateForm() {
+    var name = document.forms["registrationForm"]["name"].value;
+    var email = document.forms["registrationForm"]["email"].value;
+    var password = document.forms["registrationForm"]["password"].value;
+    var confirmPassword = document.forms["registrationForm"]["confirmPassword"].value;
+
+    // Reset previous error messages
+    document.getElementById("nameError").innerText = "";
+    document.getElementById("emailError").innerText = "";
+    document.getElementById("passwordError").innerText = "";
+    document.getElementById("confirmPasswordError").innerText = "";
+
+    if (name === "") {
+        document.getElementById("nameError").innerText = "Please enter your name";
+        return false;
+    }
+
+    var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+        document.getElementById("emailError").innerText = "Please enter a valid email address";
+        return false;
+    }
+
+    if (password === "") {
+        document.getElementById("passwordError").innerText = "Please enter your password";
+        return false;
+    }
+
+    if (password.length < 8) {
+        document.getElementById("passwordError").innerText = "Password must be at least 8 characters long";
+        return false;
+    }
+
+    if (confirmPassword === "") {
+        document.getElementById("confirmPasswordError").innerText = "Please confirm your password";
+        return false;
+    }
+
+    if (password !== confirmPassword) {
+        document.getElementById("confirmPasswordError").innerText = "Passwords do not match";
+        return false;
+    }
+
+    return true;
+}
+
+    </script>
+</head>
+
+<body>
+    <div class="wrapper">
+
+        <% if (typeof message !== 'undefined') { %>
+            <div class="Errormsg" style="color: rgb(255, 255, 255);">
+              <h4><%= message %></h4>
+            </div>
+          <% } %>
+
+        <form name="registrationForm" action="/Register" method="POST" onsubmit="return validateForm()">
+            <h2>Register</h2>
+            <div class="input-field">
+                <input type="text" name="name">
+                <label>Enter Name</label>
+                <span id="nameError" class="error-message"></span>
+            </div>
+            <div class="input-field">
+                <input type="text" name="email">
+                <label>Enter your Email</label>
+                <span id="emailError" class="error-message"></span>
+            </div>
+            <div class="input-field">
+                <input type="password" name="password">
+                <label>Enter your Password</label>
+                <span id="passwordError" class="error-message"></span>
+            </div>
+            <div class="input-field">
+                <input type="password" name="confirmPassword">
+                <label>Confirm Password</label>
+                <span id="confirmPasswordError" class="error-message"></span>
+            </div>
+            <button type="submit">Register</button>
+            <div class="register">
+                <p>Already have an account? <a href="login">Login</a></p>
+            </div>
+        </form>
+    </div>
+</body>
+
+</html>

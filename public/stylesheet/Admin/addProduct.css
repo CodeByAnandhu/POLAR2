@@ -1,0 +1,500 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+@import url(https://fonts.googleapis.com/css?family=Ubuntu:400,700,600);
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    display: flex;
+    flex-direction: column;
+    overflow:hidden;
+
+}
+
+header {
+    background-color: #ffffff;
+    color: white;
+    padding: 1em;
+    text-align: center;
+    width: 97.8%;
+    font-family: 'Poppins', sans-serif;
+    height: 55px;
+    /* position: relative; */
+    position: sticky;
+
+}
+
+header h1 {
+    width: 210px;
+    font-size: 9;
+    padding-left: 300px;
+    position: absolute;
+    top: 26%;
+    /* Adjust as needed */
+    left: 18%;
+    /* Adjust as needed */
+    transform: translate(-50%, -50%);
+}
+
+header img {
+    width: 100px;
+    padding-bottom: 20px;
+    margin-right: 1350px;
+}
+
+
+
+
+nav {
+    background-color: #ffffff;
+    color: white;
+    padding: 1px;
+    display: flex;
+    flex-direction: column;
+    width: 15%;
+    height: 784px;
+
+}
+
+nav a {
+    color: #454242;
+    text-decoration: none;
+    padding: 1.4em 0;
+    display: flex;
+    align-items: center;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    padding-left: 50px;
+}
+
+nav a i {
+    margin-right: 10px;
+
+}
+
+.dashboard {
+
+    width: 120px;
+    height: 35px;
+    background-color: #168e5e;
+    border-radius: 20px;
+    padding-left: 9%;
+    padding-bottom: 0px;
+    font-size: 17px;
+    color: rgb(255, 255, 255);
+    font-weight: 600;
+    margin-left: 24px;
+    padding-right: 0px;
+    padding-top: 10px;
+    font-family: 'Poppins', sans-serif;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.259);
+}
+
+#Products {
+    background-color: #168e5e;
+    width: 130px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+    border-radius: 30px;
+    margin-left: 40px;
+    box-shadow: 0 0 20px rgba(132, 132, 132, 0.42);
+    font-size: 12px;
+}
+
+#Products a {
+
+    padding-right: 45px;
+    color: white;
+}
+
+
+
+/* #category{
+    background-color: #168e5e;
+    position: absolute;
+    margin-top: 280px;
+    margin-left: 13px;
+    width: 150px;
+    height: 50px;
+    border-radius: 25px;
+    font-size: 10px;
+    padding-right : 20px;
+  }
+  #category a{
+    color: white;
+  } */
+
+
+
+main {
+    display: flex;
+    flex-wrap: wrap;
+
+}
+
+
+@media only screen and (max-width: 800px) {
+    body {
+        flex-direction: column;
+    }
+
+    nav {
+        width: 100%;
+    }
+
+    main {
+        width: 100%;
+    }
+}
+
+header h1 {
+
+    color: #269367;
+}
+
+.product-details {
+    margin-bottom: 20px;
+    background-color: white;
+    padding: 20px;
+    border-radius: 25px;
+    margin-bottom:  15px;
+    flex-direction: column;
+    width:79%;
+    height: auto;
+    position: relative;
+    margin-left: 16.3%;
+    margin-top: -765px;
+    overflow-y: scroll; 
+    height: 78vh;
+    
+}
+.image-preview{
+    display:flex;
+    position: absolute;
+    left: 300px;
+    height: 200px;
+    width: 500px;
+    background-color: #dadae0b0;
+    border-radius: 25px;
+    padding-right: 10px;
+    justify-content: center;
+    
+}
+
+
+#PreviewOfImage{
+    position: absolute;
+    bottom: 100px;
+    color: #333;
+    right: 80px;
+
+
+}
+#imagePreview{
+    display:flex;
+    position: absolute;
+    left: 600px;
+    bottom: -10px;
+    height: 100px;
+    width: 100px;
+    background-color: #dadae0b0;
+    border-radius: 25px;
+    /* padding-right: 10px; */
+    justify-content: center;
+}
+#CurrentImage{
+   width: 20rem;
+    position: absolute;
+    bottom: 85px;
+    color: #333;
+    left: 585px;
+   
+}
+
+.CurrentImgDiv{
+    position: absolute;
+    width: 10rem;
+    padding: 10px;
+    left: 15rem;
+    bottom: -4rem;
+}
+
+.deselect-btn {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background-color: rgba(255, 0, 0, 0.822);
+    color: white;
+    border: none;
+    padding: 5px;
+    cursor: pointer;
+    width: 50px;
+    border-radius: 19px;
+    font-size: 10px;
+}
+
+.preview-item {
+    position: relative;
+    margin-right: 0px;
+    margin-bottom: 10px;
+}
+
+.preview-item img {
+    width: 100px; 
+    display: block;
+}
+
+
+/* SearchBox */
+.form button {
+    border: none;
+    background: none;
+    color: #8b8ba7;
+}
+
+/* styling of whole input container */
+.form {
+    --timing: 0.3s;
+    --width-of-input: 200px;
+    --height-of-input: 40px;
+    --border-height: 2px;
+    --input-bg: #eaeaea;
+    /* --border-color: #2f2ee9; */
+    --border-radius: 30px;
+    --after-border-radius: 1px;
+    position: relative;
+    width: var(--width-of-input);
+    height: var(--height-of-input);
+    display: flex;
+    align-items: center;
+    padding-inline: 0.8em;
+    border-radius: var(--border-radius);
+    transition: border-radius .5s ease;
+    background: var(--input-bg, #fff);
+    margin-left: 600px;
+    position: absolute;
+    top: 50%;
+    left: 18%;
+    transform: translate(-50%, -50%);
+
+
+
+}
+
+/* styling of Input */
+.input {
+    font-size: 0.9rem;
+    background-color: transparent;
+    width: 100%;
+    height: 100%;
+    padding-inline: 0.5em;
+    padding-block: 0.7em;
+    border: none;
+}
+
+/* styling of animated border */
+.form:before {
+    content: "";
+    position: absolute;
+    background: var(--border-color);
+    transform: scaleX(0);
+    transform-origin: center;
+    width: 100%;
+    height: var(--border-height);
+    left: 0;
+    bottom: 0;
+    border-radius: 1px;
+    transition: transform var(--timing) ease;
+}
+
+/* Hover on Input */
+.form:focus-within {
+    border-radius: var(--after-border-radius);
+}
+
+input:focus {
+    outline: none;
+}
+
+/* here is code of animated border */
+.form:focus-within:before {
+    transform: scale(1);
+}
+
+/* styling of close button */
+/* == you can click the close button to remove text == */
+.reset {
+    border: none;
+    background: none;
+    opacity: 0;
+    visibility: hidden;
+}
+
+/* close button shown when typing */
+input:not(:placeholder-shown)~.reset {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* sizing svg icons */
+.form svg {
+    width: 17px;
+    margin-top: 3px;
+}
+
+/* SearchBox */
+
+
+
+
+/* Form Group */
+.nice-form-group {
+    margin-bottom: 20px;
+    font-family: 'Poppins', sans-serif;
+
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    color: #333;
+}
+.nice-form-group{
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-top: 5px;
+    font-size: 16px;
+}
+.prodectText{
+    font-family: 'Poppins', sans-serif;
+}
+.prodectText input{
+    margin-bottom: 20px;
+    border-radius: 25px;
+    border: none;
+    background-color: #dcdce26c;
+    height: 40px;
+    padding-left: 20px;
+    font-size: 15px;
+}
+.Discription{
+    font-family: 'Poppins', sans-serif;
+}
+
+.Discription textarea{
+
+border-radius: 25px;
+border:none;
+background-color:#dcdce26c;
+padding-left: 20px;
+padding-top:20px;
+width: 300px;
+margin-bottom: 20px;
+font-size: 15px;
+font-family: 'Poppins', sans-serif;
+
+}
+.CatogarySelection{
+    font-family: 'Poppins', sans-serif;
+}
+.CatogarySelection select{
+    font-family: 'Poppins', sans-serif;
+    width: 240px;
+    height: 40px;
+    border: none;
+    background-color:#dcdce26c;
+    border-radius: 25px;
+    padding-left: 12px;
+    font-size: 15px;
+    margin-bottom: 20px;
+}
+.PrImageUplode{
+    font-family: 'Poppins', sans-serif;
+}
+
+.PrImageUplode input{
+    font-family: 'Poppins', sans-serif;
+
+}
+
+
+/* Styling for Product Image Upload */
+.PrImageUplode {
+    margin-bottom: 20px;
+}
+
+.PrImageUplode label {
+   margin-top: 8px;
+}
+input[type=file]::file-selector-button {
+    margin-right: 20px;
+    border: none;
+    background: #168e5e;
+    padding: 10px 20px;
+    border-radius: 25px;
+    color: #fff;
+    cursor: pointer;
+    transition: background .2s ease-in-out;
+  }
+  
+  input[type=file]::file-selector-button:hover {
+    background: #07710a;
+    color: rgb(255, 255, 255);
+  }
+  .StockCount{
+    font-family: 'Poppins', sans-serif;
+
+  }
+
+  .StockCount input{
+    border-radius: 25px;
+    border: none;
+    background-color:#dcdce26c;
+    height: 40px;
+    width: 120px;
+    padding-left: 20px;
+    font-size: 15px;
+  }
+
+  .AddPrSubmitBtn{
+    font-family: 'Poppins', sans-serif;
+    border-radius: 25px;
+    width: 200px;
+    height: 45px;
+    border: none;
+    background-color:#168e5e;
+    margin-top: 24px;
+    color: white;
+    font-size: 15px;
+  }
+
+  .productOffer{
+    position: absolute;
+    left: 27rem;
+    top: 6rem;
+  }
+
+  .productOffer label{
+    font-family: 'Poppins', sans-serif;
+    margin-bottom: -15px;
+    margin-left: 8px;
+  }
+.productOffer input{
+    
+    width: 200px;
+    height: 45px;
+    border: none;
+    margin-top: 24px;
+    border-radius: 25px;
+    background-color: #dcdce26c;
+    padding-left: 20px;
+    
+}
+
+/* Form Group */
+

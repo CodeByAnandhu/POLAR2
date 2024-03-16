@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <style>
+
+        body{
+
+            background-color: rgb(255, 255, 255);
+            font-family: 'Poppins', sans-serif;
+
+        }
+
+.modal {
+  position: fixed;
+  z-index: 1001;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden ;
+  
+}
+.modal-content {
+  background-color: #0c905d;
+  margin:11% auto;
+  padding: 40px;
+  border: none;
+  border-radius: 25px;
+  width: 80%;
+  max-width: 500px;
+  overflow: hidden;
+}
+.modal-content h2{
+  font-weight: 600;
+  color: white;
+}
+.close {
+  color: #ffffff;
+  float: right;
+  font-size: 28px;
+  font-weight: 500;
+  position: relative;
+  bottom: 1rem;
+}
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+/* Form CSS */
+form {
+  margin-top: 20px;
+}
+label {
+  display: block;
+  margin-bottom: 0px;
+  font-weight: 500;
+  color: white;
+}
+input[type="radio"] {
+  margin-right: 0px;
+  margin-bottom: 0;
+}
+button[type="submit"] {
+  
+  border: 0;
+  border-radius: 50px;
+  color: rgb(255, 255, 255);
+  padding: 1em 2.8em;
+  background-color: #039933;
+  box-shadow: 0 8px 22px 0 rgb(37 44 97 / 15%), 0 4px 6px 0 rgb(93 100 148 / 20%);
+  transition: 0.2s background;
+  font-weight: bold;
+}
+button[type="submit"]:hover {
+  background-color: #277f4d;
+}
+
+.reasonInput{
+ 
+  border: none;
+  padding: 10px;
+  border-radius: 20px;
+  background-color: #efefef;
+  color: #000;
+  margin-bottom: 10px;
+
+}
+
+
+
+
+
+.radio-container {
+  display: inline-block;
+  margin-bottom: 15px;
+  position: relative;
+  padding-left: 35px; /* Adjust this value to increase or decrease the size */
+  margin-right: 15px;
+  cursor: pointer;
+  font-size: 16px; /* Adjust font size */
+  user-select: none;
+}
+
+/* Hide the default radio button */
+.radio-container input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+/* Create a custom radio button */
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 25px; /* Size of the radio button */
+  width: 25px; /* Size of the radio button */
+  background-color: #eee; /* Color of the radio button */
+  border-radius: 50%; /* Make it round */
+}
+
+/* On mouse-over, add a grey background color */
+.radio-container:hover input[type="radio"] ~ .checkmark {
+  background-color: #ccc;
+}
+
+/* When the radio button is checked, add a blue background */
+.radio-container input[type="radio"]:checked ~ .checkmark {
+  background-color: #0da96a;
+}
+
+/* Create the radio button indicator */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the radio button indicator when checked */
+.radio-container input[type="radio"]:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Style the radio button indicator */
+.radio-container .checkmark:after {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 12px; /* Size of the indicator */
+  height: 12px; /* Size of the indicator */
+  border-radius: 50%; /* Make it round */
+  background: white; /* Color of the indicator */
+}
+    </style>
+    
+    <div id="cancelOrderModal" class="modal">
+        <div class="modal-content">
+
+           <a href="/orderDetailsUser">
+             <span class="close">&times;</span>
+           </a> 
+          <h2>Return Order</h2>
+          <form action="/return/<%=productId %>/<%= orderNumber %>" method="post">
+            <label for="reason">Select reason for Return:</label><br>
+            <label class="radio-container" for="reasonInput">Enter reason</label>
+            <input type="text" class="reasonInput" name="reason" id=""><br>
+            <label class="radio-container" for="reason4">
+              <input type="radio" id="reason4" name="reason" value="Wrong item">
+              Wrong item
+              <span class="checkmark"></span>
+            </label><br>
+            <label class="radio-container" for="reason1">
+              <input type="radio" id="reason1" name="reason" value="Not satisfied">
+              Not satisfied
+              <span class="checkmark"></span>
+            </label><br>
+            <label class="radio-container" for="reason2">
+              <input type="radio" id="reason2" name="reason" value="Changed my mind">
+              Changed my mind
+              <span class="checkmark"></span>
+            </label><br>
+            <label class="radio-container" for="reason0">
+              <input type="radio" id="reason0" name="reason" value="Other">
+              Other
+              <span class="checkmark"></span>
+            </label><br>
+            <!-- Add more reasons as needed -->
+            <button type="submit">Send</button>
+          </form>
+          
+        </div>
+      </div>
+</body>
+</html>

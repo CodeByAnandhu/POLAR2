@@ -1,0 +1,570 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+@import url(https://fonts.googleapis.com/css?family=Ubuntu:400,700,600);
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    display: flex;
+    flex-direction: column;
+
+
+}
+
+header {
+    background-color: #ffffff;
+    color: white;
+    padding: 1em;
+    text-align: center;
+    width: 97.8%;
+    font-family: 'Poppins', sans-serif;
+    height: 55px;
+    /* position: relative; */
+    position: sticky;
+
+}
+
+header h1 {
+    width: 210px;
+    font-size: 9;
+    padding-left: 300px;
+    position: absolute;
+    top: 26%;
+    /* Adjust as needed */
+    left: 18%;
+    /* Adjust as needed */
+    transform: translate(-50%, -50%);
+}
+
+header img {
+    width: 100px;
+    padding-bottom: 20px;
+    margin-right: 1350px;
+}
+
+
+
+
+nav {
+    background-color: #ffffff;
+    color: white;
+    padding: 1px;
+    display: flex;
+    flex-direction: column;
+    width: 15%;
+    height: 620px;
+
+}
+
+nav a {
+    color: #454242;
+    text-decoration: none;
+    padding: 1.4em 0;
+    display: flex;
+    align-items: center;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    padding-left: 50px;
+}
+
+nav a i {
+    margin-right: 10px;
+
+}
+
+.dashboard {
+
+    width: 120px;
+    height: 35px;
+    background-color: #168e5e;
+    border-radius: 20px;
+    padding-left: 9%;
+    padding-bottom: 0px;
+    font-size: 17px;
+    color: rgb(255, 255, 255);
+    font-weight: 600;
+    margin-left: 24px;
+    padding-right: 0px;
+    padding-top: 10px;
+    font-family: 'Poppins', sans-serif;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.259);
+}
+
+/* #userMange {
+    background-color: #168e5e;
+    width: 130px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+    border-radius: 30px;
+    margin-left: 40px;
+    box-shadow: 0 0 20px rgba(132, 132, 132, 0.42);
+    font-size: 12px;
+}
+
+#userMange a {
+
+    padding-right: 45px;
+    color: white;
+} */
+
+#category{
+    background-color: #168e5e;
+    position: absolute;
+    top: 660px;
+    left: 24px;
+    width: 150px;
+    height: 50px;
+    border-radius: 25px;
+    font-size: 10px;
+    padding-right : 20px;
+  }
+  #category a{
+    color: white;
+
+  }
+main {
+    display: flex;
+}
+
+.product-details {
+    justify-content: space-between;
+    /* margin-bottom: 20px; */
+    background-color: white;
+    padding: 50px;
+    border-radius: 8px;
+    /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
+    margin-bottom: 20px;
+    /* background-color: #16aa6f2d; */
+
+    flex-direction: column;
+    height: 522px;
+
+    /* margin: 0px; */
+    width: 50%;
+    /* position: relative; */
+    margin-left: 16.3%;
+    margin-top: -610px
+}
+
+@media only screen and (max-width: 800px) {
+    body {
+        flex-direction: column;
+    }
+
+    nav {
+        width: 100%;
+    }
+
+    main {
+        width: 100%;
+    }
+}
+
+header h1 {
+
+    color: #269367;
+}
+
+.panel.product-details {
+    justify-content: center;
+    width: 79%;
+    margin-bottom: 0px;
+    position: relative;
+    border-radius: 25px;
+    box-shadow: 0 0 14px rgba(0, 0, 0, 0.182);
+    /* border: 1px solid #ccc; */
+}
+
+.product-details .Tsale2 {
+    height: 60px;
+    width: 1100px;
+    color: rgb(177, 177, 177);
+    margin-top: 70px;
+    margin-left: 55px;
+    margin-right: 0px;
+    border-radius: 30px;
+    margin-bottom: 0px;
+    background-color: #ffffff;
+    box-shadow: 0 0 14px rgba(0, 0, 0, 0.182);
+    font-family: 'Poppins', sans-serif;
+    position: relative;
+}
+
+.addProductBtn{
+    text-decoration: none;
+    width:130px;
+    font-size: 14px;
+    height: 30px;
+    top: 28px;
+    left: 99px;
+    border-radius: 25px;
+    border: none;
+    background-color:#269367;
+    color: white;
+    font-family: 'Poppins', sans-serif;
+    position: absolute;
+    padding-left:10px;
+    padding-top:9px;
+    padding-right:-7px;
+    /* box-shadow: #adaaaa  1px  2px 23px 2px; */
+}
+
+.ctDetails{
+    width: 1049px;
+    height: auto;
+    background-color: #00ba3522;
+    position: absolute;
+    margin-top: 1px;  
+    margin-left: 24px;  
+    border-radius: 1px 1px 30px 30px;
+    padding-bottom: 20px;
+}
+
+ul.Categoryfeild {
+   list-style: none;
+   display: flex;
+   margin-left: 90px;
+   font-weight: 500;
+  
+}
+.Categoryfeild li{
+    margin-right: 300px;
+    margin-top: 19px;
+    color: rgba(0, 0, 0, 0.767);
+}
+.catogaryValue{
+
+    list-style: none;
+    display: flex;
+    margin-left: 110px;
+}
+
+/* .catogaryValue li{
+    margin-top: 40px;
+    margin-right: 313px;
+    color: rgba(0, 0, 0, 0.866);
+} */
+
+.Visbile-list{
+    margin-top: 40px;
+    margin-right: 313px;
+    color: rgba(0, 0, 0, 0.866);
+}
+
+.Hide-list{
+    margin-top: 40px;
+    margin-right: 313px;
+    color: rgba(255, 0, 0, 0.507);
+}
+
+/* .ctdltbtn{
+    width:75px;
+    font-size: 14px;
+    height: 35px;
+    margin-top: 30px;
+    margin-left: -11px;
+    left: 720px;
+    border-radius: 25px;
+    border: none;
+    background-color:#269367;
+    color: white;
+    font-family: 'Poppins', sans-serif;
+    position: absolute;
+    
+} */
+
+.Visbile-Category{
+    width:75px;
+    font-size: 14px;
+    height: 35px;
+    margin-top: 30px;
+    margin-left: -11px;
+    left: 720px;
+    border-radius: 25px;
+    border: none;
+    background-color:#269367;
+    color: white;
+    font-family: 'Poppins', sans-serif;
+    position: absolute;
+}
+
+.Hide-Category{
+    width:85px;
+    font-size: 14px;
+    height: 35px;
+    margin-top: 30px;
+    margin-left: -11px;
+    left: 713px;
+    border-radius: 25px;
+    border: none;
+    background-color:#ff0000ba;
+    color: white;
+    font-family: 'Poppins', sans-serif;
+    position: absolute;
+}
+
+.ctdltbtnEdit{
+    width:75px;
+    font-size: 14px;
+    height: 35px;
+    margin-top: 30px;
+    margin-left: -11px;
+    left: 890px;
+    border-radius: 25px;
+    border: none;
+    background-color:#269367;
+    color: white;
+    font-family: 'Poppins', sans-serif;
+    position: absolute;
+    
+}
+
+
+
+
+
+/* SearchBox */
+.form button {
+    border: none;
+    background: none;
+    color: #8b8ba7;
+}
+
+/* styling of whole input container */
+.form {
+    --timing: 0.3s;
+    --width-of-input: 200px;
+    --height-of-input: 40px;
+    --border-height: 2px;
+    --input-bg: #eaeaea;
+    /* --border-color: #2f2ee9; */
+    --border-radius: 30px;
+    --after-border-radius: 1px;
+    position: relative;
+    width: var(--width-of-input);
+    height: var(--height-of-input);
+    display: flex;
+    align-items: center;
+    padding-inline: 0.8em;
+    border-radius: var(--border-radius);
+    transition: border-radius .5s ease;
+    background: var(--input-bg, #fff);
+    margin-left: 600px;
+    position: absolute;
+    top: 50%;
+    left: 18%;
+    transform: translate(-50%, -50%);
+
+
+
+}
+
+/* styling of Input */
+.input {
+    font-size: 0.9rem;
+    background-color: transparent;
+    width: 100%;
+    height: 100%;
+    padding-inline: 0.5em;
+    padding-block: 0.7em;
+    border: none;
+}
+
+/* styling of animated border */
+.form:before {
+    content: "";
+    position: absolute;
+    background: var(--border-color);
+    transform: scaleX(0);
+    transform-origin: center;
+    width: 100%;
+    height: var(--border-height);
+    left: 0;
+    bottom: 0;
+    border-radius: 1px;
+    transition: transform var(--timing) ease;
+}
+
+/* Hover on Input */
+.form:focus-within {
+    border-radius: var(--after-border-radius);
+}
+
+input:focus {
+    outline: none;
+}
+
+/* here is code of animated border */
+.form:focus-within:before {
+    transform: scale(1);
+}
+
+/* styling of close button */
+/* == you can click the close button to remove text == */
+.reset {
+    border: none;
+    background: none;
+    opacity: 0;
+    visibility: hidden;
+}
+
+/* close button shown when typing */
+input:not(:placeholder-shown)~.reset {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* sizing svg icons */
+.form svg {
+    width: 17px;
+    margin-top: 3px;
+}
+
+/* SearchBox */
+
+
+
+
+
+/* User Ation */
+
+label {
+    pointer-events: none;
+    position: relative;
+}
+
+label .input {
+    display: none;
+    margin-right: 5px;
+
+}
+
+label .input:checked+.toggle-wrapper {
+    box-shadow: 0 8px 14px 0 rgba(18, 51, 215, 0.12);
+
+}
+
+
+label .input:checked+.toggle-wrapper>.selector {
+    left: calc(100% - 50px);
+    background-color: #ff0000dd;
+}
+
+label .input:checked~.notification>.selected:before {
+    content: "Bolcked";
+    color: red;
+    font-size: 13px;
+}
+
+label .toggle-wrapper {
+    position: relative;
+    width: 70px;
+    height: 30px;
+    background-color: #eaeaea;
+    border-radius: 999px;
+    padding-left: 10px;
+    padding-right: 0px;
+    margin-top: -45px;
+    margin-left: 955px;
+    cursor: pointer;
+    pointer-events: all;
+    box-shadow: 0 8px 14px 0 rgba(215, 60, 18, 0.12);
+
+}
+
+label .toggle-wrapper .selector {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transform: translateY(-50%);
+    background-color: #00ba35;
+    transition: left 0.25s ease;
+    border-radius: 50%;
+}
+
+label .notification {
+    font-size: 10px;
+    width: 100%;
+    top: 50;
+    position: absolute;
+}
+
+label .notification .selected:before {
+    content: "Active";
+    color: #00ba35;
+    font-size: 15px;
+    border-bottom: 2px solid;
+    margin-left: 380px;
+    margin-bottom: 20px;
+    position: absolute;
+    margin-top: -40px;
+
+}
+
+/* User Ation */
+
+
+
+/* Add category */
+.admin-container {
+    font-family: 'Poppins', sans-serif;
+    max-width: 600px;
+    height: 400px;
+    margin: 17px auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 28px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.admin-title {
+    text-align: center;
+    color: #373937;
+    font-size: 25px;
+}
+
+.admin-form {
+    display: flex;
+    flex-direction: column;
+    
+}
+
+.admin-label {
+    margin-top: 30px;
+    margin-bottom: 19px;
+}
+
+.admin-input {
+    padding:14px;
+    border: none;
+    background-color: rgba(205, 205, 205, 0.364);
+    margin-bottom: 46px;
+    border-radius: 30px;
+    height: 30px;
+    font-size: 20px;
+}
+
+.admin-button {
+    font-family: 'Poppins', sans-serif;
+
+    background-color: #269367;
+    color: #fff;
+    padding: 10px;
+    border: none;
+    border-radius: 30px;
+    height: 45px;
+    cursor: pointer;
+    font-size: 15px;
+    transition: background-color 0.3s ease;
+}
+
+.admin-button:hover {
+    background-color: #269367a4;
+    color: black;
+}
+/* Add category */
+

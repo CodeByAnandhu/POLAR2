@@ -1,0 +1,353 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+body{
+
+    font-family: 'Poppins', sans-serif;
+    overflow: hidden;
+    width: 100%;
+    height: 100%; 
+}
+
+.cart{
+    position: relative;
+    overflow-y: scroll;
+    height: 750px;
+  
+}
+.card{
+   position: relative;
+   top: 205px; 
+   margin-bottom: 25px;
+   left: 350px;  
+   height:130px;
+   width: 800px;
+   border-radius: 30px;
+   background: #ffffff;
+   box-shadow:  22px 22px 44px #bebebe99,
+         -22px -22px 44px #ffffff;
+         transition: opacity 0.5s ease, transform 0.3s ease; 
+}
+
+.card:hover{
+    transform: scale(1.010);
+   
+}
+
+.card1{
+  position: relative;
+   top: 205px; 
+   margin-bottom: 25px;
+   left: 350px; 
+   height:130px;
+   width: 800px;
+}
+
+.PrImage{
+    top: -15px;
+    position: relative;
+    left: 20px;
+    width: 10%;
+    background-color: rgba(236, 236, 236, 0.536);
+    border-radius: 20px;
+    border-width: 10px;
+    padding-left: 8px;
+    padding-right: 2px;
+    
+}
+.ProductName{
+
+    position:relative;
+    font-size: 20px;
+    top: 44px;
+    left: 190px;
+    font-weight: 600;
+    color: rgb(47, 45, 45);
+}
+
+.ProductSubTest{
+    position:absolute;
+    font-size: 13px;
+    top: 74px;
+    left: 199px;
+    font-weight: 500;
+    color: rgb(132, 127, 127);
+}
+#leftArrow{
+   margin-left: 120px;
+   margin-top: 35px;
+   font-size: 25px;
+   left: 90px;
+   color: rgb(47, 44, 44);
+}
+.headingCart{
+
+    position: relative;
+    bottom:95px ;
+    left: 700px;
+    font-size: 30px;
+
+}
+
+#cartIcon{
+    position: relative;
+  top: -30px;
+   margin-left: 1390px;
+   font-size: 23px;
+   
+   color: rgb(47, 44, 44);
+}
+.navbar{
+    top:0px;
+    left: 0px;
+    right: 0px;
+    height:80px;
+    position: fixed;
+    z-index: 1000;
+    background-color: #ffffff;
+}
+.footer{
+    position: fixed;
+    background-color: rgb(233, 233, 233);
+    width: 950px;
+    bottom:-50px;
+    border-radius: 40px 40px 0 0;
+    left: 287px;
+    background: #ffffff;
+    box-shadow:  -5px -5px 100px #ccccccac,
+         5px 5px 100px #ffffff;
+          z-index: 1;
+}
+
+/* Wishlist Heart */
+.label {
+
+align-items: center;
+gap: 14px;
+padding: 10px 15px 10px 10px;
+cursor: pointer;
+user-select: none;
+border-radius: 10px;
+box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+color: black;
+width: 50px;
+
+}
+
+input {
+display: none;
+}
+
+input:checked + label svg {
+fill: hsl(0deg 100% 50%);
+stroke: hsl(0deg 100% 50%);
+animation: heartButton 1s;
+}
+
+@keyframes heartButton {
+0% {
+transform: scale(1);
+}
+
+25% {
+transform: scale(1.3);
+}
+
+50% {
+transform: scale(1);
+}
+
+75% {
+transform: scale(1.3);
+}
+
+100% {
+transform: scale(1);
+}
+}
+
+input + label .action {
+position: relative;
+overflow: hidden;
+display: grid;
+}
+
+input + label .action span {
+grid-column-start: 1;
+grid-column-end: 1;
+grid-row-start: 1;
+grid-row-end: 1;
+transition: all .5s;
+}
+
+input + label .action span.option-1 {
+transform: translate(0px,0%);
+opacity: 1;
+}
+
+input:checked + label .action span.option-1 {
+transform: translate(0px,-100%);
+opacity: 0;
+}
+
+input + label .action span.option-2 {
+transform: translate(0px,100%);
+opacity: 0;
+}
+
+input:checked + label .action span.option-2 {
+transform: translate(0px,0%);
+opacity: 1;
+}
+svg{
+position: absolute;
+top: 18px;
+left: 260px;
+z-index: 1;
+}
+
+.totalItem{
+position: relative;
+left: 60px;
+top: 10px;
+color: rgb(41, 39, 39);
+}
+.checkout .price{
+position: relative;
+left:80%;
+bottom: 40px;
+color: rgb(41, 39, 39);
+}
+.checkoutBuy{
+position: relative;
+bottom: 76px;
+left: 422px;
+text-decoration: none;
+background-color: #007625c6;
+padding-left: 25px;
+padding-right: 25px;
+padding-top: 10px;
+padding-bottom: 10px;
+border-radius: 25px;
+color: rgb(255, 255, 255);
+font-weight: 550;
+}
+#circle-plus{
+position: absolute;
+top: 58px;
+left: 550px;
+font-size:23px;
+color: #45454697;
+
+}
+#circle-minus{
+position: absolute;
+top: 58px;
+left: 470px;
+font-size:23px;
+color: #45454697;
+
+}
+.countItems{
+position: absolute;
+top: 40px;
+left: 519px;
+font-size: 17px;
+color: #323235de;
+}
+
+#closeButton{
+position: absolute;
+top: 19px;
+left: 760px;
+font-size: 20px;
+font-weight: 600;
+color: #45454697;
+
+
+}
+.priceOftheProduct{
+position: absolute;
+left: 372px;
+top: 51px;
+font-weight: 600;
+font-size: 18px;
+color: #605b5b;
+}
+
+/* delete Button */
+.deleteButton{
+
+border: none;
+background-color: #ffffff;
+position: absolute;
+z-index: 1;
+
+}
+
+.EmptyMessege h1{
+position: absolute;
+bottom: 350px;
+left: 580px;
+font-size: 35px;
+color: rgb(68, 63, 63);
+}
+.error{
+color: #de1a1a; 
+position: absolute; 
+top: 100px; 
+left: 596px;
+}
+/* delete Button */
+
+
+/* Add to cart button */
+.btn.cartBtn{
+    background-color: rgb(238, 235, 235);
+    font-size: 14px;
+    padding: 9px 15px;
+    color: #000;
+    border-radius: 20px;
+    position: relative;
+    bottom: 97px;
+    left: 560px;
+    display: inline-block;
+    outline: 0;
+    border: 0;
+    cursor: pointer;
+    color: rgb(6, 129, 53);
+    font-size: 14px;
+    height: 38px;
+    
+    border-radius: 50px;
+    background-image: linear-gradient(180deg,#ffffffdd,#ffffffac);
+    box-shadow: 0 4px 11px 0 rgb(37 44 97 / 15%), 0 1px 3px 0 rgb(93 100 148 / 20%);
+    transition: all .2s ease-out;
+    
+  }
+  
+  .btn.cartBtn:hover{
+    box-shadow: 0 8px 22px 0 rgb(37 44 97 / 15%), 0 4px 6px 0 rgb(93 100 148 / 20%);
+  }
+  
+/* Add to cart button */
+
+.card22{
+    
+    position: relative;
+    top: 600px;
+    width: 300px;
+    left: 600px;
+    height: 50px;
+    background-color: #f4f4f4;
+    border-radius: 55px;
+}
+.card22 a{
+    text-decoration: none;
+    position: relative;
+    top: 13px;
+    font-weight: 600;
+    display: flex;
+    justify-content: center;
+    align-items:center ;
+}

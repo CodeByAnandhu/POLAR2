@@ -1,0 +1,284 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+  <style>
+
+    *{
+
+        margin: 0;
+       
+    }
+  
+
+nav{
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: aliceblue;
+    position: relative;
+    height: 80px;
+
+}
+
+ul{
+ list-style: none;
+margin-right: 30px;
+justify-content: space-between;
+
+}
+
+.slidecnt li{
+
+   
+    display: inline-block;
+  margin-right: 10px;
+}
+
+.slidebar{
+    background-color:aliceblue;
+    width: 100px;
+position: absolute;
+height: 655px;
+width: 200px;
+padding-top: 50px;
+display: inline-block;
+
+}
+.slidebar li{
+
+    margin-bottom: 70px;
+    border-radius: 20px;
+    width: 60px;
+    
+}
+a{
+    text-decoration: none;
+  
+}
+main{
+    position: relative;
+    
+}
+
+.home{
+
+    background-color: blue;
+    padding-right: -30px;
+}
+
+.center1{
+    background-color: rgb(240, 240, 240);
+    width: 400px;
+    position: relative;
+    left: 300px;
+    height: 200px;
+    top: 200px;
+    text-align: center;
+border-radius: 25px;
+box-shadow: 2px 2px 1px .40px rgba(104, 104, 105, 0.221);
+margin-bottom: 20px;
+margin-right: 50px;
+}
+.center1 h2{
+    color: rgb(0, 0, 0);
+   position: relative;
+   top: 80px;
+   
+}
+
+section{
+
+    display: flex;
+    flex-direction: row;
+   
+}
+  </style>
+
+</head>
+<body>
+    
+
+    <main>
+
+     <header>
+        <nav>
+
+            <ul class="slidecnt">
+               <li>Home</li>
+               <li>category</li>
+               <li>cart</li>
+               <li>hello</li>
+
+            </ul>
+        </nav>
+
+     </header>
+
+     <div class="slidebar">
+        <h3>
+            <ul >
+                <li class="home"><a href="">Home</a></li>
+                <li><a href="">insite</a></li>
+                <li><a href="">dd</a></li>
+                <li><a href="">dd</a></li>
+                <li><a href="">dd</a></li>
+            </ul>
+        </h3>
+        
+     </div>
+ <section>
+ <div class="center1">
+
+      <h2>
+        Admin Insite
+      </h2>
+
+     </div>
+     <div class="center1">
+
+      <h2>
+        Admin Insite
+      </h2>
+
+     </div>
+   
+
+ </section>
+    
+
+    </main>
+
+
+
+</body>
+</html> -->
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
+    }
+
+    .container {
+      display: flex;
+      justify-content: center;
+    }
+
+    .card:not(:first-child) {
+      width: 200px;
+      height: 20pc;
+      background-color: #fff;
+      border-radius: 18px;
+      box-shadow: 0 1px 20px rgba(0, 0, 0, 0.1);
+      margin-top: 140px;
+      padding: 25px;
+      box-sizing: border-box;
+      transition:  0.35s ease-in-out;    
+    }
+
+    .card:hover{
+        transform: translate(-20px,-20px);
+    }
+
+    .card:hover{
+       position: relative;
+       opacity: 1; /* Fade-in effect on hover */
+     
+    }
+    .card img{
+        position: relative;
+        width: 180px;
+        right: 10px;
+    }
+   
+
+    h2 {
+        bottom: 330px;
+        position: absolute;
+      z-index:-1;
+      transform: translateY(10px); /* Initial position */
+      transition: transform 0.8s ease-in-out, opacity 0.3s ease-in-out;
+      color: green;
+    }
+
+    h2:hover{
+        opacity: 1; /* Fade-in effect on hover */
+      transform: translateY(0); 
+    }
+
+    p {
+      color: #666;
+    }
+   
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div class="card">
+      
+    </div>
+
+    <div class="card">
+        <img src="/public/img/Avacado.png" alt="">
+      <h2>Avacado</h2>
+      <p>This is the content of card 2.</p>
+    </div>
+
+    <div class="card">
+      <h2>Card 3</h2>
+      <p>This is the content of card 3.</p>
+    </div>
+
+    <div class="card">
+      <h2>Card 4</h2>
+      <p>This is the content of card 4.</p>
+    </div>
+  </div>
+
+
+  <div id="blockElement">This is a blocked element.</div>
+    <div id="unblockElement">This is an unblocked element.</div>
+
+    <button onclick="toggleVisibility()">Toggle Block/Unblock</button>
+
+
+    <script>
+      function toggleVisibility() {
+          var blockElement = document.getElementById("blockElement");
+          var unblockElement = document.getElementById("unblockElement");
+
+          if (blockElement.style.display === "none") {
+              blockElement.style.display = "block";
+              unblockElement.style.display = "none";
+          } else {
+              blockElement.style.display = "none";
+              unblockElement.style.display = "block";
+          }
+      }
+  </script>
+
+</body>
+
+</html>

@@ -1,0 +1,351 @@
+
+    
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+    body{
+
+        font-family: 'Poppins', sans-serif;
+        overflow: hidden;
+        width: 100%;
+        height: 100%; 
+    }
+
+    .cart{
+        position: relative;
+        overflow-y: scroll;
+        height: 750px;
+      
+    }
+    .card{
+       position: relative;
+       top: 205px; 
+       margin-bottom: 25px;
+       left: 350px;  
+       height:130px;
+       width: 800px;
+       border-radius: 30px;
+       background: #ffffff;
+       box-shadow:  22px 22px 44px #bebebe99,
+             -22px -22px 44px #ffffff;
+             transition: opacity 0.5s ease, transform 0.3s ease;
+    }
+
+    .card:hover{
+        transform: scale(1.010);
+
+    }
+
+    .card1{
+      position: relative;
+       top: 205px; 
+       margin-bottom: 25px;
+       left: 350px; 
+       height:130px;
+       width: 800px;
+    }
+    
+    .PrImage{
+        top: 15px;
+        position: relative;
+        left: 20px;
+        width: 10%;
+        background-color: rgba(236, 236, 236, 0.536);
+        border-radius: 20px;
+        border-width: 10px;
+        padding-left: 8px;
+        padding-right: 2px;
+        
+    }
+    .ProductName{
+        margin: 0;
+        padding: 0;
+        position:absolute;
+        font-size: 18px;
+        top: 25px;
+        left: 170px;
+        font-weight: 600;
+        color: rgb(47, 45, 45);
+    }
+    #leftArrow{
+       margin-left: 120px;
+       margin-top: 35px;
+       font-size: 25px;
+       left: 90px;
+       color: rgb(47, 44, 44);
+    }
+    .headingCart{
+
+        position: relative;
+        bottom:79px ;
+        left: 700px;
+        font-size: 25px;
+
+    }
+
+    #cartIcon{
+        position: relative;
+      top: -20px;
+       margin-left: 1390px;
+       font-size: 23px;
+       
+       color: rgb(47, 44, 44);
+    }
+    .navbar{
+        top:0px;
+        left: 0px;
+        right: 0px;
+        height:80px;
+        position: fixed;
+        z-index: 1000;
+        background-color: #ffffff;
+    }
+    .footer{
+        position: fixed;
+        background-color: rgb(233, 233, 233);
+        width: 950px;
+        bottom:-50px;
+        border-radius: 40px 40px 0 0;
+        left: 287px;
+        background: #ffffff;
+        box-shadow:  -5px -5px 100px #ccccccac,
+             5px 5px 100px #ffffff;
+              z-index: 1;
+    }
+
+    /* Wishlist Heart */
+.label {
+
+ align-items: center;
+ gap: 14px;
+ padding: 10px 15px 10px 10px;
+ cursor: pointer;
+ user-select: none;
+ border-radius: 10px;
+ box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+ color: black;
+ width: 50px;
+
+}
+
+input {
+ display: none;
+}
+
+input:checked + label svg {
+ fill: hsl(0deg 100% 50%);
+ stroke: hsl(0deg 100% 50%);
+ animation: heartButton 1s;
+}
+
+@keyframes heartButton {
+ 0% {
+  transform: scale(1);
+ }
+
+ 25% {
+  transform: scale(1.3);
+ }
+
+ 50% {
+  transform: scale(1);
+ }
+
+ 75% {
+  transform: scale(1.3);
+ }
+
+ 100% {
+  transform: scale(1);
+ }
+}
+
+input + label .action {
+ position: relative;
+ overflow: hidden;
+ display: grid;
+}
+
+input + label .action span {
+ grid-column-start: 1;
+ grid-column-end: 1;
+ grid-row-start: 1;
+ grid-row-end: 1;
+ transition: all .5s;
+}
+
+input + label .action span.option-1 {
+ transform: translate(0px,0%);
+ opacity: 1;
+}
+
+input:checked + label .action span.option-1 {
+ transform: translate(0px,-100%);
+ opacity: 0;
+}
+
+input + label .action span.option-2 {
+ transform: translate(0px,100%);
+ opacity: 0;
+}
+
+input:checked + label .action span.option-2 {
+ transform: translate(0px,0%);
+ opacity: 1;
+}
+svg{
+   position: absolute;
+    top: 18px;
+    left: 260px;
+    z-index: 1;
+}
+
+.totalItem{
+    position: relative;
+    left: 60px;
+    top: 10px;
+    color: rgb(41, 39, 39);
+}
+.checkout .price{
+    position: relative;
+    left:80%;
+    bottom: 40px;
+    color: rgb(41, 39, 39);
+}
+.checkoutBuy{
+    position: relative;
+    bottom: 76px;
+    left: 422px;
+    text-decoration: none;
+    background-color: #007625c6;
+    padding-left: 25px;
+    padding-right: 25px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-radius: 25px;
+    color: rgb(255, 255, 255);
+    font-weight: 550;
+}
+#circle-plus{
+ position: absolute;
+ top: 58px;
+ left: 550px;
+ font-size:23px;
+ color: #45454697;
+
+}
+#circle-minus{
+    position: absolute;
+    top: 58px;
+ left: 470px;
+ font-size:23px;
+ color: #45454697;
+
+}
+.countItems{
+    position: absolute;
+    top: 40px;
+ left: 519px;
+ font-size: 17px;
+ color: #323235de;
+}
+
+#closeButton{
+    position: absolute;
+ top: 19px;
+ left: 760px;
+ font-size: 20px;
+ font-weight: 600;
+ color: #45454697;
+
+
+}
+.priceOftheProduct{
+  position: absolute;
+  left: 172px;
+  top: 73px;
+  font-weight: 600;
+}
+
+/* delete Button */
+.deleteButton{
+
+    border: none;
+    background-color: #ffffff;
+    position: absolute;
+    z-index: 1;
+ 
+}
+
+.EmptyMessege h1{
+    position: absolute;
+    bottom: 350px;
+    left: 600px;
+    font-size: 35px;
+    color: rgb(68, 63, 63);
+}
+.error{
+    position: absolute;
+    bottom: -30px;
+    color: #de1a1a; 
+    top: 100px; 
+    left: 596px;
+}
+/* delete Button */
+
+
+/*     
+    #flashMessageContainer {
+        position: absolute;
+        margin-bottom: 90px; 
+        background-color: #de1a1a;
+    }
+
+    #popupMessage {
+        
+        position: fixed;
+        top: 50%; 
+        left: 50%; 
+        transform: translate(-50%, -50%); 
+        background-color: #fff;
+        border: 1px solid #ccc; 
+        padding: 10px 20px; 
+        border-radius: 5px; 
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); 
+        z-index: 9999;
+        display: none; 
+    } */
+   
+/* .error-message{
+    position: absolute;
+    top: 50px;
+    bottom: 200px;
+    left: 500px;
+    color: #de1a1a;
+    font-size: 20px;
+    font-weight: 600;
+    background-color: #de1a1a;
+
+} */
+
+#errorMessage {
+    display: none; 
+    margin-top: 10px; 
+    padding: 10px 30px; 
+    border-radius: 25px; 
+    z-index: 9999;
+    position: absolute;
+    top: 13%;
+    left: 39.4rem;
+}
+
+
+.alert-danger {
+    background-color: #f8d7da; 
+    border-color: #f5c6cb;
+    color: #721c24; 
+}
+
+
+
+
+

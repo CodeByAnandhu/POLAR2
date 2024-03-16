@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Details</title>
+    <!-- Link to your CSS file for styling -->
+    <link rel="stylesheet" href="styles/orderDetails.css">
+    <!-- Link to Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+
+<style>
+    /* Reset default styles */
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800&display=swap');
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    /* Page Styles */
+    body {
+        font-family: 'Poppins', sans-serif;
+        background-color: #1e9c66;
+        color: #272525;
+    }
+
+    .container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+
+    header {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    h1 {
+        font-size: 36px;
+        color: #fdfdfd; /* Change the color as desired */
+    }
+
+    .order-info {
+        
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 24px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        animation: slideIn 0.5s ease; /* Add animation */
+    }
+
+    @keyframes slideIn {
+        from {
+            opacity: 0;
+            transform: translateY(-50px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    h2 {
+        font-size: 24px;
+        margin-bottom: 20px;
+        color: #333; /* Change the color as desired */
+    }
+
+    .details p {
+        margin-bottom: 10px;
+    }
+
+    .details p strong {
+        font-weight: bold;
+        color: #177546;
+        margin-right: 10px;
+    }
+
+    .details p span {
+        color: #555; /* Change the color as desired */
+    }
+
+    .close-icon {
+        position: relative;
+        right: -43.6rem;
+        font-weight: 300;
+        font-size: 20px;
+        cursor: pointer;
+    }
+
+  
+
+</style>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>Order Details</h1>
+        </header>
+        <main>
+            <section class="order-info">
+                <a href="/orderDetailsUser" class="close-icon""><i class="fas fa-times"></i></a>
+                <h2>Order Information</h2>
+                <div class="details">
+                    <p><strong>Order ID:</strong> <span id="orderId"><%=orderData.orderNumber%></span></p>
+                    <p><strong>Order Date:</strong> <span id="orderId"><%=orderData.orderDate.toLocaleDateString("en-US", { year: 'numeric', month: '2-digit', day: '2-digit' })%></span></p>
+                    <p><strong>Address:</strong> <span id="orderAddress"><%=orderData.address%></span></p>
+                    <p><strong>Total Quantity:</strong> <span id="totalQuantity"><%=orderData.totalQuantity%></span></p>
+                    <p><strong>Total Price:</strong> <span id="totalPrice">₹<%=orderData.totalPrice%></span></p>
+                </div>
+            </section>
+        </main>
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel</title>
+    <link rel="stylesheet" href="/stylesheet/Admin/adminInsite.css">
+    <script src="https://kit.fontawesome.com/6293a1580a.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+  <header>
+    <img src="/img/ShopIconBlack.png" alt="ShopIcon">
+     <h1>Admin Panel</h1>
+ 
+      </div>
+     <!-- searchbar -->
+     <form class="form">
+      <button>
+          <svg width="17" height="16" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="search">
+              <path d="M7.667 12.667A5.333 5.333 0 107.667 2a5.333 5.333 0 000 10.667zM14.334 14l-2.9-2.9" stroke="currentColor" stroke-width="1.333" stroke-linecap="round" stroke-linejoin="round"></path>
+          </svg>
+      </button>
+      <input class="input" placeholder="Type your text" required="" type="text">
+      <button class="reset" type="reset">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
+          </svg>
+      </button>
+  </form>
+     <!-- searchbar -->
+     
+
+  </header>       
+    
+    <nav> 
+        <h1 class="dashboard">Dash Board</h1>
+        <div class="utility">>
+        <div id="insite">       
+              <a href="#"><i class="fa-solid fa-chart-simple"></i></i>Insite</a>
+        </div>
+        <a href="/products"><i class="fa-solid fa-bag-shopping"></i></i>Products</a>
+        <a href="/AdminOrderDetails"><i class="fa-solid fa-align-left"></i>Orders</a>
+        <a href="/userManage"><i class="fa-solid fa-user-plus"></i>User Manage</a>
+        <a href="/offer"><i class="fa-solid fa-gear"></i>Offers</a>
+        <a href="/coupon"><i class="fa-solid fa-ticket-simple"></i></i>Coupons</a>
+        <a href="/adminlogin"><i class="fa-solid fa-right-from-bracket"></i></i>Logout</a>
+        <div class="downlodbtn">
+            <a href="#" download><span>Download</span><span>PDF</span></a>
+        </div>
+    </div>
+    </nav>
+    <main>
+        
+        <div class="panel product-details">
+            <h2>Today's Sale</h2>
+            <h4 class="Tsale1">Total sale :  <br> <br> <div id="totalSale">₹<%=totalSaleValue%></div></h4>
+            <h4 class="Tsale2">Total Order :  <br> <br> <div id="totalOrder"> <%=ordersCount%> pc</div></h4>
+
+        </div>
+        <div class="panel product-details">
+            <h2>Revenue</h2>
+            <h4 class="Tsale1">This Month : <br> <br> <div id="thisMonth">₹2500</div></h4>
+            <h4 class="Tsale2">This Week : <br> <br> <div id="thisWeek">₹10500</div></h4>
+           
+        </div>
+
+
+        <!-- SideBar -->
+        <div class="slide-bar" id="slideBar">
+            <h2>Top selling products</h2>
+            <% topTenSaledProducts.forEach(function(product) { %>   
+            <div class="productList" id="productList">
+             <img src="<%=product.image%>" alt="">
+             <div class="contents">
+              <span class="productName"><%=product.name%></span>
+              <div class="prosuctContent">
+              <span class="Sale Qty">Total Qty  <br> <%=product.totalQuantity%>pc</span>
+              <span class="totalPrice">Total Price saled  <br> ₹<%=product.totalPrice%></span>
+            </div>
+             </div>
+            </div>
+            <% }) %>
+          </div>
+          
+          <div class="slide-bar-toggle" id="slideBarToggle">&#9776;</div>
+          
+        <!-- SideBar -->
+
+        <section class="graph">
+          <div class="panel product-details2">
+              <h4 class="Tsale3">Total Order</h4>
+          </div>
+      
+          <!-- Chart-->
+          <select id="chartType">
+            <option value="monthly">Monthly</option>
+            <option value="yearly">Yearly</option>
+            <option value="new">Bar Chart</option> <!-- Added new option -->
+          </select>
+          
+          <canvas id="monthlyChart" width="380" height="200" style="margin-top: -18rem; z-index: 10000; margin-left: 17px;"></canvas>
+          <canvas id="yearlyChart" width="380" height="200" style="margin-top: -18rem; z-index: 10000; margin-left: 17px; display: none;"></canvas>
+          <canvas id="newChart" width="380" height="200" style="margin-top: -18rem; z-index: 10000; margin-left: 17px; display: none;"></canvas>
+          <!--Chart -->
+          <!-- <button id="toggleChartBtn">Switch Chart</button>  -->
+      </section>
+
+      <script>
+        const slideBar = document.getElementById('slideBar');
+        const slideBarToggle = document.getElementById('slideBarToggle');
+      
+        
+        slideBarToggle.addEventListener('click', function() {
+          slideBar.classList.toggle('open');
+        });
+      
+        renderProducts(topProducts);
+      </script>
+
+<script>
+    const monthlyCtx = document.getElementById('monthlyChart').getContext('2d');
+    const yearlyCtx = document.getElementById('yearlyChart').getContext('2d');
+    const newChartCtx = document.getElementById('newChart').getContext('2d');
+    const monthlySalesData = <%= JSON.stringify(salesData) %>;
+    const yearlySalesData = <%= JSON.stringify(yearlySalesData) %>;
+    const months = ['January', 'February', 'March', 'April', 'May', 'June']; 
+    const years = yearlySalesData.map((_, index) => index + new Date().getFullYear() - yearlySalesData.length + 1);
+  
+    const monthlyChart = new Chart(monthlyCtx, {
+      type: 'line',
+      data: {
+        labels: months,
+        datasets: [{
+          label: 'Monthly Sales',
+          data: monthlySalesData,
+          backgroundColor: '#fff',
+          borderColor: '#000',
+          borderWidth: 1
+        }]
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
+  
+    const yearlyChart = new Chart(yearlyCtx, {
+      type: 'line',
+      data: {
+        labels: years,
+        datasets: [{
+          label: 'Yearly Sales',
+          data: yearlySalesData,
+          backgroundColor: '#fff',
+          borderColor: '#000',
+          borderWidth: 1
+        }]
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
+
+    const newChartData = <%= JSON.stringify(salesData) %>;
+    const newChart = new Chart(newChartCtx, {
+      type: 'bar',
+      data: {
+        labels: months,
+        datasets: [{
+          label: 'New Chart',
+          data: newChartData,
+          backgroundColor: ' rgba(23, 165, 109, 1.0)',
+          
+          borderColor: '#74D680',
+          borderWidth: 1
+        }]
+        
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
+
+    // Function to toggle between monthly, yearly, and new charts
+    document.getElementById('chartType').addEventListener('change', function() {
+      const chartType = this.value;
+      if (chartType === 'monthly') {
+        monthlyCtx.canvas.style.display = 'block';
+        yearlyCtx.canvas.style.display = 'none';
+        newChartCtx.canvas.style.display = 'none';
+      } else if (chartType === 'yearly') {
+        monthlyCtx.canvas.style.display = 'none';
+        yearlyCtx.canvas.style.display = 'block';
+        newChartCtx.canvas.style.display = 'none';
+      } else if (chartType === 'new') { // Added new case for 'new' chart
+        monthlyCtx.canvas.style.display = 'none';
+        yearlyCtx.canvas.style.display = 'none';
+        newChartCtx.canvas.style.display = 'block';
+      }
+    });
+
+    // Button to toggle between charts
+    document.getElementById('toggleChartBtn').addEventListener('click', function() {
+      const currentChartType = document.getElementById('chartType').value;
+      if (currentChartType === 'monthly') {
+        document.getElementById('chartType').value = 'yearly';
+      } else if (currentChartType === 'yearly') {
+        document.getElementById('chartType').value = 'new';
+      } else if (currentChartType === 'new') {
+        document.getElementById('chartType').value = 'monthly';
+      }
+
+      // Trigger change event to update chart display
+      document.getElementById('chartType').dispatchEvent(new Event('change'));
+    });
+  </script>
+
+      
+                    
+                </tbody>
+            </table>
+      <div class="background">
+     
+       
+      </div> 
+      
+    </main>
+</body>
+</html>

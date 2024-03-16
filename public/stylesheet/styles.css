@@ -1,0 +1,393 @@
+
+
+@charset "UTF-8";
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+
+body{
+
+  font-family: 'Poppins', sans-serif;
+	width: 100%;
+	height: 100%;
+
+}
+
+
+
+/* scrollbar */
+body::-webkit-scrollbar {
+  width: 9px; 
+  height: 5px;
+}
+
+
+body::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+}
+
+
+body::-webkit-scrollbar-thumb {
+  background: #04935a;
+   border-radius: 10px;
+}
+
+
+body::-webkit-scrollbar-thumb:hover {
+  background: #03b266; 
+}
+/* scrollbar */
+
+
+
+.shopIcon{
+  width: 130px;
+  position: relative;
+  bottom:1px;
+  left: 30px;
+  height: auto;
+}
+
+.Banner{
+
+ background-color: #000000;
+ width: 100;
+}
+
+.can{
+  position: relative;
+  width:50%;
+  height: 50%;
+  bottom:50px;
+  top: 40px;
+  right:65px
+}
+.bannerText{
+  position: relative;
+  width: 40%;
+  top:70px;
+  left: 250px;
+  padding-bottom: 130px;
+}
+#navbar{
+  background-color: #000000;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 82px;
+  z-index: 1000; 
+}
+
+.navbar-nav li {
+  margin-right: 40px; 
+  
+}
+
+.navbar-nav.me-auto.mb-2.mb-lg-0 {
+  margin-left: 160px;
+ }
+
+.searchbox{
+  color: rgb(255, 255, 255);
+  border-radius: 20px;
+  border-color: rgba(255, 255, 255, 0.24);
+  border-width: 1px 1px;
+  background-color: rgba(255, 255, 255, 0);
+  padding-left: 16px
+}
+.searchBtn{
+  font-size: 12px;
+  width :80px;
+  height: 40px;
+  border-radius: 20px;
+  border: none;
+  background-color: green;
+  color: white;
+}
+.d-flex{
+   
+  margin-right: 40px;
+
+}
+
+.card-img-top{
+  width:100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: -50px;
+  position: relative;
+}
+
+#t1{
+
+  background : none;
+}
+
+.btn.cart{
+  background-color: rgb(172, 173, 172);
+  font-size: 14px;
+  padding: 9px 15px;
+  color: #000;
+  border-radius: 20px;
+
+  display: inline-block;
+  outline: 0;
+  border: 0;
+  cursor: pointer;
+  color: rgb(72, 76, 122);
+  font-size: 14px;
+  height: 38px;
+  
+  border-radius: 50px;
+  background-image: linear-gradient(180deg,#fff,#f5f5fa);
+  box-shadow: 0 4px 11px 0 rgb(37 44 97 / 15%), 0 1px 3px 0 rgb(93 100 148 / 20%);
+  transition: all .2s ease-out;
+  
+}
+
+.btn.cart:hover{
+  box-shadow: 0 8px 22px 0 rgb(37 44 97 / 15%), 0 4px 6px 0 rgb(93 100 148 / 20%);
+}
+
+.btn.buy{
+  margin-left: 10px;
+  background-color: #228B22;
+  font-size: 14px;
+  padding: 9px 20px;
+  color: #ffffff;
+  border-radius: 20px;               
+  display: inline-block;
+                outline: 0;
+                border: 0;
+                cursor: pointer;
+                height: 38px;
+                border-radius: 50px;
+                box-shadow: 0 4px 11px 0 rgb(37 44 97 / 15%), 0 1px 3px 0 rgb(93 100 148 / 20%);
+                transition: all .2s ease-out;
+
+}
+
+.btn.buy:hover{
+  box-shadow: 0 8px 22px 0 rgb(37 44 97 / 15%), 0 4px 6px 0 rgb(93 100 148 / 20%);
+}
+.sort{
+
+  background-color: rgba(118, 118, 118, 0.167);
+  border-radius: 18px;
+}
+.sort1{
+
+  background-color: rgba(157, 157, 157, 0.185);
+  border-radius: 18px;
+}
+.footer{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: black;
+  width: 100%;
+  padding: 80px;
+  color: white;
+
+}
+
+.footer-section ul{
+
+  list-style-type: none;
+   margin-top: 19px;
+   margin-right: 250px;
+   
+}
+
+
+.footer-section h3{
+
+  margin-top: 19px;
+  margin-right: 300px;
+}
+
+
+.heart1{
+  position: absolute;
+  left: 21.3%;
+  top:106%;
+  background: url(http://i.imgur.com/sREcOjj.png);
+  background-position: 0 0;
+  cursor: pointer;
+}
+.heart2{
+ 
+  cursor: pointer;
+}
+.add {
+  animation: add-to-wishlist 1.1s steps(65);
+  background-position: -4160px 0;
+  transition: background 1.1s steps(65);
+}
+
+.remove {
+  animation: remove-from-wishlist 0.5s steps(30);
+  background-position: -6080px 0;
+  transition: background 0.5s steps(30);
+}
+
+@keyframes add-to-wishlist {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: -4160px 0;
+  }
+}
+
+@keyframes remove-from-wishlist {
+  0% {
+    background-position: -4160px 0;
+  }
+  100% {
+    background-position: -6080px 0;
+  }
+}
+
+/* Additional Styles for Night Mode */
+.night-mode .btn.cart {
+  background-color: #555; /* Darker background color for buttons */
+  color: #fff; /* Light text color for buttons */
+}
+
+.night-mode .btn.buy {
+  background-color: #228B22; /* Adjust color for buy button in night mode */
+  color: #fff; /* Light text color for buy button */
+}
+
+
+
+.can {
+  animation: floatAnimation 2s infinite alternate ease-in-out;
+  transition: opacity 0.5s ease-in-out;
+}
+
+
+
+.hidden {
+  opacity: 0;
+}
+
+@keyframes floatAnimation {
+  0% {
+      transform: translateY(0);
+  }
+  100% {
+      transform: translateY(-20px);
+  }
+}
+
+
+
+
+
+.bannerText {
+  transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out; 
+}
+
+.moveLeft {
+  transform: translateX(-100px); /* Adjust the value as needed */
+  opacity: 0;
+}
+
+
+
+
+/* from Energy */
+.imgbox{
+  display: flex;
+  align-items: center;
+  position: relative;
+  top: 50px;
+  right: 12px;
+  
+ }
+
+ #productbg{
+  height: 390px;
+  width: 350px;
+  /* right: 578px;
+  top: 795px; */
+ }
+
+ .card-img-top{
+  width:65%;
+  top: -40px;
+  bottom: 60px;
+  left: -243px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: -50px;
+  position: relative;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+  transition: box-shadow 3.1s ease;
+}
+
+.dropbtn{
+  border: none;
+  border-radius: 12px;
+  background-color: #ffffff;
+  color: rgb(90, 84, 84);
+  height: 30px;
+  position: absolute;
+  left: 40px;
+  width: 70px;
+  box-shadow: 0px 2px 20px rgba(0, 0, 0, .3);
+ font-size: 13px;
+ padding-top: 4px;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  border-radius: 25px;
+  background-color: #ffffff;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+  transition: opacity 3.3s ease;
+  left: 20px;
+ 
+}
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  font-size: 13px;
+}
+
+.dropdown-content a:hover {
+  background-color: #f1f1f1;
+  border-radius: 25px;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+  opacity: 1;
+}
+
+.dropbtn{
+  border: none;
+  border-radius: 12px;
+  background-color: #ffffff;
+  color: rgb(90, 84, 84);
+  height: 30px;
+  position: absolute;
+  left: 40px;
+  width: 70px;
+  box-shadow: 0px 2px 20px rgba(0, 0, 0, .3);
+ font-size: 13px;
+ padding-top: 4px;
+}
+/* from Energy */

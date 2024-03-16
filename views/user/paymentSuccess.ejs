@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>POLAR</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+ 
+        .main {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #095811; 
+        }
+        .center {
+            width: 900px;
+            height: 500px;
+            background: linear-gradient(to bottom right, rgba(43, 125, 17, 0.708), rgba(3, 35, 17,0.22));        
+            border-radius: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 1s ease-in-out; 
+        }
+        
+
+       
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 11;
+            }
+        }
+
+        @keyframes zoomIn {
+            0% {
+                transform: scale(0);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .btn-orderDetail a {
+            text-decoration: none;
+            color: #fff;
+            font-size: 20px;
+            padding: 10px 20px;
+            font-family: "Poppins", sans-serif;
+           
+        }
+        .paymentSuccess{
+            color: #fff;
+            font-size: 60px;
+            font-family: "Poppins", sans-serif;
+            text-align: center;
+            position: relative;
+            bottom: 126px;
+            right:-70px;
+            font-weight: 500;
+           
+            
+        }
+        .contents img{
+            position: relative;
+            top: 100px;
+            right: 120px;
+            width: 250px;
+            animation: zoomIn 0.85s ease-in-out;
+        }
+        .Shop{
+            width: 90px;
+            background-color:#007625;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+            border-radius: 47px;
+            position: relative;
+            bottom: 70px;
+            animation: zoomIn 0.45s ease-in-out;
+        }
+        .orderDetails{
+            position: relative;
+            bottom: 4.3rem;
+            animation: zoomIn 0.45s ease-in-out;
+            
+        }
+
+    </style>
+</head>
+
+<body>
+    <div class="main">
+        <div class="center">
+            <div class="contents">
+                <img src="/img/paymentSuccess.png" alt="">
+                <div class="paymentSuccess">Payment<br>Success </div>
+                <div class="btn-orderDetail">
+                    <a class="Shop" href="/getEnergy">Go to Shop</a>
+                    <a class="orderDetails" href="/OrderPlaced">Order Details</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

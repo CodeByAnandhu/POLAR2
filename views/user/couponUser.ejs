@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Polar</title>
+    <script src="https://kit.fontawesome.com/1069728e6a.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> <!-- Include jQuery -->
+</head>
+
+<link rel="stylesheet" href="/stylesheet/couponUser.css">
+<body>
+
+<section class="profile">
+    <header>
+        <img class="shopIcon" src="/img/ShopIconBlack.png" alt="">
+        <h1 class="profileHeading">Profile</h1>
+        <h3 class="subheading">Welcome Back <%=userData.name%></h3>
+        <%if(userData.profileImage==""){%>
+            <h1></h1>
+           <%}else{%>
+             <img src="<%=userData.profileImage%>" alt="userProfile" class="userProfile">
+             <%}%>        <h3 class="userName">Hello <%=userData.name%></h3>
+    </header>
+
+    <label class="ui-switch">
+        <input type="checkbox" id="darkModeToggle">
+        <div class="slider">
+            <div class="circle"></div>
+        </div>
+    </label>
+
+    <div class="leftBar">
+        <a href="/getHome" class="address"><i class="fa-solid fa-house"></i></i>Home</a>
+        <a href="/profile" class="editProfile"><i class="fa-solid fa-user"></i>Profile</a>
+        <a href="/address" class="address"><i class="fa-solid fa-address-card"></i>Address</a>
+        <a href="/orderDetailsUser" class="orders"><i class="fa-solid fa-bag-shopping"></i>Orders</a>
+        <a href="/couponsUser" class="wishlist"><i class="fa-solid fa-ticket-simple"></i>Coupons</a>
+    </div>
+     
+    <div class="center">    
+        <div class="card1">
+        <%CouponsData.forEach((items, index)=> {%>
+            <div class="card" onclick="copyCoupon('<%=items.couponCode%>')" >
+                <h3 class="heading"><%=items.discount%>% off <br><span>All producs</span> <i class="fa-solid fa-receipt"></i></h3>
+                <p class="expireDate">Expire on <%= items.expiryDate.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: '2-digit', year: 'numeric' }) %></p>
+                <p class="couponcode">Copy code: <%=items.couponCode%></p>
+            </div>  
+           <%})%>
+        </div>
+    </div>
+
+    <div class="popup-message" id="popupMessage">Coupon code copied!</div>
+</section>
+
+
+
+<!-- Refferal -->
+
+<div class="referral-card" onclick="toggleAccordion(this)">
+    <div class="referral-header">
+      <h2>Refer & Earn $100!</h2>
+    </div>
+    <div class="referral-body">
+      <p>Hey there!</p>
+      <p> Refer and get rewarded! Just share your unique referral and when they sign up, you'll receive ₹100! they will receive 20% discount on their first order.</p>
+      <div class="referral-code" onclick="copyReferralCode()"> <!-- Added onclick event -->
+        
+       <strong  class="referralCode" id="referralCode"><%=userData.refferalCode%></strong> 
+      </div>
+      <!-- <p class="referral-instruction">Share your referral code with friends and family. When they sign up using your code, you both get $100!</p> -->
+    </div>
+  </div>
+  
+  <div class="referral-popup" id="popup">
+    Referral code copied!
+  </div>
+<!-- Refferal -->
+
+
+
+
+
+<script>
+    document.getElementById('darkModeToggle').addEventListener('change', function() {
+        toggleDarkMode();
+    });
+    function toggleDarkMode() {
+        document.body.classList.toggle('dark-mode');
+        const cards = document.querySelectorAll('.card1, .card2, .card3,.leftBar,.profileHeading,.subheading,.shopIcon,.userName .referralCode');
+        cards.forEach(card => {
+            card.classList.toggle('dark-mode');
+        });
+       }
+        </script>
+
+
+
+<script>
+    function copyCoupon(couponCode) {
+        var tempInput = document.createElement("input");
+        tempInput.value = couponCode;
+        document.body.appendChild(tempInput);
+        tempInput.select();
+        document.execCommand("copy");
+        document.body.removeChild(tempInput);
+        
+        // Show popup message
+        var popupMessage = document.getElementById("popupMessage");
+        popupMessage.style.display = "block";
+        
+        // Hide popup message after 2 seconds
+        setTimeout(function() {
+            popupMessage.style.display = "none";
+        }, 1000);
+    }
+</script>
+
+
+
+
+<script>
+    // function toggleAccordion(card) {
+    //   var body = card.querySelector('.referral-body');
+    //   body.classList.toggle('show');
+    // }
+    
+    function copyReferralCode() {
+      var referralCode = document.getElementById('referralCode');
+      var tempInput = document.createElement('input');
+      tempInput.value = referralCode.innerText;
+      document.body.appendChild(tempInput);
+      tempInput.select();
+      document.execCommand('copy');
+      document.body.removeChild(tempInput);
+    
+      var popup = document.getElementById('popup');
+      popup.classList.add('show');
+      setTimeout(function() {
+        popup.classList.remove('show');
+      }, 2000); // Adjust duration as needed
+    }
+    </script>
+
+</body>
+</html>

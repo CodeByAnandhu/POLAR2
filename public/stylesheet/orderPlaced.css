@@ -1,0 +1,115 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+body {
+background-color: #ffffffca;
+font-family: "Poppins", sans-serif;
+z-index: 1000;
+}
+
+
+.row1{
+    display: flex;
+    justify-content: center;
+    background-color: transparent;
+    
+}
+
+.card {
+border: none;
+}
+.invoice{
+    background-color: rgba(15, 159, 63, 0.098);
+    
+}
+.payment{
+   height: 90px;
+}
+.payment::-webkit-scrollbar {
+    width: 0;  
+    background: transparent;
+}
+.logo {
+background-color: #08721fa8;
+}
+.logo img {
+    filter: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(7500%) hue-rotate(0deg);
+}
+.py-2{
+    background-color: transparent;
+}
+.totals tr td {
+font-size: 18px;
+background-color: transparent;
+}
+.footer {
+background-color: #0aa0435f;
+}
+.footer span {
+font-size: 12px;
+}
+.product-qty span{
+font-size: 16px;
+color: #7c7777;
+}
+
+.product{
+   border-radius: 25px;
+   background-color: white;
+}
+
+.product img{
+ margin-top: -10px;
+ width: 70px;
+ margin-left: 30px;
+}
+
+.product::-webkit-scrollbar {
+    width: 0;  
+    background: transparent;
+}
+tbody{
+    border-radius: 25px;
+    background-color: white;
+}
+.col-md-5{
+    border-radius: 25px;
+}
+tr{
+    background-color:rgba(15, 159, 63, 0.098);
+}
+
+.aTag{
+    display: flex;
+    align-items: center;
+   position: relative;
+   margin-top:-20px;
+   bottom: 27px;
+   left: 100px;
+
+
+}
+.aTag a{
+    color: rgba(252, 252, 252, 0.941);
+    text-decoration: none;
+   margin-right: 20px;
+}
+
+
+.download-button {
+    position: absolute;
+    top: 35.4rem; 
+    display: inline-block;
+    padding: 5px 15px;
+    color: #fff; 
+    border: none;
+    border-radius: 25px;
+    text-decoration: none;
+    background-color: #117e4b;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .download-button:hover {
+    background-color: #12b167; /* Darker shade of primary color on hover */
+  }
+  
+/* DownlodaBtn */

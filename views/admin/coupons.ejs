@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel</title>
+    <link rel="stylesheet" href="/stylesheet/Admin/coupons.css">
+    <script src="https://kit.fontawesome.com/6293a1580a.js" crossorigin="anonymous"></script>
+  
+</head>
+<body>
+     <style>
+        #error p{
+  color: #a90202;
+  padding-left: 15px;
+  font-size: 20px;
+  font-weight: 600;
+  
+}
+
+#errrormessege{
+    background-color:rgba(229, 225, 225, 0.443);
+    width: 180px;
+    left: 200px;
+    position: absolute;
+    left: 700px;
+    top: 30px;
+    padding: 10px;
+    border-radius: 25px;
+  }
+
+     </style>
+
+  <header>
+    <img src="/img/ShopIconBlack.png" alt="ShopIcon">
+     <h1>Admin Panel</h1>
+ 
+      </div>
+     <!-- searchbar -->
+     <form class="form">
+      <button>
+          <svg width="17" height="16" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="search">
+              <path d="M7.667 12.667A5.333 5.333 0 107.667 2a5.333 5.333 0 000 10.667zM14.334 14l-2.9-2.9" stroke="currentColor" stroke-width="1.333" stroke-linecap="round" stroke-linejoin="round"></path>
+          </svg>
+      </button>
+      <input class="input" placeholder="Type your" type="text">
+      <button class="reset" type="reset">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
+          </svg>
+      </button>
+  </form>
+     <!-- searchbar -->
+     
+
+  </header>       
+    
+
+     <!-- Popup Messsege -->
+     <% if (typeof errorMessage !== 'undefined' && errorMessage.length > 0) { %>
+      <div id="popupmessege" class="popup-containerForError">
+          <h4><%= errorMessage %> <i class="fa-solid fa-circle-exclamation"></i></h4>
+        </div>
+    <% } %>
+    
+    <% if (typeof successMessage !== 'undefined' && successMessage.length > 0) { %>
+      <div id="popupmessege" class="popup-containerForSuccess">
+          <h4> <%= successMessage %>  <i class="fa-solid fa-circle-check"></i></h4>
+        </div>
+    <% } %>
+    
+    
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        var popup = document.getElementById('popupmessege');
+        setTimeout(function() {
+          popup.style.animation = 'popOut 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards';
+          setTimeout(function() {
+            popup.remove();
+          }, 300);
+        }, 4000);
+      });
+    </script>
+    <!-- Popup Messsege -->
+
+  
+
+    <nav> 
+        <h1 class="dashboard">Dash Board</h1>
+        <div class="utility">
+        <div id="insite">       
+              <a href="/Insite"><i class="fa-solid fa-chart-simple"></i></i>Insite</a>
+        </div>
+        <div id="products">       
+          <a href="/products"><i class="fa-solid fa-bag-shopping"></i></i>Products</a>
+        </div>
+
+        <div id="AdminOrderDetails">       
+          <a href="/AdminOrderDetails"><i class="fa-solid fa-align-left"></i>Orders</a>
+        </div>
+        <div id="userManage">       
+          <a href="/userManage"><i class="fa-solid fa-user-plus"></i>User Manage</a>
+        </div>
+        
+        <div id="BannerEdit">       
+          <a href="/offer"><i class="fa-solid fa-gear"></i>Offers</a>
+        </div>
+        <div id="Coupons">       
+          <a href="/coupon"><i class="fa-solid fa-ticket-simple"></i></i>Coupons</a>
+        </div>
+
+       
+        
+        <a href="/adminlogin"><i class="fa-solid fa-right-from-bracket"></i></i>Logout</a>
+        
+    </div>
+    </nav>
+    
+    <main>
+      <section class="scrollHandiling">
+      <button class="addcoupon"><i class="fa-solid fa-plus"></i> Add Coupon</button>
+      <div class="modal" id="modal">
+          <div class="modal-content">
+              <span class="close">&times;</span>
+              <h2>Add Coupon</h2>
+              <form action="/addcoupon" method="post"  id="couponForm">
+                  <div class="form-group">
+                      <label for="couponCode">Coupon Code:</label>
+                      <input type="text" id="couponCode" name="couponCode"  required>
+                  </div>
+                  <div class="form-group">
+                      <label for="discount">Discount (%):</label>
+                      <input type="number" id="discount" name="discount" min="1" required>
+                  </div>
+                  <div class="form-group">
+                      <label for="expiryDate">Expiry Date:</label>
+                      <input type="date" id="expiryDate" name="expiryDate" required>
+                  </div>
+                  <div class="form-group">
+                      <label for="purchaseAmount">Purchase Amount:</label>
+                      <input type="number" id="purchaseAmount" name="purchaseAmount" min="1" required>
+                  </div>
+                  <button type="submit">Submit</button>
+              </form>
+          </div>
+      </div>
+      <% couponData.forEach((coupon) => { %>
+        <div class="align">
+         <a href="/editCoupon/<%= coupon._id %>">
+          <i class="fa-solid fa-gear" id="gearicon"></i>
+         </a>
+        </div>
+        <div class="panel product-details">
+            <form action="/deleteCoupon/<%= coupon._id %>" method="post" class="deleteCouponForm">
+              <i class="fa-solid fa-xmark xMark"></i>
+          </form>
+            <i class="fa-solid fa-receipt"></i>
+            <h2 class="Discount">Discount.</h2>
+            <h2 class="Percentage"><%= coupon.discount %>%</h2>
+            <h2 class="couponCode"><%= coupon.couponCode %></h2>
+            <h2 class="couponExpiry"><%= coupon.expiryDate.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: '2-digit', year: 'numeric' }) %></h2>
+        </div>
+      
+      <% }) %>
+
+
+
+   
+
+
+      <div class="background"></div>
+    </section>
+  </main>
+
+
+
+
+  <script>
+    // Get all elements with class "xMark" and attach event listener to each
+    document.querySelectorAll(".xMark").forEach(function(element) {
+      element.addEventListener("click", function(event) {
+        event.preventDefault(); 
+        // Find the corresponding form by traversing up the DOM tree
+        var form = element.closest(".deleteCouponForm");
+        if (form) {
+          form.submit();
+        }
+      });
+    });
+  </script>
+
+
+  <script>
+    setTimeout(function() {
+      var errorMessageElement = document.getElementById('errrormessege');
+      if (errorMessageElement) {
+        errorMessageElement.style.display = 'none';
+      }
+    }, 3000); 
+  </script>
+
+
+
+
+<script>
+// Get the modal
+var modal = document.getElementById("modal");
+
+// Get the button that opens the modal
+var btn = document.querySelector(".addcoupon");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks the button, open the modal
+btn.onclick = function() {
+    modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+    modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+
+
+</script> 
+
+
+</body>
+</html>

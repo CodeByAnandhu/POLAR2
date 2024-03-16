@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel</title>
+    <link rel="stylesheet" href="/stylesheet/Admin/offers.css">
+    <script src="https://kit.fontawesome.com/6293a1580a.js" crossorigin="anonymous"></script>
+  
+</head>
+<body>
+
+    <style>
+
+
+.home a{
+  background-color: #078b4b;
+  border-radius: 30px;
+  padding: 5px;
+  color: white;
+}
+
+        #error p{
+  color: #a90202;
+  padding-left: 15px;
+  font-size: 20px;
+  font-weight: 600;
+  
+}
+
+#errrormessege{
+    background-color:rgba(229, 225, 225, 0.443);
+    width: 180px;
+    left: 200px;
+    position: absolute;
+    left: 700px;
+    top: 30px;
+    padding: 10px;
+    border-radius: 25px;
+  }
+
+
+    /* Popup styles */
+.popup {
+  font-family: "Poppins", sans-serif;
+  display: none;
+  position: fixed;
+  z-index: 999;
+  left: 26rem;
+  top: 2.7rem;
+  width: 50%;
+  height: 100%;
+  overflow: auto;
+}
+
+.popup-content {
+  background-color: #fefefe;
+  margin: 10% auto;
+  padding: 20px;
+  /* border: 3px solid #087d46; */
+  width: 50%;
+  border-radius: 25px;
+  box-shadow: 25px 25px 52px 2px rgba(151, 151, 151, 0.48);
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* Input fields */
+.popup-content input[type="number"],
+.popup-content input[type="checkbox"],
+.popup-content button {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 24px;
+  box-sizing: border-box;
+}
+
+.popup-content button {
+  background-color: #08855d;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.popup-content button:hover {
+  background-color: #1eab5d;
+}
+
+/* Animation */
+@keyframes zoomIn {
+  from {
+    transform: scale(0.20);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+.zoom-in {
+  animation: zoomIn 0.3s ease;
+}
+
+@keyframes zoomOut {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(0);
+  }
+}
+
+.zoom-out {
+  animation: zoomOut 0.3s ease;
+}
+
+
+     </style>
+
+
+
+  <header>
+    <img src="/img/ShopIconBlack.png" alt="ShopIcon">
+     <h1>Admin Panel</h1>
+ 
+      </div>
+     <!-- searchbar -->
+     <form class="form">
+      <button>
+          <svg width="17" height="16" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="search">
+              <path d="M7.667 12.667A5.333 5.333 0 107.667 2a5.333 5.333 0 000 10.667zM14.334 14l-2.9-2.9" stroke="currentColor" stroke-width="1.333" stroke-linecap="round" stroke-linejoin="round"></path>
+          </svg>
+      </button>
+      <input class="input" placeholder="Type your text" required="" type="text">
+      <button class="reset" type="reset">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
+          </svg>
+      </button>
+  </form>
+     <!-- searchbar -->
+     
+
+  </header>       
+    
+    <nav> 
+        <h1 class="dashboard">Dash Board</h1>
+        <div class="utility">>
+        <div id="insite">       
+              <a href="Insite"><i class="fa-solid fa-chart-simple"></i></i>Insite</a>
+        </div>
+        
+        <div id="Products">
+            <a href="Products"><i class="fa-solid fa-bag-shopping"></i></i>Products</a>
+        </div>
+        <div id="Orders">       
+          <a href="/AdminOrderDetails"><i class="fa-solid fa-align-left"></i>Orders</a>
+    </div>
+        <div id="userMange">
+            <a href="UserManage"><i class="fa-solid fa-user-plus"></i>User Manage</a>
+        </div>
+        
+        <div id="offers">
+            <a href="#"><i class="fa-solid fa-gear"></i>Offers</a>
+        </div>
+        
+        <a href="/coupon"><i class="fa-solid fa-ticket-simple"></i></i>Coupons</a>
+        <a href="adminLogin"><i class="fa-solid fa-right-from-bracket"></i></i>Logout</a>
+    </div>
+    </nav>
+    <main>
+
+
+      
+
+       <!-- Popup Messsege -->
+<% if (typeof errorMessage !== 'undefined' && errorMessage.length > 0) { %>
+  <div id="popupmessege" class="popup-containerForError">
+      <h4><%= errorMessage %> <i class="fa-solid fa-circle-exclamation"></i></h4>
+    </div>
+<% } %>
+
+<% if (typeof successMessage !== 'undefined' && successMessage.length > 0) { %>
+  <div id="popupmessege" class="popup-containerForSuccess">
+      <h4> <%= successMessage %>  <i class="fa-solid fa-circle-check"></i></h4>
+    </div>
+<% } %>
+
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var popup = document.getElementById('popupmessege');
+    setTimeout(function() {
+      popup.style.animation = 'popOut 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards';
+      setTimeout(function() {
+        popup.remove();
+      }, 300);
+    }, 4000);
+  });
+</script>
+<!-- Popup Messsege -->
+        
+          
+        <!-- userManage.ejs -->
+
+        <div class="panel product-details">
+
+
+
+               <!-- Popup -->
+<div id="popup" class="popup">
+    <div class="popup-content">
+      <span class="close" onclick="closePopup()">&times;</span>
+      <h2>Add Referral Offer</h2>
+      <form id="offerForm" class="offer-form" action="/offer" method="post">
+       
+        <div class="form-group">
+          <label for="category">Category:</label>
+          <select id="category" name="category">
+              <option value="">Select a category</option> 
+              <% categoryData.forEach((category) => { %>
+                  <option value="<%= category.categoryName %>"><%= category.categoryName %></option>
+              <% }) %>
+          </select>
+      </div><br>
+      <div class="form-group">
+        <label for="percentage">Percentage:</label>
+        <input type="number" id="percentage" name="discount" min="1" max="100" placeholder="Enter Percentage" required>
+      </div>
+        <br>
+        <div class="form-group">
+            <label for="startDate">Start Date:</label>
+            <input type="date" id="startDate" name="startDate" >
+        </div><br>
+        <div class="form-group">
+            <label for="endDate">End Date:</label>
+            <input type="date" id="endDate" name="endDate">
+        </div>
+        <br>
+        <label for="isActive">Is Active:</label>
+        <div class="radio-buttons">
+        <input type="radio" id="isActiveTrue" name="isActive" value="true" required>
+        <label for="isActiveTrue">Active</label>
+        <input type="radio" id="isActiveFalse" name="isActive" value="false">
+        <label for="isActiveFalse">Hide</label>
+        </div>
+
+        <button type="submit" class="submit-btn">Submit</button>
+      </form>
+    </div>
+  </div>
+
+
+
+                   <!-- BreadCrumbs -->
+ 
+    <div class="breadCrumbs">
+        
+      <div class="home">
+          <a href="#">Category Offers</a>
+      </div>
+
+      <i class="fa-solid fa-chevron-right"></i>
+
+      <div class="current">
+          <a href="/refferalOffer">Refferal Offer</a>
+      </div>
+
+      <i class="fa-solid fa-chevron-right"></i>
+
+      <div class="current2">
+          <a href="/productOffer">Product Offer</a>
+      </div>
+
+  </div>
+  
+  <!-- BreadCrumbs -->
+
+
+
+ 
+
+  <a href="#">     
+ <button class="btnAddOffer"><i class="fa-solid fa-plus"></i> Add Offer</button>
+</a>    
+
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Percentage</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th>isActive</th>
+            <th>Category</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% offerData.forEach((offer, index) => { %>
+            <tr>
+                <td><%= index + 1 %></td>
+                <td><%= offer.discount %>%</td>
+                <td><%= offer.startDate?.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: '2-digit', year: 'numeric' }) %></td>
+                <td><%= offer.endDate?.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: '2-digit', year: 'numeric' }) %></td>
+                <td><%= offer.isActive %></td>
+                <td><%= offer.category %></td>
+                <td class="action"> 
+                    <a href="/editOffer/<%= offer._id %>">
+                        <button type="submit" class="edit-btn" data-id="<%= offer._id %>">
+                            <i class="fa-solid fa-pen-to-square"></i>
+                        </button>
+                    </a>
+                    <form action="/deleteOffer/<%= offer._id %>" method="post">
+                        <button type="submit" class="delete-btn" data-id="<%= offer._id %>">
+                            <i class="fa-solid fa-trash"></i>
+                        </button>
+                    </form>
+                </td>
+            </tr>
+        <% }) %>
+    </tbody>
+    
+</table>
+             
+
+          </div>
+       
+          
+    </main>
+
+
+
+    <script>
+        // Open popup
+// Open popup
+function openPopup() {
+  var popup = document.getElementById("popup");
+  popup.classList.remove("zoom-out");
+  popup.classList.add("zoom-in");
+  popup.style.display = "block";
+}
+
+// Close popup
+function closePopup() {
+  var popup = document.getElementById("popup");
+  popup.classList.remove("zoom-in");
+  popup.classList.add("zoom-out");
+  setTimeout(function() {
+    popup.style.display = "none";
+  }, 300); // 0.3s animation duration
+}
+
+// Form submission
+document.getElementById("offerForm").addEventListener("submit", function(event) {
+//   event.preventDefault();
+  var isActiveTrue = document.getElementById("isActiveTrue").checked;
+  var isActiveValue = isActiveTrue ? "true" : "false";
+  document.getElementById("isActive").value = isActiveValue;
+  // Handle form submission here
+  closePopup();
+});
+
+// Trigger popup
+document.querySelector(".btnAddOffer").addEventListener("click", function() {
+  openPopup();
+});
+
+    </script>
+
+
+
+
+  
+    
+    
+
+</body>
+</html>
+
+   
+    

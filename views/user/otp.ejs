@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+   <title>OTP Verification Form</title>
+    <link rel="stylesheet" href="/stylesheet/otp.css" />
+    <!-- Boxicons CSS -->
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+    <script src="https://kit.fontawesome.com/6293a1580a.js" crossorigin="anonymous"></script>
+   <script src="/script.js" defer></script>
+
+  </head>
+  
+  <body>
+   
+    <div class="container">
+      <% if (typeof message !== 'undefined') { %>
+        <div class="Errormsg">
+          <h3 ><%= message %></h3>
+        </div>
+      <% } %>
+      <header>
+        <i class="fa-solid fa-circle-check"></i>
+      </header>
+      <h4>Enter OTP Code</h4>
+      <form action="/getOtp" method="POST">
+        <div class="input-field">
+          <input type="number" name="n1"/>
+          <input type="number"  name="n2" disabled/>
+          <input type="number" name="n3" disabled/>
+          <input type="number" name="n4" disabled/>
+        </div>
+        <button class="active">Verify OTP</button>
+      </form>
+       <div id="otp-timer"></div>
+      <form action="/resendOtp" method="POST">
+        <button id="resendOTP">Resend OTP</button>
+       </form>
+
+    </div>
+
+
+
+  
+    <script>
+   function resendOTP() {
+            
+           
+         fetch('/resendotp', {
+             method: 'POST',
+             headers: {
+                  'Content-Type': 'application/json',
+             },
+         })
+         .then(response => response.json())
+         .then(data => {
+             console.log('Resend Response:', data);
+             if (data.error) {
+                 showError(data.error);
+             } else {
+                 showSuccessMessage('OTP Resent!');
+                 // Reset the timer if needed
+                 clearInterval(timer);
+                 timeLeft = 120;
+                 startTimer();
+             }
+         })
+         .catch(error => {
+             console.error('Error:', error);
+         });
+ 
+ }
+ 
+    </script>
+    
+
+
+  </body>
+</html>

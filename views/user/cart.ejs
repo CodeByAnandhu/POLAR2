@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>POLAR</title>
+
+    <!-- font Awsome -->
+    <script src="https://kit.fontawesome.com/1069728e6a.js" crossorigin="anonymous"></script>
+    <!-- font Awsome -->
+
+    <link rel="stylesheet" href="/stylesheet/cart.css">
+
+</head>
+
+<body>
+
+    <section class="cart">
+        <nav class="navbar">
+
+            <a href="/getEnergy">
+                <i id="leftArrow" class="fa-solid fa-arrow-left"></i>
+            </a>
+
+            <i id="cartIcon" class="fa-solid fa-cart-shopping"></i>
+
+             <h3 class="headingCart">
+                Cart
+            </h3>
+
+        </nav>
+
+
+
+
+        
+
+        <div id="errorMessage" class="alert alert-danger" style="display: none;"></div>
+
+
+
+
+       
+
+        <% if (Cart.length==0) { %>
+            <div class="EmptyMessege">
+                <h1><i class="fa-solid fa-heart-crack"></i> Cart is empty</h1>
+            </div>
+            <% } %>
+
+
+
+                    <% Cart.forEach((item, index) => { %>
+                        <div class="card">
+                            <div class="card-content">
+                                <div class="action">
+                                </div>
+                                <h3 class="countItems">
+                                    <%= item.quantity %>
+                                </h3>
+                    
+                                
+                                    <i id="circle-plus" class="fa-solid fa-circle-plus"
+                                       data-product-id="<%= item.productId %>"></i>
+                               
+                                <i id="circle-minus" class="fa-solid fa-circle-minus"
+                                    data-product-id="<%= item.productId %>"></i>
+
+                                <form action="/delete-cart-item/<%= item.productId %>" method="POST">
+                                    <button type="submit" class="deleteButton">
+                                        <i id="closeButton" class="fa-solid fa-xmark"></i>
+                                    </button>
+                                </form>
+                               
+                    
+                                <% if (CategoryOfferPrice.find(offer => offer.category=="Sport") ) { %>
+                                    
+                                    <div class="ProductName">
+                                        <%= item.productName %>
+                                    </div>
+                                    <div class="priceOftheProduct">₹<%= discountedPrices[index] %></div>
+                                    <div class="imagesCard">
+                                        <img class="PrImage" src="<%= item.productImage %>" alt="">
+                                    </div>
+                                <% } else { %>
+                                   
+                                    <div class="ProductName">
+                                        <%= item.productName %>
+                                    </div>
+                                    <div class="priceOftheProduct">₹<%= item.price %></div>
+                                    <div class="imagesCard">
+                                        <img class="PrImage" src="<%= item.productImage %>" alt="">
+                                    </div>
+                                <% } %>
+                            </div>
+                        </div>
+                    <% }); %>
+                    
+                    
+                    
+
+
+
+
+
+<button style="color: black; background-color: rgb(169, 63, 63); padding: 10px; display: none;" id="btndd">Button</button>
+
+
+
+
+                                <div class="card1">
+                                    <div class="card-content">
+
+                                        <div class="imagesCard">
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                
+    </section>
+    <div class="footer">
+        <div class="checkout">
+            <h3 class="totalItem">Total Items(<span id="totalQuantityElement">
+                    <%= totalQuantity %>
+                </span>)</h3>
+            <h3 class="price" id="totalPriceElement">Total price: ₹<span id="totalPricePlaceholder">
+               
+                        <%= finalPrice %>
+                       
+                </span></h3>
+
+            <% if (Cart.length==0) { %>
+                <a class="checkoutBuy" href="/getEnergy">Shop Now</a>
+                <% }else { %>
+                    <a class="checkoutBuy" id="cee"  href="/checkout">Checkout</a>
+                    <%}%>
+        </div>
+    </div>
+
+    
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Retrieve total price from local storage
+
+        var totalPriceElement = document.getElementById('totalPriceElement');
+        var totalQuantityElement = document.getElementById('totalQuantityElement'); 
+        var totalPrice1 = localStorage.getItem('totalPrice1');
+        if (totalPrice1) {
+            totalPriceElement.innerText = "Total price: ₹" + totalPrice1;
+        } else {
+            
+            updateTotalPriceFromServer();
+        }
+
+        var plusButtons = document.querySelectorAll('.fa-circle-plus');
+        var minusButtons = document.querySelectorAll('.fa-circle-minus');
+
+        plusButtons.forEach(function (btn) {
+            btn.addEventListener('click', function () {
+                var input = this.parentNode.querySelector('.countItems');
+                var newQuantity = parseInt(input.textContent) + 1;
+                input.textContent = newQuantity;
+                updateQuantityOnServer(this, newQuantity); // pass the clicked button as this
+                updateTotalQuantity(); // Update total quantity whenever a button is clicked
+            });
+        });
+
+        minusButtons.forEach(function (btn) {
+            btn.addEventListener('click', function () {
+                var input = this.parentNode.querySelector('.countItems');
+                if (parseInt(input.textContent) > 1) {
+                    var newQuantity = parseInt(input.textContent) - 1;
+                    input.textContent = newQuantity;
+                    updateQuantityOnServer(this, newQuantity); // pass the clicked button as this
+                    updateTotalQuantity(); // Update total quantity whenever a button is clicked
+                }
+            });
+        });
+
+        function updateTotalQuantity() {
+            // Calculate total quantity by summing up individual quantities
+            var totalQuantity = 0;
+            document.querySelectorAll('.countItems').forEach(function (item) {
+                totalQuantity += parseInt(item.textContent);
+            });
+            // Update the content of the total quantity element
+            totalQuantityElement.textContent = totalQuantity;
+        }
+    });
+
+    function updateQuantityOnServer(inputElement, newQuantity) {
+    var itemId = inputElement.getAttribute('data-product-id');
+    fetch('/update-quantity', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ itemId: itemId, quantity: newQuantity }),
+    })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                // Update total price in local storage
+                localStorage.setItem('totalPrice', data.totalPrice.toFixed(2));
+                // Update total price element
+                var totalPriceElement = document.getElementById('totalPriceElement');
+                totalPriceElement.innerText = "Total price: ₹" + data.totalPrice;
+               
+
+                var plusIcon = document.getElementById('circle-plus');
+                    plusIcon.style.visibility = 'visible'; 
+
+                // Check if the quantity exceeds stock count
+                if (data.insufficientStock) {
+                    // Show message to the user
+                    document.getElementById('errorMessage').style.display = 'block';
+                    document.getElementById('errorMessage').innerText = data.errorMessage;
+                    
+
+
+                    // Hide the plus button
+                    var plusIcon = document.getElementById('circle-plus');
+                    plusIcon.style.visibility = 'hidden';
+                } else {
+                    // Ensure the error message is hidden if no longer applicable
+                    document.getElementById('errorMessage').style.display = 'none';
+                   
+
+                }
+            } else {
+                // Handle error, show message to user
+                document.getElementById('errorMessage').style.display = 'block';
+                document.getElementById('errorMessage').innerText = data.message;
+                var plusIcon = document.getElementById('circle-plus');
+                    plusIcon.style.visibility = 'hidden'; 
+                
+                
+            }
+        })
+        .catch(error => {
+            console.error('Error updating quantity:', error);
+            // Optionally handle/display this error on the UI
+        });
+}
+
+
+
+
+    function updateTotalPriceFromServer() {
+        fetch('/get-total-price')
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    // Update total price in local storage
+                    localStorage.setItem('totalPrice', data.totalPrice.toFixed(2));
+                    // Update total price element
+                    var totalPriceElement = document.getElementById('totalPriceElement');
+                    totalPriceElement.innerText = "Total price: $" + data.totalPrice.toFixed(2);
+                } else {
+                    // Handle error, show message to user
+                    console.error('Error getting total price:', data.message);
+                }
+            })
+            .catch(error => {
+                console.error('Error getting total price:', error);
+
+            });
+    }
+
+
+</script>
+
+
+
+
+</body>
+
+</html>

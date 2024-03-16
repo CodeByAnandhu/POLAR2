@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="My First project" />
+    <meta name="author" content="Anandhu Aji Gopinath" />
+    <title>POLAR</title>
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="/img/Favicon.png" />
+    <link href="path/to/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <!-- Bootstrap -->
+    <!-- Bootstrap icons-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <!-- fontAwsome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+        integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofnP+4zfuJeq8z6EegFjN5XgVi7z1aX6j" crossorigin="anonymous">
+    <!-- fontAwsome -->
+    <!-- <link href="css/styles.css" rel="stylesheet" /> -->
+    <link rel="stylesheet" href="/stylesheet/styles.css">
+
+</head>
+
+<body>
+
+
+
+    <!-- Header-->
+    <header class="Banner">
+
+        <!-- Navigation-->
+
+        <nav class="navbar navbar-expand-lg" id="navbar">
+            <div class="container-fluid">
+                <img src="/img/ShopIcon.png" alt="Polar Icon" class="shopIcon">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link active text-light " aria-current="page" href="getHome">HOME</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-success" href="/getEnergy">SPORT</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-light" href="/wishlist">WISHLIST</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-light" href="/cart">CART</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-light" href="/profile">PROFILE</a>
+                        </li>
+
+                    </ul>
+                    <form class="d-flex">
+                        <input class="searchbox me-2" type="search" placeholder="Search" aria-label="Search">
+                        <button class="searchBtn" type="submit">SEARCH</button>
+                    </form>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Navigation-->
+        <img src="/img/bannerText.png" alt="bannerText" class="bannerText">
+        <img src="/img/bannerCan.png" alt="bannerCan" class="can">
+
+    </header>
+
+    <!-- Section-->
+
+    <section class="py-5">
+
+
+        <!-- sortButton -->
+        <div class="dropdown">
+            <button class="dropbtn">Sort By</button>
+            <div class="dropdown-content">
+                <a href="/classic/popularity">Popularity</a>
+                <a href="/classic/energy">Energy Drinks</a>
+                <a href="/classic/priceLowToHigh">Price: Low to High</a>
+                <a href="/classic/priceHighToLow">Price: High to Low</a>
+                <a href="#">Average Ratings</a>
+                <a href="/classic/featured">Featured</a>
+                <a href="/classic/newArrivals">New Arrivals</a>
+                <a href="/classic/a-z">aA - zZ</a>
+                <a href="/classic/z-a">zZ - aA</a>
+            </div>
+        </div>
+        <!-- sortButton -->
+
+
+        <div class="container px-4 px-lg-5 mt-5">
+
+
+            <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+                <% showProducts.forEach((product)=> { %>
+                    <% const productData = product._doc; %>
+                    <div class="col mb-5"">
+                        <div class=" t1" class="card">
+                        <!-- Product image-->
+                        <a href="/getProductDetails/<%=productData._id%>">
+                            <div class="imgbox">
+                                <img id="productbg" src="/img/productBackground.png" alt="">
+                                <img class="card-img-top" src="<%=productData.productImage%>" alt="V8" />
+                            </div>
+                        </a>
+                        <!-- Product details-->
+                        <div class="card-body p-4">
+                            <div class="text-center">
+                                <!-- Product name-->
+                                <h5 class="fw-bolder"><%= productData.productName %></h5>
+                                <!-- Product price-->
+                                <% if(product.Offerprice > 0) { %>
+                                    <span class="text-muted text-decoration-line-through">₹<%= productData.price %></span>
+                                           
+
+                                    <span class="text-success">₹<%= (product.Offerprice).toFixed(2) %></span>
+                                <% } else if(product.productOfferPrice > 0){ %>
+                                  
+                                    <span class="text-muted text-decoration-line-through">₹<%= productData.price %></span>
+                                  
+                                    $<%= product.productOfferPrice %>
+                                <% } else { %>
+                                  
+                                    <span class="text-muted text-decoration-line-through">₹<%= productData.price %></span>
+                                  
+                                    ₹<%= productData.price %>
+                                <% } %>
+                            </div>
+                        </div>
+                        <!-- Product actions-->
+                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                            <form action="/addToCart/<%= productData._id %>" method="POST">
+                                <div class="text-center">
+                                    <button type="submit" class="btn cart" name="addToCart">Add To Cart</button>
+                                     <!-- <a class="btn buy" href="/checkout">Buy</a> -->
+                                    <a class="btn buy" href="/addToWishlist/<%= productData._id %>">wishlist</a>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+            </div>
+            <% }); %>
+
+        </div>
+        </div>
+        </div>
+
+    </section>
+    <!-- Footer-->
+    <footer class="footer">
+        <div class="footer">
+
+        </div>
+        <div class="footer-section">
+
+            <h3>About</h3>
+            <ul>
+                <li>story</li>
+                <li>Mission</li>
+                <li>Global</li>
+                <li>Menu</li>
+            </ul>
+        </div>
+
+        <!-- Menu Section -->
+        <div class="footer-section">
+            <h3>Menu</h3>
+            <ul>
+                <li>Beverages</li>
+                <li>Food</li>
+                <li>Nutrition</li>
+                <li>Locations</li>
+            </ul>
+        </div>
+
+        <!-- Location Section -->
+        <div class="footer-section">
+            <h3>Location</h3>
+            <ul>
+                <li>Kerala</li>
+                <li>Store </li>
+                <li>POLAR </li>
+                <li>Location</li>
+            </ul>
+        </div>
+
+        <!-- Social Links Section -->
+        <!-- <div class="footer-section social-links">
+                <a href="#" target="_blank" rel="noopener noreferrer">Facebook</a>
+                <a href="#" target="_blank" rel="noopener noreferrer">Twitter</a>
+                <a href="#" target="_blank" rel="noopener noreferrer">YouTube</a>
+            </div> -->
+
+        </div>
+    </footer>
+    <!-- Bootstrap core JS-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Core theme JS-->
+    <script src="/public/motion.js"></script>
+
+    <script src="path/to/jquery.min.js"></script>
+    <script src="path/to/popper.min.js"></script>
+    <script src="path/to/bootstrap.min.js"></script>
+
+</body>
+
+</html>

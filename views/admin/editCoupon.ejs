@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>POLAR</title>
+</head>
+<body>
+
+    <style>
+        /* Modal */
+/* Styles for the modal */
+
+body{
+    font-family: "Poppins", sans-serif;
+}
+.modal {
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: 10% auto;
+  padding: 20px;
+  border-radius: 30px;
+  width: 60%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.close {
+  color: #282727;
+  float: right;
+  font-size: 29px;
+
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.modal h2 {
+  margin-top: 0;
+  color: #15682c;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+label {
+  font-weight: 600;
+  display: block;
+  color: #6a6464;
+}
+
+.form-group input[type="text"],
+.form-group input[type="number"],
+.form-group input[type="date"] {
+  width: 100%;
+  padding: 17px;
+  border-radius: 25px;
+  background-color: #f0f0f0;
+  border: none;
+  box-sizing: border-box;
+}
+
+button {
+  background-color: #269367;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #d8ead9;
+  color: #075b1f;
+  transition: 0.80s;
+}
+
+/* Modal */
+
+
+.couponExpiry{
+  font-size: 12px;
+  position: relative;
+  top:-40px;
+  left: -95px;
+  padding: 30px;
+  font-weight: 600;
+  color: #d3d3d3; 
+}
+
+
+
+/* pop up messege */
+.popup-containerForError {
+  font-family: "Poppins", sans-serif;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.7);
+  background-color: #bd1919c5;
+  border-radius: 30px;
+  padding: 20px;
+  box-shadow: 25px 25px 52px 2px rgba(201,201,201,0.48);
+  opacity: 0;
+  animation: popIn 0.8s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards;
+  z-index: 9999;
+}
+
+.popup-containerForError h4 {
+  margin: 0;
+  padding: 10px;
+  font-size: 18px;
+  text-align: center;
+  color: #ffffff;
+  font-weight: 600;
+}
+.popup-containerForError i{
+  color: #fefefe;
+}
+
+@keyframes popIn {
+  0% { opacity: 0; transform: translate(-50%, -50%) scale(0.7); }
+  70% { opacity: 1; transform: translate(-50%, -50%) scale(1.05); }
+  100% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+}
+
+@keyframes popOut {
+  0% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+  100% { opacity: 0; transform: translate(-50%, -50%) scale(0.7); }
+}
+
+
+
+
+/* For success */
+.popup-containerForSuccess {
+  font-family: "Poppins", sans-serif;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.7);
+  background-color: #fff;
+  border-radius: 30px;
+  padding: 20px;
+  box-shadow: 25px 25px 52px 2px rgba(201,201,201,0.48);
+  opacity: 0;
+  animation: popIn 0.8s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards;
+  z-index: 9999;
+}
+
+.popup-containerForSuccess h4 {
+  margin: 0;
+  padding: 10px;
+  font-size: 18px;
+  text-align: center;
+  color: #10a765;
+  font-weight: bolder;
+}
+
+
+.popup-containerForSuccess i{
+  color: #10a765;;
+}
+
+
+/* For success */
+/* pop up messege */
+    </style>
+
+
+
+       <!-- Popup Messsege -->
+       <% if (typeof errorMessage !== 'undefined' && errorMessage.length > 0) { %>
+        <div id="popupmessege" class="popup-containerForError">
+            <h4><%= errorMessage %> <i class="fa-solid fa-circle-exclamation"></i></h4>
+          </div>
+      <% } %>
+      
+      <% if (typeof successMessage !== 'undefined' && successMessage.length > 0) { %>
+        <div id="popupmessege" class="popup-containerForSuccess">
+            <h4> <%= successMessage %>  <i class="fa-solid fa-circle-check"></i></h4>
+          </div>
+      <% } %>
+      
+      
+      <script>
+        document.addEventListener('DOMContentLoaded', function() {
+          var popup = document.getElementById('popupmessege');
+          setTimeout(function() {
+            popup.style.animation = 'popOut 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards';
+            setTimeout(function() {
+              popup.remove();
+            }, 300);
+          }, 4000);
+        });
+      </script>
+      <!-- Popup Messsege -->
+
+
+    <div class="modal" id="modal">
+        <div class="modal-content">
+            <a href="/coupon">
+            <span class="close">&times;</span>
+            </a>
+            <h2>Edit Coupon</h2>
+            <form action="/editCoupon/<%=couponData._id%>" method="post"  id="couponForm">
+                <div class="form-group">
+                    <label for="couponCode">Coupon Code:</label>
+                    <input type="text" id="couponCode" name="couponCode" value="<%=couponData.couponCode%>" required>
+                </div>
+                <div class="form-group">
+                    <label for="discount">Discount (%):</label>
+                    <input type="number" id="discount" name="discount" min="1" value="<%=couponData.discount%>" max="100" required>
+                </div>
+                <div class="form-group">
+                    <label for="expiryDate">Expiry Date:</label>
+                    <input type="date" id="expiryDate" name="expiryDate" value="<%= couponData.expiryDate.toISOString().substr(0, 10) %>" required>
+                </div>
+                <div class="form-group">
+                    <label for="purchaseAmount">Purchase Amount:</label>
+                    <input type="number" id="purchaseAmount" name="purchaseAmount" min="1" value="<%=couponData.purchaseAmount%>" required>
+                </div>
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+    </div>
+    
+</body>
+</html>

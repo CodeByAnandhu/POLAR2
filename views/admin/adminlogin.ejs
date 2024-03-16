@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>POLAR</title>
+    <link rel="stylesheet" href="/stylesheet/adminlogin.css">
+    <style>
+        .error{
+            z-index: 1000;
+            color: rgb(255, 255, 255);
+            position: absolute;
+            font-size: 14px;
+            bottom: 38rem;
+            right: 43rem;
+            padding: 10px 40px;
+            border-radius: 20px;
+            background-color: rgba(255, 255, 255, 0.123);
+        }
+     
+    </style>
+    <script>
+        function validateForm() {
+            var email = document.forms["adminLoginForm"]["email"].value;
+            var password = document.forms["adminLoginForm"]["password"].value;
+            var confirmPassword = document.forms["adminLoginForm"]["confirmPassword"].value;
+
+            // Reset previous error messages
+            document.getElementById("emailError").innerText = "";
+            document.getElementById("passwordError").innerText = "";
+            document.getElementById("confirmPasswordError").innerText = "";
+
+            var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                document.getElementById("emailError").innerText = "Please enter a valid email address";
+                return false;
+            }
+
+            if (password === "") {
+                document.getElementById("passwordError").innerText = "Please enter your password";
+                return false;
+            }
+
+            if (confirmPassword === "") {
+                document.getElementById("confirmPasswordError").innerText = "Please confirm your password";
+                return false;
+            }
+
+            if (password !== confirmPassword) {
+                document.getElementById("confirmPasswordError").innerText = "Passwords do not match";
+                return false;
+            }
+
+            return true;
+        }
+    </script>
+</head>
+
+<body>
+
+    <% if (typeof errorMessage !== 'undefined' && errorMessage.length > 0) { %>
+        <div class="error" id="errorMessage">
+            <%= errorMessage %>
+        </div>
+        <script>
+            // Check if errorMessage is set before showing it
+            window.addEventListener('DOMContentLoaded', function() {
+                var errorMessageElement = document.getElementById('errorMessage');
+                if (errorMessageElement) {
+                    errorMessageElement.style.display = 'block'; // Display the error message
+                    // Close the error message after 2 seconds
+                    setTimeout(function() {
+                        errorMessageElement.style.display = 'none'; // Hide the error message
+                    }, 2000); // 2000 milliseconds = 2 seconds
+                }
+            });
+        </script>
+    <% } %>
+    
+    
+
+    <div class="wrapper">
+        <form name="adminLoginForm" action="/adminLogin" method="POST"  onsubmit="return validateForm()">
+            <h2>Admin</h2>
+            <div class="input-field">
+                <input type="text" name="email">
+                <label>Enter your email</label>
+                <span id="emailError" class="error-message"></span>
+            </div>
+            <div class="input-field">
+                <input type="password" name="password">
+                <label>Enter your password</label>
+                <span id="passwordError" class="error-message"></span>
+            </div>
+            <!-- <div class="input-field">
+                <input type="password" name="confirmPassword">
+                <label>Confirm your password</label>
+                <span id="confirmPasswordError" class="error-message"></span>
+            </div> -->
+            <div class="forget">
+                <a href="#">Forgot password?</a>
+            </div>
+            <button type="submit">Log In</button>
+        </form>
+    </div>
+</body>
+
+</html>

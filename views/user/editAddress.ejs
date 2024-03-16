@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Polar</title>
+    <script src="https://kit.fontawesome.com/1069728e6a.js" crossorigin="anonymous"></script>
+    <style>
+        .alert {
+            position: absolute;
+            padding: 15px;
+            background-color: #08a84b7e;
+            color: rgb(255, 255, 255);
+            bottom : 650px;
+            left: 700px;
+            border-radius: 20px;
+           
+        }
+
+        .alert-success {
+    background-color: #0ea54b;
+    border-color: #c3e6cb;
+    color: #ffffff;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border: 2px solid transparent;
+    border-radius: 25px;
+}
+
+.Errormsg{
+    position: absolute;
+            bottom: 36rem;
+            left: 38rem;
+    background-color: rgba(205, 29, 16, 0.553);
+    border-color: #c3e6cb;
+    color: #ffffff;
+    padding: 1rem;
+    border: 1px solid transparent;
+    border-radius: 25px;
+    z-index: 1000;
+}
+    </style>
+</head>
+
+<link rel="stylesheet" href="/stylesheet/editAddress.css">
+<body>
+    
+
+    <section class="profile">
+
+ 
+        <header>
+
+
+            <img class="shopIcon" src="/img/ShopIconBlack.png" alt="">
+            <h1 class="profileHeading">Profile</h1>
+            <h3 class="subheading">
+                Welcome Back <%=userData.name%>
+            </h3>
+            <%if(userData.profileImage==""){%>
+                <h1></h1>
+               <%}else{%>
+                 <img src="<%=userData.profileImage%>" alt="userProfile" class="userProfile">
+                 <%}%>
+            <h3 class="userName">Hello <%=userData.name%></h3>
+        </header>
+
+        <label class="ui-switch">
+            <input type="checkbox" id="darkModeToggle">
+            <div class="slider">
+              <div class="circle"></div>
+            </div>
+        </label>
+
+        <% if (typeof errorMessage !== 'undefined' && errorMessage.length > 0) { %>
+            <div id="errorMessage" class="Errormsg">
+              <%= errorMessage %>
+            </div>
+          <% } %>
+          <% if (typeof successMessage !== 'undefined' && successMessage.length > 0) { %>
+            <div class="alert alert-success">
+                <%= successMessage %>
+            </div>
+        <% } %>
+
+      <div class="leftBar">
+        <a href="/getHome" class="address"><i class="fa-solid fa-house"></i></i>Home</a>
+        <a href="/profile" class="editProfile"><i class="fa-solid fa-user"></i>Profile</a>
+        <a href="/address" class="address"><i class="fa-solid fa-address-card"></i>Address</a>
+        <a href="/orderDetailsUser" class="orders"><i class="fa-solid fa-bag-shopping"></i>Orders</a>
+        <a href="/couponsUser" class="wishlist"><i class="fa-solid fa-ticket-simple"></i>Coupons</a>
+      </div>
+     
+      <div class="center">
+       
+        
+       <div class="card1">
+        <div class="AddressTitle">UPDATE ADDRESS</div>
+        <form id="addressForm" action="/updateAddress/<%= addressData._id %>" method="POST" onsubmit="return validateForm()">
+            <div class="section1">
+                 <label for="name">Name:</label><br>
+            <input type="text" id="name" name="name" value="<%= addressData.name %>"><br>
+
+             <label for="address">Address:</label><br>
+            <input type="text" id="address" name="address" value="<%= addressData.address %>"><br>
+
+            <label for="locality">Locality:</label><br>
+            <input type="text" id="locality" name="locality" value="<%= addressData.locality %>"><br>
+            </div>
+           
+            <div class="section2">
+            <label for="phone">Phone:</label><br>
+            <input type="number" id="phone" name="phone" min="0" value="<%= addressData.phone %>"><br>
+        
+            <label for="pincode">Pincode:</label><br>
+            <input type="number" id="pincode" name="pincode" min="0" value="<%= addressData.pincode %>"><br>
+        
+            <label for="state">State:</label><br>
+            <input type="text" id="state" name="state" value="<%= addressData.state %>"><br>
+            </div>
+            <input type="submit" value="Submit" class="submit">
+        </form>
+       </div>
+      
+       </div>
+      
+        
+  
+      
+
+    </section>
+
+    <script>
+document.getElementById('darkModeToggle').addEventListener('change', function() {
+    toggleDarkMode();
+});
+function toggleDarkMode() {
+    document.body.classList.toggle('dark-mode');
+    const cards = document.querySelectorAll('.card1, .card2, .card3,.leftBar,.profileHeading,.subheading,.shopIcon,.userName');
+    cards.forEach(card => {
+        card.classList.toggle('dark-mode');
+    });
+}
+
+function validateForm() {
+    var inputs = document.getElementById('addressForm').getElementsByTagName('input');
+    for (var i = 0; i < inputs.length; i++) {
+        if (inputs[i].value.trim() === '') {
+            displayAlert('Please fill in all fields.'); // Here's where you edit the alert text
+            return false;
+        }
+    }
+    return true;
+}
+
+function displayAlert(message) {
+    var alertElement = document.createElement('div');
+    alertElement.className = 'alert';
+    alertElement.textContent = message;
+    document.body.appendChild(alertElement);
+    setTimeout(function() {
+        alertElement.style.display = 'none';
+    }, 3000); // Hides the alert after 3 seconds
+}
+ 
+    </script>
+
+<script>
+  
+    setTimeout(function() {
+        var errorMessege = document.getElementById('errorMessage');
+        if (errorMessege) {
+            errorMessege.style.display = 'none';
+        }
+    }, 2000);
+  </script>
+
+</body>
+</html>

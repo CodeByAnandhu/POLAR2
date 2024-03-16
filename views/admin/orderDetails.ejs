@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Panel</title>
+  <link rel="stylesheet" href="/stylesheet/Admin/orderDetails.css">
+  <script src="https://kit.fontawesome.com/6293a1580a.js" crossorigin="anonymous"></script>
+
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  
+
+
+</head>
+
+<body>
+
+  <header>
+    <img src="/img/ShopIconBlack.png" alt="ShopIcon">
+    <h1>Admin Panel</h1>
+
+    </div>
+    <!-- searchbar -->
+    <form class="form">
+      <button>
+        <svg width="17" height="16" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="search">
+          <path d="M7.667 12.667A5.333 5.333 0 107.667 2a5.333 5.333 0 000 10.667zM14.334 14l-2.9-2.9"
+            stroke="currentColor" stroke-width="1.333" stroke-linecap="round" stroke-linejoin="round"></path>
+        </svg>
+      </button>
+      <input class="input" placeholder="Type your text" required="" type="text">
+      <button class="reset" type="reset">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+          stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
+        </svg>
+      </button>
+    </form>
+    <!-- searchbar -->
+
+
+  </header>
+
+  <nav>
+    <h1 class="dashboard">Dash Board</h1>
+    <div class="utility">>
+      <div id="insite">
+        <a href="Insite"><i class="fa-solid fa-chart-simple"></i></i>Insite</a>
+      </div>
+
+      <div id="Products">
+        <a href="/products"><i class="fa-solid fa-bag-shopping"></i></i>Products</a>
+      </div>
+
+      <div id="salesReport">
+        <a href="#"><i class="fa-solid fa-align-left"></i>Orders</a>
+      </div>
+
+      
+      <a href="UserManage"><i class="fa-solid fa-user-plus"></i>User Manage</a>
+      <a href="/offer"><i class="fa-solid fa-gear"></i>Offers</a>
+      <a href="/coupon"><i class="fa-solid fa-ticket-simple"></i></i>Coupons</a>
+      <a href="adminLogin"><i class="fa-solid fa-right-from-bracket"></i></i>Logout</a>
+
+
+    </div>
+  </nav>
+  <main>
+
+     <!-- BreadCrumbs -->
+     <div class="breadCrumbs">
+        
+      <div class="home">
+          <a href="#">Orders</a>
+      </div>
+      <i class="fa-solid fa-chevron-right"></i>
+      <div class="current">
+          <a href="/salesReport">Sales Report</a>
+      </div>
+
+  </div>
+  <!-- BreadCrumbs -->
+
+
+
+  <div class="modal" id="confirmationModal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2>Confirmation</h2>
+      <p>Are you sure you want to change the status?</p>
+      <div class="modal-buttons">
+        <button id="confirmBtn">Confirm</button>
+        <button id="cancelBtn">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+
+      <!-- Table -->
+      
+<!-- Table -->
+<div class="container">
+  <!-- Your existing code for filtering and table headers -->
+
+  <table>
+      <thead>
+          <tr>
+              <th>Order ID</th>
+              <th>Addres</th>
+              <th>Product</th>
+              <th>Quantity</th>
+              <th>Price</th>
+              <th>Payment Method</th>
+              <th>Date</th>
+              <th>Status</th>
+          </tr>
+      </thead>
+      <% orderData.forEach((items, index) => { %>
+        <% items.products.forEach((element, productIndex) => { %>
+      <tbody>
+         
+                  <tr>
+                      <td><%= items.orderNumber %></td>
+                      <td><%= items.address.name%> 
+                        <%= items.address.address%> 
+                        <%= items.address.locality%>
+                        <%= items.address.phone%>
+                        Pin:<%= items.address.pincode%>
+                        <%= items.address.state%>
+                      </td>
+                      <td><%= element.productName %></td>
+                      <td><%= element.quantity %> pc</td>
+                      <td>$<%= element.price %></td>
+                      <td><%= items.paymentMethod %></td>
+                      <td><%= items.orderDate.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: '2-digit' }) + ' ' + items.orderDate.getFullYear() %></td>
+                      <td>
+                          <% if(element.status === "Pending" || element.status === "pending") { %>
+                              <select class="statusSelect" style="background-color: #ffcc00;" onchange="changeSelectColor(this)">
+                                  <option>Pending</option>
+                                  <option class="statusDisplay processing" value="processing" data-order-id="<%= items._id %>" data-product-id="<%= element.productId %>">Processing</option>
+                                  <option class="statusDisplay shipped" value="shipped" data-order-id="<%= items._id %>" data-product-id="<%= element.productId %>">Shipped</option>
+                                  <option class="statusDisplay delivered" value="delivered" data-order-id="<%= items._id %>" data-product-id="<%= element.productId %>">Delivered</option>
+                                  <option class="statusDisplay cancelled" value="cancelled" data-order-id="<%= items._id %>" data-product-id="<%= element.productId %>">Cancelled</option>
+                              </select>
+                          <% } else if(element.status === "processing" || element.status === "Processing") { %>
+                              <select class="statusSelect" style="background-color: #ff9900;" onchange="changeSelectColor(this)">
+                                  <option>Processing</option>
+                                  <option class="statusDisplay pending" value="pending" data-order-id="<%= items._id %>" data-product-id="<%= element.productId %>">Pending</option>
+                                  <option class="statusDisplay shipped" value="shipped" data-order-id="<%= items._id %>" data-product-id="<%= element.productId %>">Shipped</option>
+                                  <option class="statusDisplay delivered" value="delivered" data-order-id="<%= items._id %>" data-product-id="<%= element.productId %>">Delivered</option>
+                                  <option class="statusDisplay cancelled" value="cancelled" data-order-id="<%= items._id %>" data-product-id="<%= element.productId %>">Cancelled</option>
+                              </select>
+                          <% } else if(element.status === "shipped" || element.status === "Shipped") { %>
+                              <select class="statusSelect" style="background-color: #0099ff;" onchange="changeSelectColor(this)">
+                                  <option>Shipped</option>
+                                  <option class="statusDisplay delivered" value="delivered" data-order-id="<%= items._id %>" data-product-id="<%= element.productId %>">Delivered</option>
+                                  <option class="statusDisplay cancelled" value="cancelled" data-order-id="<%= items._id %>" data-product-id="<%= element.productId %>">Cancelled</option>
+                              </select>
+                          <% } else if(element.status === "Delivered" || element.status === "delivered") { %>
+                              <select class="statusSelect" style="background-color: #00cc00;" onchange="changeSelectColor(this)">
+                                  <option>Delivered</option>
+                              <% } else if(element.status === "Cancelled" || element.status === "cancelled") { %>
+                                  <select class="statusSelect" style="background-color: #ff0000;" onchange="changeSelectColor(this)" disabled>
+                                      <option>Cancelled</option>
+                                  <% } else if(element.status === "Returned" || element.status === "returned") {%>
+                                    <select class="statusSelect" style="background-color: #8c00ff;" disabled>
+                                      <option>Returned</option>
+                                  <% } %>
+                                  
+                              </td>
+                          </tr>
+           
+      </tbody>
+      <% }); %>
+      <% }); %>
+  </table>
+
+  <div class="pagination">
+    <% if (pagination.previous) { %>
+      <a href="?page=<%= pagination.previous.page %>" class="active">&laquo; Prev</a>
+    <% } %>
+    <% for (let i = 1; i <= pagination.totalPages; i++) { %>
+      <a href="?page=<%= i %>" class="<%= i === pagination.current.page ? 'active' : '' %>"><%= i %></a>
+    <% } %>
+    <% if (pagination.next) { %>
+      <a href="?page=<%= pagination.next.page %>" class="active">Next &raquo;</a>
+    <% } %>
+  </div>
+
+</div>
+<!-- Table -->
+
+      <!-- Table -->
+
+
+
+
+      
+
+
+
+ <!-- Loader -->
+ <div class="jelly"></div>
+ <svg width="0" height="0" class="jelly-maker">
+   <defs>
+     <filter id="uib-jelly-ooze">
+       <feGaussianBlur in="SourceGraphic" stdDeviation="6.25" result="blur"></feGaussianBlur>
+       <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -7" result="ooze"></feColorMatrix>
+       <feBlend in="SourceGraphic" in2="ooze"></feBlend>
+     </filter>
+   </defs>
+ </svg>
+ <!-- Loader -->
+
+
+
+
+ <!-- Confirmation Modal -->
+ <script>
+
+  $(document).ready(function() {
+  
+    $('.statusSelect').change(function() {
+      $('#confirmationModal').show();
+    });
+
+   
+    $('.close, #cancelBtn').click(function() {
+      $('#confirmationModal').hide();
+    });
+
+    
+    $('#confirmBtn').click(function() {
+    
+      $('#confirmationModal').hide();
+     
+      $(this).closest('.statusSelect').trigger('change');
+    });
+  });
+</script>
+
+ <!-- Confirmation Modal -->
+
+
+
+<!-- Table script -->
+<script>
+  function toggleCustomDate() {
+      var customDate = document.getElementById("customDate");
+      var select = document.getElementById("dateFilter");
+      if (select.value === "custom") {
+          customDate.style.display = "block";
+      } else {
+          customDate.style.display = "none";
+      }
+  }
+
+  function applyCustomDate() {
+      // Your custom date filtering logic goes here
+      // For example, you can fetch the start and end dates and filter the table accordingly
+      var startDate = document.getElementById("startDate").value;
+      var endDate = document.getElementById("endDate").value;
+      console.log("Start Date:", startDate);
+      console.log("End Date:", endDate);
+      // Implement filtering logic based on startDate and endDate
+  }
+</script>
+
+<script>
+  function changeSelectColor(select) {
+      var selectedOption = select.options[select.selectedIndex];
+      var colorClass = selectedOption.className;
+      var color;
+      switch (colorClass) {
+          case 'pending':
+              color = '#ffcc00';
+              break;
+          case 'processing':
+              color = '#ff9900';
+              break;
+          case 'shipped':
+              color = '#0099ff';
+              break;
+          case 'delivered':
+              color = '#00cc00';
+              break;
+          case 'cancelled':
+              color = '#ff0000';
+              break;
+          default:
+              color = '#ffcc00'; 
+      }
+      select.style.backgroundColor = color;
+  }
+  </script>
+  
+
+<!-- Table script -->
+
+
+
+
+
+<!-- Loader script -->
+<script>
+  // Show loader when the page starts loading
+  document.addEventListener('DOMContentLoaded', function() {
+    const loader = document.querySelector('.jelly');
+    loader.style.display = 'block';
+  });
+
+  // Hide loader when the page has finished loading
+  window.addEventListener('load', function() {
+    const loader = document.querySelector('.jelly');
+    loader.style.display = 'none';
+  });
+</script>
+<!-- Loader script -->
+
+
+
+
+
+      <!-- update Status -->
+      <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const dropdownItems = document.querySelectorAll('.statusSelect');
+    
+            dropdownItems.forEach(select => {
+                select.addEventListener('change', function(event) {
+                    event.preventDefault();
+                    const selectedOption = this.options[this.selectedIndex];
+                    const status = selectedOption.value;
+                    const productId = selectedOption.getAttribute('data-product-id');
+                    const orderId = selectedOption.getAttribute('data-order-id');
+    
+                    fetch('/updateOrderStatus', {
+                        method: 'POST',
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({ status, productId, orderId })
+                    })
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Network response was not ok');
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        selectedOption.textContent = data.status;
+                        console.log("Status updated successfully to", data.status);
+                        changeSelectColor(select, data.status); // Pass the select element and status to changeSelectColor function
+                    })
+                    .catch(error => console.error("Error:", error));
+                });
+            });
+        });
+    
+        function changeSelectColor(select, status) {
+            var color;
+            switch (status) {
+                case 'pending':
+                    color = '#ffcc00';
+                    break;
+                case 'processing':
+                    color = '#ff9900';
+                    break;
+                case 'shipped':
+                    color = '#0099ff';
+                    break;
+                case 'delivered':
+                    color = '#00cc00';
+                    break;
+                case 'cancelled':
+                    color = '#ff0000';
+                    break;
+                default:
+                    color = '#ffcc00'; 
+            }
+            select.style.backgroundColor = color;
+    
+            // Update the color of all options in the select dropdown
+            var options = select.options;
+            for (var i = 0; i < options.length; i++) {
+                options[i].style.color = color;
+            }
+        }
+    </script>
+    
+        
+      <!-- update Status -->
+    
+          
+          
+          
+
+</div>
+
+</body>
+  
+</html>

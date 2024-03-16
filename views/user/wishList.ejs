@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>POLAR</title>
+
+    <!-- font Awsome -->
+    <script src="https://kit.fontawesome.com/1069728e6a.js" crossorigin="anonymous"></script>
+    <!-- font Awsome -->
+    <link rel="stylesheet" href="/stylesheet/whishList.css">
+    </head>
+<body>
+    
+    <section class="cart">
+        <nav class="navbar">
+          <a href="/getEnergy">
+                    <i  id="leftArrow"  class="fa-solid fa-arrow-left"></i>
+          </a>
+        <i id="cartIcon" class="fa-solid fa-cart-shopping"></i>
+        <h3 class="headingCart">
+            Wishlist
+        </h3>
+    </nav>
+
+
+    <% if (wishList.length == 0) { %>
+      <div class="EmptyMessege">
+          <h1><i class="fa-solid fa-heart-crack"></i> Wishlist is empty</h1>
+      </div>
+
+      <div class="card22">
+        <a href="/getEnergy">Shop Now!</a>
+      </div>
+
+  <% } %>
+
+  
+    
+
+       <% wishList.forEach((item)=>{%>
+        <div class="card">
+          <div class="card-content">
+            </label>
+            <h3 class="countItems"></h3>
+            <form action="/deleteWishList/<%=item.productId%>" method="POST">
+              <button type="submit" class="deleteButton"> <i id="closeButton" class="fa-solid fa-xmark"></i></button>
+            </form> 
+            <div class="ProductName"><%= item.productName %></div>
+            <div class="ProductSubTest">With Polar</div>
+            <div class="priceOftheProduct">₹<%= item.price%></div>
+            <div class="imagesCard">
+              <img class="PrImage" src="<%= item.productImage %>" alt="">
+            </div>  
+            <div class="text-center">
+           <form action="/addToCart/<%= item.productId%>" method="POST">
+            <button type="submit" class="btn cartBtn" name="addToCart">AddToCart</button>
+           </form>
+            </div>
+          </div>
+        </div>
+        <%})%>
+
+
+    <div class="card1">
+        <div class="card-content">
+            <div class="imagesCard">
+                </div>
+            </div>
+        </div>
+
+</section>
+
+</body>
+</html>
