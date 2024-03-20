@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express();
-const bcrypt = require("bcrypt");
+// const bcrypt = require("bcrypt");
 const mongoose = require("../config/dbConnect");
 const Admin = require("../model/adminModel");
 const userData = require("../model/userModel");
