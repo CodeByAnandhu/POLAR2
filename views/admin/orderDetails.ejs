@@ -72,7 +72,7 @@
      <div class="breadCrumbs">
         
       <div class="home">
-          <a href="#">Orders</a>
+          <a href="#" style="background-color: #168e5e; color: white; padding: 7px; border-radius: 20px; font-size: 15px;">Orders</a>
       </div>
       <i class="fa-solid fa-chevron-right"></i>
       <div class="current">
@@ -158,7 +158,7 @@
                                   <option class="statusDisplay cancelled" value="cancelled" data-order-id="<%= items._id %>" data-product-id="<%= element.productId %>">Cancelled</option>
                               </select>
                           <% } else if(element.status === "Delivered" || element.status === "delivered") { %>
-                              <select class="statusSelect" style="background-color: #00cc00;" onchange="changeSelectColor(this)">
+                              <select class="statusSelect" style="background-color: #168e5e;" onchange="changeSelectColor(this)">
                                   <option>Delivered</option>
                               <% } else if(element.status === "Cancelled" || element.status === "cancelled") { %>
                                   <select class="statusSelect" style="background-color: #ff0000;" onchange="changeSelectColor(this)" disabled>

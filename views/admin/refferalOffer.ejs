@@ -126,7 +126,23 @@
   animation: zoomOut 0.3s ease;
 }
 
+.percentage{
+  width: 8rem;
+  border: none;
+  padding:7px;
+  background-color: #f0f0f0c5;
+  border-radius: 30px;
+  color: rgb(0, 0, 0);
+}
 
+#referralAmount{
+  width: 8rem;
+  border: none;
+  padding:7px;
+  background-color: #f0f0f0c5;
+  border-radius: 30px;
+  color: rgb(0, 0, 0);
+}
      </style>
 
 
@@ -218,9 +234,9 @@
       <h2>Add Referral Offer</h2>
       <form id="offerForm" class="offer-form" action="/refferalOffer" method="post">
         <label for="percentage">Percentage:</label>
-        <input type="number" id="percentage" name="percentage" min="1" max="100"  required>
+        <input type="number" class="percentage" id="percentage" name="percentage" min="1" max="100"  required><br>
         <label for="referralAmount">Referral Amount:</label>
-        <input type="number" id="referralAmount" name="refferalAmound" min="0" required>
+        <input type="number"  id="referralAmount" name="refferalAmound" min="0" required><br>
         <label for="isActive">Is Active:</label>
         <div class="radio-buttons">
         <input type="radio" id="isActiveTrue" name="isActive" value="true" required>

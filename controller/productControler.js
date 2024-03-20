@@ -93,27 +93,6 @@ exports.AddProductPost = async (req, res) => {
     } = req.body;
 
 
-    // const hasWhiteSpace = (str) => {
-    //   return /\s/g.test(str);
-    // };
-
-    // const fieldsWithWhiteSpace = {};
-
-    // if (hasWhiteSpace(productName)) {
-    //   fieldsWithWhiteSpace.productName = productName.trim();
-    // }
-
-    // // if (hasWhiteSpace(description)) {
-    // //   fieldsWithWhiteSpace.description = description;
-    // // }
-
-    // if (Object.keys(fieldsWithWhiteSpace).length > 0) {
-    //   req.flash("errorMessage", 'Please fill all the fields');
-    //   return res.redirect("/AddProduct");
-
-    // } 
-   
-
     const specialChars = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
     
     if (price < 0) {
@@ -187,6 +166,62 @@ exports.AddProductPost = async (req, res) => {
           const product = await AddProduct.findById(productId);
           productImage = product.productImage;
        }
+
+
+       const productOffer = req.body.productOffer;
+
+
+       const productData = await AddProduct.find({_id:productId});
+     
+       const price = productData[0].price;
+       
+       
+
+       if(productOffer > price){
+        req.flash("errorMessage", "Discount amount cannot be greater than the product price");
+        return res.redirect(`/editProduct/${req.params.id}`);
+      }
+
+      if( productOffer == price){
+        req.flash("errorMessage", "Discount amount cannot be equal to the product price");
+        return res.redirect(`/editProduct/${req.params.id}`);
+      }
+
+
+      if( productOffer < 0){
+        req.flash("errorMessage", "Discount amount cannot be less than 0");
+        return res.redirect(`/editProduct/${req.params.id}`);
+      }
+
+
+      const description = req.body.description;
+
+      if(!description){
+        req.flash("errorMessage", "Please fill the description");
+        return res.redirect(`/editProduct/${req.params.id}`);
+      }
+
+      const  productName =  req.body.productName;
+
+      if(!productName){
+        req.flash("errorMessage", "Please fill the product name");
+        return res.redirect(`/editProduct/${req.params.id}`);
+      }
+
+      const stockCount = req.body.stockCount;
+
+      if(!stockCount){
+        req.flash("errorMessage", "Please fill the product stockCount");
+        return res.redirect(`/editProduct/${req.params.id}`);
+      }
+
+
+      const  priceOfProduct = req.body.price;
+
+      if(!priceOfProduct){
+        req.flash("errorMessage", "Please fill the product price");
+        return res.redirect(`/editProduct/${req.params.id}`);
+      }
 
 
 

@@ -120,9 +120,9 @@ if (searchTerm) {
             users.push(user);
         }
 
-        // Sorting logic
+        // Sorting 
         let sortedOrders = orderData;
-        const sortOption = req.query.sort || 'yearly'; // Default sort option set to 'yearly'
+        const sortOption = req.query.sort || 'yearly'; 
         switch (sortOption) {
             case 'daily':
                 const todayDaily = new Date();
@@ -158,7 +158,7 @@ if (searchTerm) {
             default:
                 break;
         }
-
+        // Sorting
         const page = req.query.page ? parseInt(req.query.page) : 1;
         const limit = 7;
         const startIndex = (page - 1) * limit;

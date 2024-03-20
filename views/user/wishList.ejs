@@ -15,7 +15,7 @@
     <section class="cart">
         <nav class="navbar">
           <a href="/getEnergy">
-                    <i  id="leftArrow"  class="fa-solid fa-arrow-left"></i>
+                    <i id="leftArrow"  class="fa-solid fa-arrow-left"></i>
           </a>
         <i id="cartIcon" class="fa-solid fa-cart-shopping"></i>
         <h3 class="headingCart">
@@ -39,15 +39,19 @@
     
 
        <% wishList.forEach((item)=>{%>
+        <div class="card-content">
         <div class="card">
-          <div class="card-content">
+          
             </label>
             <h3 class="countItems"></h3>
             <form action="/deleteWishList/<%=item.productId%>" method="POST">
               <button type="submit" class="deleteButton"> <i id="closeButton" class="fa-solid fa-xmark"></i></button>
             </form> 
+            <div class="nameAndPolar">
             <div class="ProductName"><%= item.productName %></div>
+            <p class="productNameForPhone"><%= item.productName %></p>
             <div class="ProductSubTest">With Polar</div>
+           </div>
             <div class="priceOftheProduct">₹<%= item.price%></div>
             <div class="imagesCard">
               <img class="PrImage" src="<%= item.productImage %>" alt="">

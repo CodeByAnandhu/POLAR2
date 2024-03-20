@@ -181,6 +181,17 @@ transition: background-color .50s ease, color 0.3s ease;
     
 }
 
+.dark-mode .cardLarge{
+    background-color: #00000052;
+    box-shadow:  22px 22px 44px #13131351,
+  -22px -22px 44px #13131338;
+ 
+}
+.dark-mode .productImg img{
+    
+    background-color: #00000052;
+}
+
 .dark-mode .notibody{
   color: black;
 }

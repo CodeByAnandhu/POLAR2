@@ -97,6 +97,45 @@
         </div>
     </nav>
     <main>
+
+
+
+
+
+
+        
+<!-- Popup Messsege -->
+<% if (typeof errorMessage !== 'undefined' && errorMessage.length > 0) { %>
+    <div id="popupmessege" class="popup-containerForError">
+        <h4><%= errorMessage %> <i class="fa-solid fa-circle-exclamation"></i></h4>
+      </div>
+  <% } %>
+
+  <% if (typeof successMessage !== 'undefined' && successMessage.length > 0) { %>
+    <div id="popupmessege" class="popup-containerForSuccess">
+        <h4> <%= successMessage %>  <i class="fa-solid fa-circle-check"></i></h4>
+      </div>
+<% } %>
+
+  
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var popup = document.getElementById('popupmessege');
+      setTimeout(function() {
+        popup.style.animation = 'popOut 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards';
+        setTimeout(function() {
+          popup.remove();
+        }, 300);
+      }, 4000);
+    });
+  </script>
+<!-- Popup Messsege -->
+
+
+
+
+
+
         <div class="panel product-details">
 
 
@@ -158,29 +197,12 @@
                 
                 </div>
                 </div>
-                <div id="flashMessageContainer">
-                    <% if (typeof errorMessage !== 'undefined' && errorMessage.length > 0) { %>
-                    <div class="alert alert-danger">
-                        <%= errorMessage %>
-                    </div>
-                    <% } %>
-                </div>
-                
-                <div id="popupMessage" style="display: none;"></div>
+               
+
                 
                 </main>
                 
                  <script>
-        function displayPopupMessage(message) {
-            // Function to display popup messages
-            var popupMessage = document.getElementById("popupMessage");
-            popupMessage.innerHTML = message;
-            popupMessage.style.display = "block";
-
-            setTimeout(function() {
-                popupMessage.style.display = "none";
-            }, 2000);
-        }
 
         function submitForm() {
             // Function to handle form submission

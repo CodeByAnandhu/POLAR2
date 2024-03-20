@@ -193,6 +193,15 @@ transition: background-color .50s ease, color 0.3s ease;
     background: #f3f2f2c1;
     
 }
+.dark-mode .innerCard2{
+    background-color: #000000c1;
+    
+}
+
+.dark-mode .card1{
+    background-color:transparent;
+}
+
 
 .dark-mode .notibody{
   color: black;
@@ -300,6 +309,9 @@ transition: background-color .50s ease, color 0.3s ease;
 /* Address  */
 
 .card1 {
+  background-color: transparent;
+  top: 4rem;
+  position: relative;
    display: flex;
     flex-direction: row; 
     flex-wrap: wrap;
@@ -310,6 +322,7 @@ transition: background-color .50s ease, color 0.3s ease;
     padding-top: 30px;
     overflow: auto; 
     max-height: 80vh; 
+ 
   
 }
 

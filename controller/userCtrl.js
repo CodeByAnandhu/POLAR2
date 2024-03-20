@@ -139,59 +139,79 @@ exports.postLogin = async (req, res) => {
 
 
 exports.postRegister = async (req, res) => {
-  const { name, email, password, confirmPassword } = req.body;
-
-  // Function to check for white space
-  const hasWhiteSpace = (value) => { 
-    return /\s/.test(value);
-  };
-
-  // Validate input: Check for presence, numeric values
-  const isValidInput = name && !/^\d+$/.test(name);
-
-  if (!isValidInput) {
-    return res.render("userRegister", { message: "Cannot contain numeric values in names" });
-  }
-
-  // Check for white space in input fields
-  if (hasWhiteSpace(name) || hasWhiteSpace(email) || hasWhiteSpace(password) || hasWhiteSpace(confirmPassword)) {
-    return res.render("userRegister", { message: "Input fields cannot contain white space" });
-  }
-
-  const specialCharector = name && /^[^\d`~!@#$%^&*()_+={}\[\]|\\;:'",.<>\/?]*$/.test(name);
-
-if (!specialCharector) {
-  return res.render("userRegister", { message: "cannot contain special characters" });
-}
 
   try {
-    const existingUser = await User.findOne({ email });
-    if (existingUser) {
-      return res.render("userRegister", { message: "User Already exists" });
-    }
 
-    const generatedOTP = Math.floor(1000 + Math.random() * 9000).toString();
+      const { name, email, password, confirmPassword } = req.body;
 
-    req.session.signupData = {
-      name,
-      email,
-      password,
-      confirmPassword,
-    };
 
-    const newOTP = new otp({
-      email,
-      otp: generatedOTP,
-    });
-    await newOTP.save();
+      const emailRegex = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/;
+      if (!emailRegex.test(email)) {
 
-    const mailBody = `Your OTP for registration is ${generatedOTP}`;
-    await mailSender(email, "Registration OTP", mailBody);
+        return res.render("userRegister", { message: "Please enter a valid email address" });
 
-    res.redirect("/getOtp");
-  } catch (error) {
-    console.error(error);
-  }
+      }
+      
+      const hasWhiteSpace = (value) => { 
+        return /\s/.test(value);
+      };
+
+    
+      const isValidInput = name && !/^\d+$/.test(name);
+
+      
+      if (!name.trim()) {
+        return res.render("userRegister", { message: "Please fill the name field" });
+      }
+      
+    
+      if (!isValidInput) {
+        return res.render("userRegister", { message: "Cannot contain numeric values in names" });
+      }
+      
+
+
+      if (hasWhiteSpace(email) || hasWhiteSpace(password) || hasWhiteSpace(confirmPassword)) {
+        return res.render("userRegister", { message: "Input fields cannot contain white space" });
+      }
+
+      const specialCharacter = name && /^[^\d`~!@#$%^&*()_+={}\[\]|\\;:'",<>\/?]*$/.test(name);
+
+      if (!specialCharacter) {
+        return res.render("userRegister", { message: "Name cannot contain special characters" });
+      }
+
+      
+    
+        const existingUser = await User.findOne({ email });
+        if (existingUser) {
+          return res.render("userRegister", { message: "User Already exists" });
+        }
+
+        const generatedOTP = Math.floor(1000 + Math.random() * 9000).toString();
+
+        req.session.signupData = {
+          name,
+          email,
+          password,
+          confirmPassword,
+        };
+
+        const newOTP = new otp({
+          email,
+          otp: generatedOTP,
+        });
+        await newOTP.save();
+
+        const mailBody = `Your OTP for registration is ${generatedOTP}`;
+        await mailSender(email, "Registration OTP", mailBody);
+
+        res.redirect("/getOtp");
+      } catch (error) {
+        console.error(error);
+      }
+
+
 };
 
 
@@ -295,25 +315,25 @@ exports.resendotp = async (req,res)=>{
       console.error('Error:', error);
     
     }
-}
+};
 
 
-exports.postLogout = (req,res) =>{
+exports.postLogout = (req, res) => {
+  try {
+      req.session.user = null; 
+      req.session.save((err) => { 
+          if (err) {
+              console.error("Error destroying session:", err);
+              res.status(500).json({ error: "Internal Server Error" });
+          } else {
+              res.redirect("/login");
+          }
+      });
+  } catch (err) {
+      console.log(err);
+  }
+};
 
-  req.session.user = null;
-  req.session.destroy((err)=>{
-
-    if(err){
- 
-      console.error("Error destroying session:", err);
-      res.status(500).json({ error: "Internal Server Error" });
-    }else{
-
-      res.redirect("/login");
-    }
-  })
-  
-}
 
 
 

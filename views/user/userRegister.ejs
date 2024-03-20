@@ -70,11 +70,22 @@
 <body>
     <div class="wrapper">
 
-        <% if (typeof message !== 'undefined') { %>
-            <div class="Errormsg" style="color: rgb(255, 255, 255);">
+          <% if (typeof message !== 'undefined' && message.length > 0) { %>
+            <div class="Errormsg" id="errorMessage" style="color: rgb(255, 255, 255);">
               <h4><%= message %></h4>
             </div>
           <% } %>
+
+          <script>
+            setTimeout(function() {
+              var errorMessage = document.getElementById('errorMessage');
+              if (errorMessage) {
+                errorMessage.style.display = 'none';
+              }
+            }, 3000); 
+          </script>
+
+
 
         <form name="registrationForm" action="/Register" method="POST" onsubmit="return validateForm()">
             <h2>Register</h2>

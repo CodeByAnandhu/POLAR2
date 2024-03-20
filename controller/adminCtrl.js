@@ -65,7 +65,7 @@ exports.getInsite = async (req, res) => {
       }
     ]);
 
- 
+
     const salesData = [];
     const currentMonth = new Date().getMonth() + 1; 
 
@@ -229,11 +229,23 @@ exports.blockUser = async (req, res) => {
 
 
 
-exports.logOut = (req, res) => {
-  req.session.destroy();
-  res.redirect("/adminLogin");
 
-}
+
+exports.logOut = (req, res) => {
+  try {
+      req.session.Admin = null; 
+      req.session.save((err) => { 
+          if (err) {
+              console.error("Error destroying session:", err);
+          } else {
+              res.redirect("/adminLogin");
+          }
+      });
+  } catch (err) {
+      console.log(err);
+  }
+};
+
 /////////////////////////////////////////////////////////////////////////
 
 

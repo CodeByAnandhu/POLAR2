@@ -134,10 +134,11 @@ exports.getCheckout = async (req, res) => {
 
 
 
-const ITEMS_PER_PAGE = 4; 
+
 
 exports.orderDetailsUser = async (req, res) => {
   try {
+    const ITEMS_PER_PAGE = 4; 
     const userId = req.session.user; 
     const userData = await User.findOne({_id: userId});
     let page = parseInt(req.query.page) || 1;

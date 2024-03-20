@@ -65,6 +65,11 @@ body{
     color: rgb(47, 45, 45);
 }
 
+.productNameForPhone{
+   visibility: hidden;
+   display: none;
+}
+
 .ProductSubTest{
     position:absolute;
     font-size: 13px;
@@ -351,3 +356,220 @@ left: 596px;
     justify-content: center;
     align-items:center ;
 }
+
+
+/* Responsive */
+@media only screen and (max-width: 600px) {
+    .container {
+      width: 100%;
+    }
+
+    body{
+
+        font-family: 'Poppins', sans-serif;
+        overflow: hidden;
+        width: 100%;
+        height: 100%; 
+       
+    }
+
+    .cart{
+    position: relative;
+    overflow-y: auto;
+    height: 750px;
+    width: 100%; 
+   
+    
+}
+
+    .card{
+        position: relative;
+        top: 145px; 
+        margin-bottom: 25px;
+        left: 350px;  
+        height:130px;
+        width: 370px;
+        border-radius: 30px;
+        background: #ffffff;
+        box-shadow:  22px 22px 44px #bebebe99,
+              -22px -22px 44px #ffffff;
+              transition: opacity 0.5s ease, transform 0.3s ease; 
+     }
+     
+     .card:hover{
+         transform: scale(1.010);
+        
+     }
+     
+     .card1{
+       position: relative;
+        top: 205px; 
+        margin-top: -30rem;
+        left: 350px; 
+        height:230px;
+        width: 100px;
+     }
+   
+     
+     .card-content{
+        width: 30%;
+        margin-left: -20rem;
+     }
+
+ 
+
+
+  
+.PrImage{
+    top: -10px;
+    position: relative;
+    left: 20px;
+    width: 22%;
+    background-color: rgba(236, 236, 236, 0.536);
+    border-radius: 20px;
+    border-width: 10px;
+    padding-left: 8px;
+    padding-right: 2px;
+    
+}
+.ProductName{
+    display: none;   
+    position:relative;
+    font-size: 15px;
+    top: 44px;
+    margin-left: 0;
+    margin-left: -8rem;
+    font-weight: 600;
+    color: rgb(47, 45, 45);
+}
+
+.productNameForPhone{
+    visibility: visible;
+}
+
+
+.ProductSubTest{
+    display: none;
+    position:absolute;
+    font-size: 13px;
+    top: 74px;
+    left: 199px;
+    font-weight: 500;
+    color: rgb(132, 127, 127);
+}
+#leftArrow{
+   margin-left: 60px;
+   margin-top: 35px;
+   font-size: 25px;
+   left: 90px;
+   color: rgb(47, 44, 44);
+}
+.headingCart{
+
+    position: relative;
+    bottom:95px ;
+    left: 170px;
+    font-size: 30px;
+
+}
+
+#cartIcon{
+    visibility: hidden;
+    position: relative;
+    top: -29px;
+    margin-left: 360px;
+    font-size: 20px;
+   
+   color: rgb(47, 44, 44);
+}
+.navbar{
+    top:0px;
+    left: 0px;
+    right: 0px;
+    height:80px;
+    position: fixed;
+    z-index: 1000;
+    background-color: #ffffff;
+    border-bottom-left-radius: 25px;
+    border-bottom-right-radius: 25px;
+}
+
+.footer{
+    position: fixed;
+    background-color: rgb(233, 233, 233);
+    width: 950px;
+    bottom:-50px;
+    border-radius: 40px 40px 0 0;
+    left: 287px;
+    background: #ffffff;
+    box-shadow:  -5px -5px 100px #ccccccac,
+         5px 5px 100px #ffffff;
+          z-index: 1;
+}
+
+.priceOftheProduct{
+    position: absolute;
+    left: 152px;
+    top: 4rem;
+    font-weight: 600;
+    font-size: 14px;
+    color: #605b5b;
+    }
+    
+    /* delete Button */
+    .deleteButton{
+   
+    border: none;
+    background-color: #ffffff;
+    position: absolute;
+    z-index: 1;
+    left: -27rem;
+    
+    }
+
+    
+
+    .text-center{
+
+        position: relative;
+        left: -18rem;
+    }
+
+
+    .btn.cartBtn{
+        background-color: rgb(238, 235, 235);
+        padding: 3px 8px;
+        color: #000;
+        border-radius: 20px;
+        position: relative;
+        bottom: 74px;
+        left: 540px;
+        display: inline-block;
+        outline: 0;
+        border: 0;
+        cursor: pointer;
+        color: rgb(6, 129, 53);
+        font-size: 12px;
+        height: 38px;
+        
+        border-radius: 50px;
+        background-image: linear-gradient(180deg,#ffffffdd,#ffffffac);
+        box-shadow: 0 4px 11px 0 rgb(37 44 97 / 15%), 0 1px 3px 0 rgb(93 100 148 / 20%);
+        transition: all .2s ease-out;
+        
+      }
+      
+      .btn.cartBtn:hover{
+        box-shadow: 0 8px 22px 0 rgb(37 44 97 / 15%), 0 4px 6px 0 rgb(93 100 148 / 20%);
+      }
+      
+
+
+
+
+
+
+
+
+}
+/* Responsive */

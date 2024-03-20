@@ -118,8 +118,9 @@ exports.getProductOffer = async (req, res) => {
         const successMessage = req.flash("successMessage");
 
         const offerData = await product.find({productOffer:{$gt:0}});
+        const productData = await product.find();
         
-        res.render("productOffer",{offerData,errorMessage:errorMessage,successMessage:successMessage});
+        res.render("productOffer",{offerData,errorMessage:errorMessage,successMessage:successMessage,productData});
     }catch(err){
         console.log(err);
     }
@@ -522,6 +523,70 @@ exports.postEditRefferalOffer = async (req, res) => {
 };
 
 
+
+
+
+exports.postAddProductOffer = async (req, res) => {
+  
+    try {
+        
+      const inputData = {
+        productName : req.body.productName,
+        discountAmount: req.body.discountAmount,
+      }
+      const productData = await product.find({productName:{$in:inputData.productName}});
+     
+      const price = productData[0].price;
+
+
+      if( !inputData.productName || !inputData.discountAmount){
+        req.flash("errorMessage", "Please fill all the fields");
+        return res.redirect("/productOffer");
+      }
+
+      if( inputData.discountAmount < 0){
+        req.flash("errorMessage", "Discount amount cannot be negative");
+        return res.redirect("/productOffer");
+      }
+
+      if(inputData.discountAmount < 1){
+        req.flash("errorMessage", "Discount amount cannot be less than 1");
+        return res.redirect("/productOffer");
+      }
+      
+      if( inputData.discountAmount > price){
+        req.flash("errorMessage", "Discount amount cannot be greater than the product price");
+        return res.redirect("/productOffer");
+      }
+
+      if( inputData.discountAmount == price){
+        req.flash("errorMessage", "Discount amount cannot be equal to the product price");
+        return res.redirect("/productOffer");
+      }
+      
+
+      // update the discountAmount in product collection 
+
+      const updatedProduct = await product.findByIdAndUpdate(productData[0]._id, {productOffer: inputData.discountAmount});
+      console.log("updatedProduct", updatedProduct);
+
+      req.flash("successMessage", "Product offer added successfully");
+      res.redirect("/productOffer");
+            
+
+      }catch(err){
+
+        console.log(err);
+
+      }
+
+};
+
+
+
+
+
+
 exports.postEditProductOffer = async (req, res) => {
     
     try {
@@ -532,6 +597,25 @@ exports.postEditProductOffer = async (req, res) => {
         productOffer: req.body.productOffer,
         isActive : req.body.isActive,
       }
+
+
+      const productData = await product.find({_id:offerId});
+     
+      const price = productData[0].price;
+
+
+
+      if( inputData.productOffer > price){
+        req.flash("errorMessage", "Discount amount cannot be greater than the product price");
+        return res.redirect(`/editProductOffer/${offerId}`);
+      }
+
+      if( inputData.productOffer == price){
+        req.flash("errorMessage", "Discount amount cannot be equal to the product price");
+        return res.redirect(`/editProductOffer/${offerId}`);
+      }
+
+
 
       if( !inputData.productOffer){
         req.flash("errorMessage", "Please fill all the fields");
@@ -578,8 +662,10 @@ exports.postDeleteProductOffer = async (req, res) => {
         
       const offerId = req.params.id;
 
-      const deletedItem = await product.findByIdAndDelete(offerId);
+     
 
+      const deletedItem = await product.findByIdAndUpdate(offerId, {productOffer: 0});
+      
       if(!deletedItem){
         req.flash("errorMessage", "Product offer not found");
         res.redirect("/productOffer");

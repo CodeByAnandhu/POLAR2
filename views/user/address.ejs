@@ -136,19 +136,36 @@
       
 
 
-    <script>
-document.getElementById('darkModeToggle').addEventListener('change', function() {
-    toggleDarkMode();
-});
-function toggleDarkMode() {
-    document.body.classList.toggle('dark-mode');
-    const cards = document.querySelectorAll('.card1, .card2, .card3,.leftBar,.profileHeading,.subheading,.shopIcon,.userName');
-    cards.forEach(card => {
-        card.classList.toggle('dark-mode');
+   <script>
+    // Function to toggle dark mode
+    function toggleDarkMode() {
+        // Toggle dark mode class on the body
+        document.body.classList.toggle('dark-mode');
+        // Toggle dark mode class on specific elements
+        const cards = document.querySelectorAll('.card1, .card2, .card3, .leftBar, .profileHeading, .subheading, .shopIcon, .userName');
+        cards.forEach(card => {
+            card.classList.toggle('dark-mode');
+        });
+
+        // Store dark mode state in localStorage
+        const darkModeEnabled = document.body.classList.contains('dark-mode');
+        localStorage.setItem('darkModeEnabled', darkModeEnabled);
+    }
+
+    // Add event listener to the dark mode toggle checkbox
+    document.getElementById('darkModeToggle').addEventListener('change', function() {
+        toggleDarkMode();
     });
-   }
-  
-    </script>
+
+    // Check if dark mode was enabled before and apply it if it was
+    window.addEventListener('DOMContentLoaded', function() {
+        const darkModeEnabled = localStorage.getItem('darkModeEnabled') === 'true';
+        if (darkModeEnabled) {
+            toggleDarkMode();
+            document.getElementById('darkModeToggle').checked = true;
+        }
+    });
+</script>
 
 <script>
   

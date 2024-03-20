@@ -126,7 +126,14 @@
   animation: zoomOut 0.3s ease;
 }
 
-
+#referralAmount{
+  width: 8rem;
+  border: none;
+  padding:7px;
+  background-color: #f0f0f0c5;
+  border-radius: 30px;
+  color: rgb(0, 0, 0);
+}
      </style>
 
 
@@ -215,20 +222,19 @@
 <div id="popup" class="popup">
     <div class="popup-content">
       <span class="close" onclick="closePopup()">&times;</span>
-      <h2>Add Referral Offer</h2>
-      <form id="offerForm" class="offer-form" action="/refferalOffer" method="post">
-        <label for="percentage">Percentage:</label>
-        <input type="number" id="percentage" name="percentage" min="1" max="100"  required>
-        <label for="referralAmount">Referral Amount:</label>
-        <input type="number" id="referralAmount" name="refferalAmound" min="0" required>
-        <label for="isActive">Is Active:</label>
-        <div class="radio-buttons">
-        <input type="radio" id="isActiveTrue" name="isActive" value="true" required>
-        <label for="isActiveTrue">Active</label>
-        <input type="radio" id="isActiveFalse" name="isActive" value="false">
-        <label for="isActiveFalse">Hide</label>
-        </div>
+      <h2>Add Product Offer</h2>
+      <form id="offerForm" class="offer-form" action="/addProductOffer" method="post">
+        <label for="products">Products</label>
 
+        <select name="productName">
+          <% productData.forEach((product) => { %>
+              <option value="<%= product.productName %>"><%= product.productName %></option>
+          <% }) %>
+      </select> <br>
+
+        <label for="referralAmount">Discount Amount:</label>
+        <input type="number" id="referralAmount" name="discountAmount"><br>
+        
         <button type="submit" class="submit-btn">Submit</button>
       </form>
     </div>
@@ -269,8 +275,8 @@
 
 
 
-  <a href="#" style="visibility: hidden;">     
- <button class="btnAddOffer"><i class="fa-solid fa-plus"></i> Add refferal offer</button>
+  <a href="#">     
+ <button class="btnAddOffer"><i class="fa-solid fa-plus"></i> Add Product offer</button>
 </a>    
 
 <table>
@@ -278,7 +284,8 @@
         <tr>
             <th>ID</th>
             <th>Product Name</th>
-            <th>Percentage</th>
+            <th>Discount Price</th>
+            <th>Orginal Price</th>
             <th>isActive</th>
             <th>Action</th>
         </tr>
@@ -288,7 +295,8 @@
             <tr>
                 <td><%= index + 1 %></td>
                 <td><%= offer.productName %></td>
-                <td><%= offer.productOffer %>%</td>
+                <td>₹ <%= offer.productOffer %></td>
+                <td>₹ <%= offer.price %></td>
                 <td><%= offer.isActive %></td>
                 <td class="action"> 
                     <a href="/editProductOffer/<%= offer._id %>">

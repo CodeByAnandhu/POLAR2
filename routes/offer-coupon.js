@@ -46,9 +46,11 @@ const {
     postRefferalOffer,
     deleteRefferalOffer,
     postEditRefferalOffer,
+    postAddProductOffer,
     postEditProductOffer,
     postDeleteProductOffer,
     postEditCoupon,
+
     
 }= require("../controller/offer-couponCtrl");
 
@@ -60,6 +62,7 @@ router.post("/deleteOffer/:id",sessionHandler,postDeleteOffer);
 router.post("/refferalOffer", sessionHandler,postRefferalOffer);
 router.post("/deleteRefferalOffer/:id", sessionHandler,deleteRefferalOffer);
 router.post("/editRefferalOffer/:id", sessionHandler,postEditRefferalOffer);
+router.post("/addProductOffer", sessionHandler,postAddProductOffer);
 router.post("/editProductOffer/:id", sessionHandler,postEditProductOffer);
 router.post("/deleteProductOffer/:id", sessionHandler,postDeleteProductOffer);
 router.post("/editCoupon/:id", sessionHandler,postEditCoupon);

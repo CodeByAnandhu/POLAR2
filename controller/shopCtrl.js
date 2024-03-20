@@ -237,7 +237,7 @@ exports.sortClassic = async (req, res) => {
         }
 
         
-        res.render("Energy", { showProducts });
+        res.render("Energy", { showProducts , productData});
     } catch (error) {
         console.error(error);
         res.status(500).send("Internal Server Error");
