@@ -5,7 +5,7 @@ const User = require("../model/userModel");
 const PDFDocument = require('pdfkit');
 const fs = require('fs');
 const ExcelJS = require('exceljs');
-const { createCanvas, registerFont } = require('canvas');
+// const { createCanvas, registerFont } = require('canvas');
 const pdfMake = require('pdfmake');
 
  
