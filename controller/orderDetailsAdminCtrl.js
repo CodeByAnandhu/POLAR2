@@ -3,7 +3,7 @@ const router = express();
 const Order = require("../model/orderModel");
 const User = require("../model/userModel");
 const PDFDocument = require('pdfkit');
-const fs = require('fs');
+const fs = require('fs');  
 const ExcelJS = require('exceljs');
 // const { createCanvas, registerFont } = require('canvas');
 const pdfMake = require('pdfmake');
@@ -178,87 +178,82 @@ if (searchTerm) {
 
 
 
-
-
-
-
 exports.downloadSalesReport = async (req, res) => {
     try {
-        // Fetch orders from the database
-        const orders = await Order.find().populate('userId');
-
-        // Create a new PDF document
-        const doc = new PDFDocument();
-        const fileName = 'sales_report.pdf';
-        const filePath = `./public/downloads/${fileName}`;
-
-        // Pipe the PDF document to a writable stream
-        const stream = fs.createWriteStream(filePath);
-        doc.pipe(stream);
-
-        // Set font and font size for company name
-        doc.font('Helvetica-Bold').fontSize(24).fillColor('#056431');
-        // Write company name
-        doc.text('POLAR', { align: 'center' })
-
-        // Set font and font size for section headings
-        doc.font('Helvetica').fontSize(21).fillColor('#333');
-
-        // Write section heading for sales report
-        doc.text('Sales Report', { align: 'center' }).moveDown();
-
-        // Iterate over each order
-        orders.forEach(order => {
-            // Add customer details
-            doc.font('Helvetica-Bold').fontSize(14).fillColor('#2f2d2d');
-            doc.text(`Customer Name: ${order.address.name}`);
-            doc.text(`Address: ${order.address.address}`);
-            doc.text(`Locality: ${order.address.locality || ''}`);
-            doc.text(`Pincode: ${order.address.pincode}`);
-            doc.text(`State: ${order.address.state}`);
-            doc.text(`Phone Number: ${order.address.phone}`);
-            doc.text(`Email: ${order.userId.email}`);
-            doc.text(`Payment Method: ${order.paymentMethod}`);
-            doc.text(`Order Date: ${order.orderDate.toDateString()}`);
-
-            // Add two line gap
-            doc.moveDown(2);
-
-            // Add product details
-            doc.font('Helvetica-Bold').fontSize(14).fillColor('#333');
-            doc.text('Product Details');
-            order.products.forEach(product => {
-                doc.font('Helvetica').fontSize(12).fillColor('#000');
-                doc.text(`Product Name: ${product.productName}`);
-                doc.text(`Quantity: ${product.quantity}`);
-                doc.text(`Price: $${product.price}`);
-                doc.text(`Discount Price: $${product.discountPrice}`);
-                doc.moveDown(); // Move to the next line
-            });
-
-            // Add a line break between orders
-            doc.moveDown();
+      const orders = await Order.find();
+  
+      // Create a PDF document
+      const doc = new PDFDocument();
+      const filename = "sales_report.pdf";
+  
+      res.setHeader("Content-Disposition", `attachment; filename="${filename}"`);
+      res.setHeader("Content-Type", "application/pdf");
+  
+      doc.pipe(res);
+  
+      // Add content to the PDF document
+      doc.text("Sales Report", { align: "center", fontSize: 10, margin: 2 });
+  
+      // Draw the table headers
+      doc.moveDown(); 
+      doc.fontSize(10);
+      const tableHeaders = [
+        "Username",
+        "Product Name",
+        "Price",
+        "Quantity",
+        "Address",
+        "City",
+        "Pincode",
+        "State",
+      ];
+      drawTableRow(doc, tableHeaders);
+  
+      // Draw the table rows
+      orders.forEach(order => {
+        order.products.forEach(product => {
+          const rowData = [
+            order.address.name,
+            product.productName,
+            product.price.toString(),
+            product.quantity.toString(),
+            order.address.address,
+            order.address.city,
+            order.address.pincode,
+            order.address.state,
+          ];
+          drawTableRow(doc, rowData);
         });
-
-        // End the document
-        doc.end();
-
-        // Respond with the file for download
-        stream.on('finish', () => {
-            res.download(filePath, fileName, (err) => {
-                if (err) {
-                    console.error(err);
-                    res.status(500).send('Internal Server Error');
-                }
-                // Delete the file after download
-                fs.unlinkSync(filePath);
-            });
-        });
-    } catch (err) {
-        console.error(err);
-        res.status(500).send('Internal Server Error');
+      });
+  
+      // Finalize the PDF document
+      doc.end();
+    } catch (error) {
+      console.error("Error generating PDF:", error);
+      res.status(500).send("Internal Server Error");
     }
-};
+  };
+  
+  function drawTableRow(doc, rowData) {
+    const rowHeight = 20;
+    const cellWidth = doc.page.width / rowData.length;
+  
+    rowData.forEach((cell, i) => {
+      doc.text(cell, i * cellWidth + 10, doc.y, { width: cellWidth - 10, height: rowHeight, lineBreak: false });
+    });
+  
+    // Draw borders
+    const x = doc.x - 10;
+    const y = doc.y - rowHeight;
+    const endY = y + rowHeight;
+    const endX = x + doc.page.width;
+    doc.moveTo(x, y).lineTo(endX, y).stroke(); 
+    doc.moveTo(x, endY).lineTo(endX, endY).stroke(); 
+    for (let i = 0; i <= rowData.length; i++) {
+      doc.moveTo(x + i * cellWidth, y).lineTo(x + i * cellWidth, endY).stroke(); 
+    }
+    doc.moveDown();
+  }
 
 
 
