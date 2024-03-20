@@ -8,7 +8,7 @@ const session = require('express-session');
 const flash = require("connect-flash");
 
 app.use(flash());
-
+ 
 app.use(session({
   secret: process.env.SESSION_SECRET,
   resave: false,
