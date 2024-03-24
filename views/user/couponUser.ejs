@@ -40,11 +40,17 @@
      
     <div class="center">    
         <div class="card1">
+         
+            
+
         <%CouponsData.forEach((items, index)=> {%>
             <div class="card" onclick="copyCoupon('<%=items.couponCode%>')" >
+                <div class="tooltip">
+                    <span class="tooltiptext">Minimum Purchase Amount ₹<%=items.minimumPurchaseAmount%> <br> <span style="color: rgb(97, 97, 97); position: relative; top: 4px; font-weight: 500;">Click to copy !</span></span>
                 <h3 class="heading"><%=items.discount%>% off <br><span>All producs</span> <i class="fa-solid fa-receipt"></i></h3>
                 <p class="expireDate">Expire on <%= items.expiryDate.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: '2-digit', year: 'numeric' }) %></p>
                 <p class="couponcode">Copy code: <%=items.couponCode%></p>
+                </div>
             </div>  
            <%})%>
         </div>
@@ -59,7 +65,7 @@
 
 <div class="referral-card" onclick="toggleAccordion(this)">
     <div class="referral-header">
-      <h2>Refer & Earn $100!</h2>
+      <h2>Refer & Earn ₹100!</h2>
     </div>
     <div class="referral-body">
       <p>Hey there!</p>

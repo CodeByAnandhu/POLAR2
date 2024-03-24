@@ -137,7 +137,11 @@
                       <input type="date" id="expiryDate" name="expiryDate" required>
                   </div>
                   <div class="form-group">
-                      <label for="purchaseAmount">Purchase Amount:</label>
+                    <label for="purchaseAmount">Minimum Purchase Amount:</label>
+                    <input type="number" id="purchaseAmount" name="minimumPurchaseAmount" min="1" required>
+                </div>
+                  <div class="form-group">
+                      <label for="purchaseAmount">Maximum Purchase Amount:</label>
                       <input type="number" id="purchaseAmount" name="purchaseAmount" min="1" required>
                   </div>
                   <button type="submit">Submit</button>

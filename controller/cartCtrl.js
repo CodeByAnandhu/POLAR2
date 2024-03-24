@@ -15,24 +15,44 @@ const offer = require("../model/offerModel");
 exports.getCart = async (req, res) => {
 
     try { 
-        const CategoryOfferPrice = await offer.find({ isActive: true });
-        const categoryOffer = CategoryOfferPrice.map((item) => item.discount)[0];
-        const productData = await PRODUCTDATA.find({ isVisible: true, isActive: true});
+
         const userId = req.session.user; 
+
+        const CategoryOfferPrice = await offer.find({ isActive: true });
+        
+        
+        const categoryOffer = CategoryOfferPrice.map((item) => item.discount)[0];
+        
+        const productData = await PRODUCTDATA.find({ isVisible: true, isActive: true});
+        
         const userCart = await Cart.find({ userId: userId });
+        
         var errorMessage = req.flash("errorMessage");
-       
+        
+
         let totalPrice = 0;
+
         let totalQuantity = 0; 
+
         let discountedTotalPrice = 0; 
+
         let discountedPrices = []; 
+
+
         userCart.forEach(item => {
+
             let itemTotalPrice = item.price * item.quantity;
+
             totalPrice += itemTotalPrice;
+
             totalQuantity += item.quantity; 
-            if (productData.find(product => product.productName === item.productName) || CategoryOfferPrice.find(offer => offer.category === item.category)) {
+
+            if (CategoryOfferPrice.find(offer => offer.category === item.category)) {
+
                 let discountedPrice = item.price - (categoryOffer * item.price / 100);
+
                 discountedPrices.push(discountedPrice); 
+
                 discountedTotalPrice += discountedPrice * item.quantity; 
                 
             } else {
@@ -44,6 +64,8 @@ exports.getCart = async (req, res) => {
 
         const finalPrice = totalPrice - discountedTotalPrice;
 
+       
+
         res.render("cart", { 
             Cart: userCart, 
             totalPrice: totalPrice, 
@@ -53,6 +75,7 @@ exports.getCart = async (req, res) => {
             errorMessage: errorMessage,
             discountedPrices: discountedPrices, 
             CategoryOfferPrice, 
+            
         });
        
     } catch (error) {
@@ -82,6 +105,7 @@ exports.getCart = async (req, res) => {
 //Post Controll
 //////////////////////////////////////////////////////////////////////////////
 exports.postAddToCart = async (req, res) => {
+
     try {
 
         const productId = req.params.id;
@@ -107,9 +131,11 @@ exports.postAddToCart = async (req, res) => {
         const existingCartItem = await Cart.findOne({ userId, productId });
   
         if (existingCartItem) {
-          // Check if adding another product exceeds the stock quantity
+          
           if (existingCartItem.quantity + 1 > product.stock) {
             return res.render("cart", { message: "Product out of stock" });
+            // return  res.json({message: "Product out of stock"});
+
           }
   
             existingCartItem.quantity += 1;
@@ -117,7 +143,7 @@ exports.postAddToCart = async (req, res) => {
   
         } else {
             const cartItem = {
-                userId,
+                userId : userId,
                 productId: product._id,
                 productName: product.productName,
                 category: product.selectCategory,
@@ -140,25 +166,26 @@ exports.postAddToCart = async (req, res) => {
 
 
 exports.updateCart = async (req, res) => {
-    const { itemId , quantity } = req.body;
+ 
    
     try {
-        
+        const UserId = req.session.user
+        const { itemId , quantity } = req.body;
+       
         const CategoryOfferPrice = await offer.find({ isActive: true });
+      
         const categoryOffer = CategoryOfferPrice.map((item) => item.discount)[0];
+        
 
         const product = await PRODUCTDATA.findOne({ _id: itemId });
-       
+        
         if (!product) {
             console.log("Product not found");
             return res.render("cart", {
                 message: "Product not found",
             });
         }
-
-        
-     
-
+   
         if (quantity >= product.stockCount) {
 
              res.json({
@@ -176,26 +203,21 @@ exports.updateCart = async (req, res) => {
 
         
         const updateQuantity = await Cart.findOneAndUpdate(
-            { productId: itemId }, 
+            { userId:UserId, productId: itemId  }, 
             { $set: { quantity: quantity } }, 
             { new: true } 
         );
-        
-
-     
-
-        
+      
+       
+         
         if (updateQuantity) {
-            
 
-            const UserId = req.session.user
+            
            
             const cartItems = await Cart.find({userId:UserId});
-
-            console.log("cartItems",cartItems);
-
-            const totalQuantity = cartItems.reduce((acc, curr) => acc + curr.quantity, 0);
            
+            const totalQuantity = cartItems.reduce((acc, curr) => acc + curr.quantity, 0);
+            
             const fetchPromises = cartItems.map(async (item) => {
                 if(CategoryOfferPrice.find(offer => offer.category === item.category)) {
                     const discountedPrice = item.price - (categoryOffer * item.price / 100);
@@ -208,12 +230,12 @@ exports.updateCart = async (req, res) => {
             
            
             const prices = await Promise.all(fetchPromises);
-
-
             
+
+             
             
             const totalPrice = prices.reduce((acc, curr) => acc + curr, 0);
-          
+            
             
             return res.json({
                 success: true,

@@ -154,6 +154,9 @@
                                     <div class="imgbox">
                                         <img id="productbg" src="/img/productBackground.png" alt="">
                                         <img class="card-img-top" src="<%= productData.productImage %>" alt="V8" />
+                                        <%if(productData.productImage.length > 1){%>
+                                            <img class="card-img-top" src="<%= productData.productImage[0] %>" alt="V8" />
+                                        <% }%>
                                     </div>
                                 </a>
                                 <!-- Product details-->

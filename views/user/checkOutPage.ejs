@@ -88,8 +88,12 @@
       <% userCart.forEach((cart,index)=> { %>
         <div class="details__item">
           <div class="item__image">
-            <img class="iphone" src="<%=cart.productImage%>" alt="">
-          </div>
+            <img class="iphone" src="<%= cart.productImage %>" alt="">
+            <% if (cart.productImage.length > 1) { %>
+                <img style="margin-left: -12.6rem;" class="iphone" src="<%= cart.productImage[0]%>" alt="">
+            <% } %>
+        </div>
+        
           <div class="item__details">
             <div class="item__title">
               <%=cart.productName%>
@@ -170,13 +174,18 @@
               Wallet Balance :
             </div>
             <div class="walletSlidDowon__amount">
-              ₹<span id="walletAmount"><%=walletBalance%></span>
+              ₹<span id="walletAmount"><%=walletBalance.walletAmount%></span>
             </div>
           </div>
 
     <% if(addressData.length == 0) { %>
-     
-      
+      <select style="visibility: hidden;" class="styled-dropdown" name="selectedAddress" id="addressSelector">
+       
+            <option value="">
+                
+            </option>
+        
+    </select>
   <% } else { %>
       <select class="styled-dropdown" name="selectedAddress" id="addressSelector">
           <% addressData.forEach((address) => { %>
@@ -210,15 +219,28 @@
     </div>
     </div>
     
-    <% if (typeof discontAfterPrice !== 'undefined'&& discontAfterPrice) { %>
-      
-    <h4 class="totalprice">Total Price: <del>₹<%= totalPrice %></del> <span class="space"></span> $<%= discontAfterPrice %>
-      <span id="price" data-totalprice="<%=discontAfterPrice%>"></span>
-      <%}else{%> 
-        <h4 class="totalprice">Total Price: ₹<%= totalPrice %>
-        <span id="price" data-totalprice="<%=totalPrice%>"></span>
+    <% if (discontAfterPrice > 0) { %>
 
-      <%}%>
+      <h4 class="totalprice">Total Price: <del>₹<%= totalPrice %></del></h4>
+      <h4 class="Discounted">Discounted Price: ₹<%= discontAfterPrice %></h4>
+      <span id="price" data-totalprice="<%= discontAfterPrice %>"></span>
+
+    <% } else if (Number.isNaN(finalPrice) || finalPrice === totalPrice) { %>
+
+      <h4 class="Discounted" style="color: #635d5d;">Discounted Price: ₹<%= totalPrice %></h4>
+      <span id="price" data-totalprice="<%= totalPrice %>"></span>
+
+    <% } else { %>
+
+      <h4 class="totalprice">Total Price: <del>₹<%= totalPrice %></del></h4>
+      <h4 class="Discounted">Discounted Price: ₹<%= finalPrice %></h4>
+      <span id="price" data-totalprice="<%= finalPrice %>"></span>
+
+    <% } %>
+    
+ 
+
+
     </h4>
     <h4 class="totalquantity">Total Quantity: <%= totalQuantity %> pc</h4>
 
@@ -283,7 +305,7 @@
       <% }else{%>
          <div class="coupon-box">
     <form action="/couponApply" method="post">
-    <input type="text" class="coupon-input" placeholder="Enter coupon code" name="couponCode">
+    <input type="text" class="coupon-input" placeholder="Enter coupon code" id="couponCodeId"  name="couponCode">
     <button class="apply-btn" type="submit">Apply</button>
   </form>
 </div>
@@ -293,7 +315,7 @@
 
 
 
-  <!-- Loader -->
+
    <!-- Loader -->
    
  <div class="jelly"></div>
@@ -372,13 +394,13 @@ $(document).ready(function() {
         popupMessage.innerHTML = message;
         popupMessage.style.display = "block";
 
-        // Hide popup message after 2 seconds
+       
         setTimeout(function() {
             popupMessage.style.display = "none";
         }, 2000);
     }
 
-    // Call displayPopupMessage function with the flash message content
+   
     var errorMessage = "<%= errorMessage %>";
     var successMessage = "<%= successMessage %>";
     
@@ -404,7 +426,7 @@ $(document).ready(function() {
         "method": "POST",
         "timeout": 0,
         "headers": {
-          "Content-Type": "application/json"
+        "Content-Type": "application/json"
         },
         "data": JSON.stringify({
           "amount": orderprice
@@ -422,59 +444,63 @@ $(document).ready(function() {
     });
 
     document.getElementById('razorpayBtn').onclick = function (e) {
-      
-      console.log('hre the click');
+
+      let totalPriceElement = document.getElementById('price');
+      let orderprice = totalPriceElement.getAttribute('data-totalprice');
+     
+
       var options = {
-        "key": "rzp_test_rEnMoJdll9h6tI",
-        "amount": orderprice,
-        "currency": "INR",
-        "name": "POLAR",
-        "description": "Online Payment",
-        "image": "",
-        "order_id": orderId,
-        "handler": function (response) {
-          // Create a form dynamically
+          "key": "rzp_test_rEnMoJdll9h6tI",
+          "amount": orderprice,
+          "currency": "INR",
+          "name": "POLAR",
+          "description": "Online Payment",
+          "image": "",
+          "order_id": orderId,
+          "handler": function (response) {
           var form = document.createElement('form');
           form.method = 'post';
-          form.action = '/order2ForRazorPay';  // Replace with the URL you want to redirect to
-          // Create an input element to hold the payment ID
+          form.action = '/order2ForRazorPay';  
+         
+
+          var orderPriceInput = document.createElement('input');
+          orderPriceInput.type = 'hidden';
+          orderPriceInput.name = 'orderprice';
+          orderPriceInput.value = orderprice; 
+          form.appendChild(orderPriceInput);
+
+
           var paymentIdInput = document.createElement('input');
           paymentIdInput.type = 'hidden';
           paymentIdInput.name = 'razorpay_payment_id';
           paymentIdInput.value = response.razorpay_payment_id;
-          // Add the input element to the form
           form.appendChild(paymentIdInput);
-          // Add hidden input fields for payment mode and address details
+         
 
           var paymentModeInput = document.createElement('input');
           paymentModeInput.type = 'hidden';
           paymentModeInput.name = 'paymentMethod';
-          // paymentModeInput.value = document.getElementById('paymentMethodSelect').value; // Assumes the payment mode is selected through a dropdown
-          // form.appendChild(paymentModeInput);
+         
 
           var addressSelector = document.getElementById('addressSelector')
           var selectedAddressValue = addressSelector.value;
           var addressIdInput = document.createElement('input');
-            addressIdInput.type = 'hidden';
-            addressIdInput.name = 'address';
-            addressIdInput.value = selectedAddressValue; // This line needs to be changed
-            form.appendChild(addressIdInput);
+          addressIdInput.type = 'hidden';
+          addressIdInput.name = 'address';
+          addressIdInput.value = selectedAddressValue; 
+          form.appendChild(addressIdInput);
 
-
-          // Append the form to the body
-          document.body.appendChild(form);      // Submit the form
+         
+          document.body.appendChild(form);      
           form.submit();
         }
       };
-      var rzp1 = new Razorpay(options);
-      rzp1.on('payment.failed', function (response) {
-        alert(response.error.code);
-        // alert(response.error.description);
-        // alert(response.error.source);
-        // alert(response.error.step);
-        alert(response.error.reason);
-        alert(response.error.metadata.order_id);
-        alert(response.error.metadata.payment_id);
+          var rzp1 = new Razorpay(options);
+          rzp1.on('payment.failed', function (response) {
+          alert(response.error.code);
+          alert(response.error.reason);
+          alert(response.error.metadata.order_id);
+          alert(response.error.metadata.payment_id);
       });
       rzp1.open();
       e.preventDefault();

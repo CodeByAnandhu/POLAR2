@@ -230,6 +230,10 @@ button:hover {
                     <input type="date" id="expiryDate" name="expiryDate" value="<%= couponData.expiryDate.toISOString().substr(0, 10) %>" required>
                 </div>
                 <div class="form-group">
+                  <label for="purchaseAmount">Minimum Purchase Amount:</label>
+                  <input type="number" id="purchaseAmount" name="minimumPurchaseAmount" min="1" value="<%=couponData.minimumPurchaseAmount%>" required>
+               </div>
+                <div class="form-group">
                     <label for="purchaseAmount">Purchase Amount:</label>
                     <input type="number" id="purchaseAmount" name="purchaseAmount" min="1" value="<%=couponData.purchaseAmount%>" required>
                 </div>

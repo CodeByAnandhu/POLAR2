@@ -657,11 +657,20 @@ input[type="text"] {
 
 .totalprice{
   position: absolute;
+  bottom: 100px;
+  left: 546px;
+  font-size: 15px;
+  font-weight: 500;
+ color: #635d5d;
+}
+
+.Discounted{
+  position: absolute;
   bottom: 75px;
   left: 546px;
   font-size: 17px;
   font-weight: 500;
- color: #635d5d;
+  color: #15a04d;
 }
 
 .totalquantity{

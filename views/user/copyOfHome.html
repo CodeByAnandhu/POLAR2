@@ -1,41 +1,97 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Footer</title>
-    <style>
-        body {
-            margin: 0;
-            font-family: 'Poppins', sans-serif;
-        }
-        footer {
-            background-color: #000;
-            color: #fff;
-            padding: 20px 0;
-            text-align: center;
-        }
-        footer ul {
-            list-style-type: none;
-            padding: 0;
-            margin: 0;
-        }
-        footer ul li {
-            display: inline-block;
-            margin: 0 10px;
-        }
-        footer a {
-            color: #fff;
-            text-decoration: none;
-            font-size: 16px;
-        }
-        footer a:hover {
-            text-decoration: underline;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stylish Tooltip</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <style>
+        
+        .container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.tooltip {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 220px;
+  background-color: #ffffff;
+  color: #19a551;
+  text-align: center;
+  border-radius: 29px;
+  box-shadow: 25px 25px 52px 2px rgba(201,201,201,0.48);
+  padding: 25px 0;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: 50%;
+  margin-left: -105px;
+  opacity: 0;
+  transition: opacity 0.3s;
+  animation: tooltip-pop-in 0.30s ease forwards;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+  animation: tooltip-text-pop-in 0.30s ease forwards;
+}
+
+@keyframes tooltip-pop-in {
+  0% {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes tooltip-text-pop-in {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(-20px);
+  }
+}
+
+/* Custom styling */
+.tooltip {
+  padding: 10px;
+  border: 2px solid #333;
+  border-radius: 8px;
+  background-color: #fff;
+  color: #333;
+  font-weight: bold;
+  transition: all 0.3s ease-in-out;
+}
+
+.tooltip:hover {
+  background-color: #333;
+  color: #fff;
+}
 
 
+    </style>
+  <div class="container">
+    <div class="tooltip">
+      Hover over me
+      <span class="tooltiptext">This is a stylish tooltip!</span>
+    </div>
+  </div>
 </body>
 </html>

@@ -7,8 +7,12 @@ const storage = multer.diskStorage({
   },
   filename: function (req, file, cb) {
     let ext = path.extname(file.originalname);
-    cb(null, Date.now() + ext);
+    let uniqueFilename = Date.now() + '-' + Math.floor(Math.random() * 1000) + ext;
+    cb(null, Date.now() + uniqueFilename);
+   
   },
+
+  
 });
 
 const fileFilter = function (req, file, callback) {

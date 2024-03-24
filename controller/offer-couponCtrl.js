@@ -181,6 +181,7 @@ exports.postAddcoupon = async (req, res) => {
             discount : req.body.discount,
             expiryDate : req.body.expiryDate,
             purchaseAmount : req.body.purchaseAmount,
+            minimumPurchaseAmount : req.body.minimumPurchaseAmount
         }
         
 
@@ -192,6 +193,16 @@ exports.postAddcoupon = async (req, res) => {
         if(inputData.discount < 1 || inputData.discount > 100){
             req.flash("errorMessage", 'Discount should be between 1 and 100');
             return res.redirect("/coupon");
+        }
+
+        if(inputData.minimumPurchaseAmount < 1){
+            req.flash("errorMessage", 'Minimum Purchase Amount should be greater than 0');
+            return res.redirect("/coupon");
+        }
+        
+        if(inputData.purchaseAmount < inputData.minimumPurchaseAmount){
+          req.flash("errorMessage", 'Purchase Amount should be greater than Minimum Purchase Amount');
+          return res.redirect("/coupon");
         }
 
         if(inputData.purchaseAmount < 1){
@@ -692,6 +703,7 @@ exports.postEditCoupon = async (req, res) => {
       discount : req.body.discount,
       expiryDate : req.body.expiryDate,
       purchaseAmount : req.body.purchaseAmount,
+      minimumPurchaseAmount : req.body.minimumPurchaseAmount,
     }
 
     if( !inputData.couponCode || !inputData.discount || !inputData.expiryDate || !inputData.purchaseAmount){
@@ -716,6 +728,21 @@ exports.postEditCoupon = async (req, res) => {
 
     if(inputData.couponCode.trim() === "" || inputData.discount.trim() === "" || inputData.expiryDate.trim() === "" || inputData.purchaseAmount.trim() === ""){
       req.flash("errorMessage", "Please fill all the fields");
+      return res.redirect(`/editCoupon/${couponId}`);
+    }
+
+    if(Date.parse(inputData.expiryDate) < Date.now()){
+      req.flash("errorMessage", 'Expiry Date should be greater than today');
+      return res.redirect(`/editCoupon/${couponId}`);
+    }
+
+    if(inputData.minimumPurchaseAmount < 1){
+      req.flash("errorMessage", 'Minimum Purchase Amount should be greater than 0');
+      return res.redirect(`/editCoupon/${couponId}`);
+    }
+
+    if(inputData.purchaseAmount < inputData.minimumPurchaseAmount){
+      req.flash("errorMessage", 'Purchase Amount should be greater than Minimum Purchase Amount');
       return res.redirect(`/editCoupon/${couponId}`);
     }
 

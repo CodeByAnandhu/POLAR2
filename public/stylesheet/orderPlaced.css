@@ -95,8 +95,8 @@ tr{
 
 
 .download-button {
-    position: absolute;
-    top: 35.4rem; 
+    position: relative;
+    top: 45.4rem; 
     display: inline-block;
     padding: 5px 15px;
     color: #fff; 

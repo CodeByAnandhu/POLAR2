@@ -6,7 +6,8 @@ const PRODUCTDATA = require("../model/addProductModel");
 const Category  =  require("../model/categoryModel")
 const WHISHLIST = require("../model/wishListModel")
 const offer = require("../model/offerModel");
-
+const flash = require("connect-flash");
+const Cart = require("../model/cartModel");
 
 
 
@@ -28,6 +29,7 @@ exports.getHome = async(req, res) => {
 
   }catch(err){
     console.log(err);
+    
   }
 
 
@@ -109,7 +111,7 @@ exports.getClassic = async (req, res) => {
 
 } catch (error) {
     console.error(error);
-    res.status(500).send("Internal Server Error");
+    res.render("pageNotFound404");
 }
     
   };  
@@ -159,7 +161,7 @@ exports.sortClassic = async (req, res) => {
 
   }catch (error) {
   console.error(error);
-  res.status(500).send("Internal Server Error");
+  res.render("pageNotFound404");
 
    }
 
@@ -240,7 +242,7 @@ exports.sortClassic = async (req, res) => {
         res.render("Energy", { showProducts , productData});
     } catch (error) {
         console.error(error);
-        res.status(500).send("Internal Server Error");
+        res.render("pageNotFound404");
     }
 };
 
@@ -267,6 +269,7 @@ exports.getProductDetails = async (req, res) => {
       }
     } catch (error) {
       console.log("Error occure in getEditProduct", error);
+      res.render("pageNotFound404");
     }
   };
   
@@ -277,13 +280,15 @@ exports.getProductDetails = async (req, res) => {
       try {
            
           const user = req.session.user;
+          const errorMessage = req.flash("errorMessage");
+          const successMessage = req.flash("successMessage");
           const wishList = await WHISHLIST.find({ userId: user });
-          res.render("wishList",{wishList});
+          res.render("wishList",{wishList , errorMessage: errorMessage, successMessage: successMessage});
 
           }catch (error) {
 
           console.log("Error occure in getEditProduct", error);
-
+          res.render("pageNotFound404");
           }
   }
 
@@ -328,6 +333,7 @@ exports.getProductDetails = async (req, res) => {
 
         }catch(error){
             console.log("Error occure in getEditProduct", error);
+            res.render("pageNotFound404");
         }
       }
 ////////////////////////////////////////////////////////////////////////////  
@@ -374,6 +380,7 @@ exports.postWishList = async (req, res) => {
 
         }catch(error){
             console.log("Error occure in getEditProduct", error);
+            res.render("pageNotFound404");
         }
       }
 
@@ -395,10 +402,59 @@ exports.postWishList = async (req, res) => {
       
         } catch(error) {
           console.log("Error occurred in deleteWishList:", error);
-          return res.status(500).send("Internal Server Error");
+          res.render("pageNotFound404");
         }
       
-      };
+       };
+
+
+
+      exports.postAddToCartInWishList = async (req, res) => {
+
+        try {
+
+          const id = req.params.id;
+          const user = req.session.user;
+
+          const product = await PRODUCTDATA.findById(id);
+          if (!product) {
+          
+            req.flash("errorMessage", "Product not found");
+            return res.redirect("/wishList");
+          }
+          
+          const existingItem = await Cart.findOne({ productId: id, userId: user });
+          
+          if (existingItem) {
+            
+              req.flash("errorMessage", "Product Already In Cart");
+              return res.redirect("/wishList");
+
+          }else{
+
+            const newCart = new Cart({
+                userId : user,
+                productId: product._id,
+                productName: product.productName,
+                category: product.selectCategory, 
+                price: product.price,
+                quantity: 1,
+                productImage: product.productImage,
+            })
+
+            await Cart.create(newCart);
+
+          }
+
+          res.redirect("/cart");
+
+         }catch (error) {
+      
+          console.log("Error occure in getEditProduct", error);
+          res.render("pageNotFound404");
+         }
+
+    };   
       
 
 

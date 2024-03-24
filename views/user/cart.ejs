@@ -74,13 +74,17 @@
                                 </form>
                                
                     
-                                <% if (CategoryOfferPrice.find(offer => offer.category=="Sport") ) { %>
+                                <% if (CategoryOfferPrice.find(offer => offer.category=="Sport") || CategoryOfferPrice.find(offer => offer.category=="Classic")) { %>
                                     
                                     <div class="ProductName">
                                         <%= item.productName %>
                                     </div>
                                     <div class="priceOftheProduct">₹<%= discountedPrices[index] %></div>
                                     <div class="imagesCard">
+                                       
+                                        <%if(item.productImage.length >1){%>
+                                            <img class="PrImage" src="<%= item.productImage[0] %>" alt="">
+                                            <%}%>
                                         <img class="PrImage" src="<%= item.productImage %>" alt="">
                                     </div>
                                 <% } else { %>
@@ -90,6 +94,9 @@
                                     </div>
                                     <div class="priceOftheProduct">₹<%= item.price %></div>
                                     <div class="imagesCard">
+                                        <%if(item.productImage.length >1){%>
+                                            <img class="PrImage" src="<%= item.productImage[0] %>" alt="">
+                                            <%}%>
                                         <img class="PrImage" src="<%= item.productImage %>" alt="">
                                     </div>
                                 <% } %>
@@ -127,7 +134,13 @@
                 </span>)</h3>
             <h3 class="price" id="totalPriceElement">Total price: ₹<span id="totalPricePlaceholder">
                
-                        <%= finalPrice %>
+                <% if (Number.isNaN(finalPrice)) { %>
+                    <%= totalPrice %>
+                <% } else { %>
+                    <%= finalPrice %>
+                <% } %>
+                
+                
                        
                 </span></h3>
 
@@ -197,12 +210,14 @@
         headers: {
             'Content-Type': 'application/json',
         },
+
+      
         body: JSON.stringify({ itemId: itemId, quantity: newQuantity }),
     })
         .then(response => response.json())
         .then(data => {
             if (data.success) {
-                // Update total price in local storage
+                
                 localStorage.setItem('totalPrice', data.totalPrice.toFixed(2));
                 // Update total price element
                 var totalPriceElement = document.getElementById('totalPriceElement');

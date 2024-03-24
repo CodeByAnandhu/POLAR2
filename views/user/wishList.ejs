@@ -36,6 +36,36 @@
   <% } %>
 
   
+
+  
+       <!-- Popup Messsege -->
+<% if (typeof errorMessage !== 'undefined' && errorMessage.length > 0) { %>
+  <div id="popupmessege" class="popup-containerForError">
+      <h4><%= errorMessage %> <i class="fa-solid fa-circle-exclamation"></i></h4>
+    </div>
+<% } %>
+
+<% if (typeof successMessage !== 'undefined' && successMessage.length > 0) { %>
+  <div id="popupmessege" class="popup-containerForSuccess">
+      <h4> <%= successMessage %>  <i class="fa-solid fa-circle-check"></i></h4>
+    </div>
+<% } %>
+
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var popup = document.getElementById('popupmessege');
+    setTimeout(function() {
+      popup.style.animation = 'popOut 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards';
+      setTimeout(function() {
+        popup.remove();
+      }, 300);
+    }, 4000);
+  });
+</script>
+<!-- Popup Messsege -->
+
+
     
 
        <% wishList.forEach((item)=>{%>
@@ -55,9 +85,12 @@
             <div class="priceOftheProduct">₹<%= item.price%></div>
             <div class="imagesCard">
               <img class="PrImage" src="<%= item.productImage %>" alt="">
+              <%if(item.productImage.length >1){%>
+                <img class="PrImage" src="<%= item.productImage[0] %>" alt="">
+              <%}%>
             </div>  
             <div class="text-center">
-           <form action="/addToCart/<%= item.productId%>" method="POST">
+           <form action="/addToCartInWishList/<%= item.productId%>" method="POST">
             <button type="submit" class="btn cartBtn" name="addToCart">AddToCart</button>
            </form>
             </div>

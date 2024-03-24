@@ -342,9 +342,9 @@ transition: background-color .50s ease, color 0.3s ease;
 
 .couponcode{
     position: relative;
-    top: 5rem;
+    top: 1.8rem;
     font-weight: 500;
-    left: 10px;
+    left: -37px;
     font-size: 13px;
     color: #d3d3d3;
 }
@@ -453,3 +453,67 @@ transition: background-color .50s ease, color 0.3s ease;
     opacity: 1;
   }
 /* Refferal */
+
+
+
+
+
+
+/* Tool tip */
+
+.tooltip{
+  z-index: 10;
+  width: 16rem;
+  padding: 3rem;
+ 
+}
+
+.tooltiptext {
+  visibility: hidden;
+  font-size: 14px;
+  width: 180px;
+  background-color: #f5f5f5;
+  color: #19a551;
+  text-align: center;
+  border-radius: 29px;
+  box-shadow: 25px 25px 52px 2px rgba(144, 144, 144, 0.48);
+  padding: 10px 0;
+  position: absolute;
+  z-index: 1;
+  bottom: 1rem;
+  left: 86.3%;
+  opacity: 0;
+  transition: opacity 0.3s;
+  animation: tooltip-pop-in 0.30s ease forwards;
+}
+
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+  animation: tooltip-text-pop-in 0.30s ease forwards;
+}
+
+
+@keyframes tooltip-pop-in {
+  0% {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes tooltip-text-pop-in {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(-20px);
+  }
+}
+/* Tool tip */

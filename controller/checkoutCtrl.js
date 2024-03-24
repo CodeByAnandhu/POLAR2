@@ -26,28 +26,50 @@ exports.getCheckout = async (req, res) => {
 
     try {
 
+      const userId = req.session.user; 
+
       const CategoryOfferPrice = await offer.find({ isActive: true });
+
       const categoryOffer = CategoryOfferPrice.map((item) => item.discount)[0];
+
       const productData = await PRODUCTDATA.find({ isVisible: true, isActive: true});
+
       var errorMessage = req.flash("errorMessage");
       var successMessage = req.flash("successMessage");
-      const userId = req.session.user; 
+
+      
+
       const userCart = await cart.find({ userId: userId });
+
       const userData = await User.findOne({ _id: userId });
+
       const walletBalance = userData.walletAmount;
       
+
       let totalPrice = 0;
+
       let totalQuantity = 0; 
+
       let discountedTotalPrice = 0; 
+
       let discountedPrices = []; 
+
+
       userCart.forEach(item => {
+
           let itemTotalPrice = item.price * item.quantity;
+
           totalPrice += itemTotalPrice;
+
           totalQuantity += item.quantity; 
-          if (productData.find(product => product.productName === item.productName) || CategoryOfferPrice.find(offer => offer.category === item.category)) {
+
+          if ( CategoryOfferPrice.find(offer => offer.category === item.category)) {
+
               let discountedPrice = item.price - (categoryOffer * item.price / 100);
+
               discountedPrices.push(discountedPrice); 
-              totalPrice= discountedTotalPrice += discountedPrice * item.quantity; 
+
+              discountedTotalPrice += discountedPrice * item.quantity; 
               
           } else {
               discountedPrices.push(item.price); 
@@ -55,19 +77,25 @@ exports.getCheckout = async (req, res) => {
       });
     
       
-
+      const finalPrice = totalPrice - discountedTotalPrice;
 
       const products = await product.find(); 
       const addressData = await address.find({ userId: userId });
       const cartData = await cart.find();
-
+      
+      // Dummy
+      const discontAfterPrice = 0;
+      // Dummy
+      
 
 
       res.render("checkOutPage", {  
 
         addressData, 
         userCart , 
-        products, 
+        products,
+        discontAfterPrice:discontAfterPrice,
+        finalPrice:finalPrice, 
         totalPrice: totalPrice, 
         totalQuantity: totalQuantity,
         errorMessage:errorMessage, 
@@ -123,7 +151,6 @@ exports.getCheckout = async (req, res) => {
 
         const totalPrice = orderDetails[0].totalPrice;
         const totalQuantity = orderDetails[0].totalQuantity;
-        console.log("totalPrice",totalPrice, "totalQuantity",totalQuantity);
 
         res.render("orderPlaced", { orderDetails , totalPrice , totalQuantity});
     } catch (error) {
@@ -393,7 +420,7 @@ exports.postOrder = async (req, res) => {
             let itemTotalPrice = item.price * item.quantity;
             totalPrice += itemTotalPrice;
             totalQuantity += item.quantity; 
-            if (productData.find(product => product.productName === item.productName) || CategoryOfferPrice.find(offer => offer.category === item.category)) {
+            if ( CategoryOfferPrice.find(offer => offer.category === item.category)) {
                 discountedPrice = item.price - (categoryOffer * item.price / 100);
                 discountedPrices.push(discountedPrice); 
                 totalPrice= discountedTotalPrice += discountedPrice * item.quantity; 
@@ -565,12 +592,14 @@ exports.postOrder = async (req, res) => {
 
 
 exports.postOrder2ForRazorPay = async (req,res) => {
+  
   try {
 
       const userId = req.session.user;
       const userCart = await cart.find({ userId: userId });
       const productDataInCollection = await product.find();
-      const { razorpay_payment_id, address } = req.body;
+      const { razorpay_payment_id, address ,orderprice} = req.body;
+      
 
       const submittedData = {
           userId: userId,
@@ -639,7 +668,7 @@ exports.postOrder2ForRazorPay = async (req,res) => {
                 };
             }),
             totalQuantity: totalQuantity, 
-            totalPrice: totalPrice, 
+            totalPrice: orderprice, 
             address: {
                 name: fetchedAddressData.name,
                 address: fetchedAddressData.address,
@@ -672,7 +701,7 @@ exports.postOrder2ForRazorPay = async (req,res) => {
              
           })),
           totalQuantity: userCart.reduce((total, item) => total + item.quantity, 0), 
-          totalPrice: userCart.reduce((total, item) => total + (item.quantity * item.price), 0), 
+          totalPrice:orderprice, 
           address: {
               name: fetchedAddressData.name,  
               address: fetchedAddressData.address,
@@ -689,9 +718,6 @@ exports.postOrder2ForRazorPay = async (req,res) => {
         }
 
 
-
-
-        
         const minusQuantityPromises = userCart.map(async (item) => {
         const productToUpdate = productDataInCollection.find(product => product._id.toString() === item.productId.toString());
         if (productToUpdate && productToUpdate.stockCount >= item.quantity) {

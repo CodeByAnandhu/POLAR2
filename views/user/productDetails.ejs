@@ -29,7 +29,6 @@
 
 
     <div class="Main">
-         
         <div class="square">
             <h4 class="priceProduct">₹<%=productdetails.price%>.0</h4>
             <div class="buttonss">
@@ -42,19 +41,38 @@
                    </form>
             </div>
            
-                
-            <img class="imgMain" src="<%= productdetails.productImage %>" alt="Chocolate">
+               
+            <img class="imgMain" src="<%= productdetails.productImage[0] %>" alt="Product Image">
+
+            <!-- Thumbnail images -->
+            <% if (productdetails.productImage.length > 1) { %>
             <div class="imgsm1">
-            <img class="imgsm" src="<%= productdetails.productImage %>" alt="Chocolate">
-            <img class="imgsm" src="<%= productdetails.productImage %>" alt="Chocolate">
-            <img class="imgsm" src="<%= productdetails.productImage %>" alt="Chocolate">
-           </div>
+                <% for (let i = 0; i < productdetails.productImage.length; i++) { %>
+                    <% if (productdetails.productImage[i]) { %>
+                        <img class="imgsm" src="<%= productdetails.productImage[i] %>" alt="Thumbnail Image">
+                    <% } else { %>
+                        <!-- Handle empty or invalid image paths -->
+                        <p>No image available</p>
+                    <% } %>
+                <% } %>
+            </div>
+            <% }else{ %>
+                <div class="imgsm1">
+                <img class="imgsm" src="<%= productdetails.productImage%>" alt="Thumbnail Image">
+                <img class="imgsm" src="<%= productdetails.productImage%>" alt="Thumbnail Image">
+                <img class="imgsm" src="<%= productdetails.productImage%>" alt="Thumbnail Image">
+                </div>
+            <%} %>
+                
+          
+
         </div>
         <div class="cardsm">
             <div class="card"></div>
             <div class="card1"></div>
             <div class="card1"></div>
             <div class="card1"></div>
+            
             </div>
         <div class="discription">
 

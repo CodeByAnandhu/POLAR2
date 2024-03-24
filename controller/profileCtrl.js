@@ -490,32 +490,18 @@ exports.withdrawalAmount = async (req, res) => {
 exports.postCouponApply = async (req, res) => {
     try {
 
+        const usersId = req.session.user; 
         //
         const CategoryOfferPrice = await offer.find({ isActive: true });
-        let discountedPrices = [];
+        const categoryOffer = CategoryOfferPrice.map((item) => item.discount)[0];
         //
-        const walletBalance  = await wallet.findOne({ user: req.session.user });
+        const walletBalance  = await User.findOne({ _id: req.session.user });
         var errorMessage = req.flash("errorMessage");
         var successMessage = req.flash("successMessage");
         const products = await product.find();
         const addressData = await Address.find();
         const couponCode = req.body.couponCode;
         const cartDatas = await Cart.find({ userId: req.session.user });
-
-
-        // tryy
-        const userId = req.session.user; 
-        const userCart = await Cart.find({ userId: userId });
-       
-        
-        let totalPrice = 0;
-        let totalQuantity = 0; 
-        userCart.forEach(item => {
-            totalPrice += item.price * item.quantity;
-            totalQuantity += item.quantity; 
-        });
-        
-        //tryy
 
 
         if (!cartDatas || cartDatas.length === 0) {
@@ -534,9 +520,9 @@ exports.postCouponApply = async (req, res) => {
         
         if (couponsData) {
             const existingCouponOrders = await Order.findOne(
-                { "products.couponCode": couponsData.couponCode },
+                { userId: usersId, "products.couponCode": couponsData.couponCode },
                 { "products.couponCode": 1, _id: 0 }
-            );
+            );            
           
             if (existingCouponOrders && existingCouponOrders.products && existingCouponOrders.products[0].couponCode === couponsData.couponCode) {
                 req.flash("errorMessage", 'Coupon already used');
@@ -552,14 +538,19 @@ exports.postCouponApply = async (req, res) => {
                 req.flash("errorMessage", 'Maximum purchase amount reached');
                 return res.redirect("/checkout");
             }
+            let mimimumpurchaseAmount = couponsData.minimumPurchaseAmount;
+            if(couponsData.minimumPurchaseAmount > cartTotalPrice){
+                req.flash("errorMessage", `Minimum purchase amount ₹ ${mimimumpurchaseAmount}`);
+                return res.redirect("/checkout");
+            }
         
         
-
 
             const PercentageOfCoupon = couponsData.discount;
             const userId = req.session.user;
             const userCart = await Cart.find({ userId: userId });
-
+            
+            let finalPrice = 0;
             let totalPrice = 0;
             let totalQuantity = 0;
             userCart.forEach(item => {
@@ -567,15 +558,39 @@ exports.postCouponApply = async (req, res) => {
                 totalQuantity += item.quantity;
             });
 
+            
+
+            let discountedPrices = [];
+            userCart.forEach(item => {
+
+                let itemTotalPrice = item.price * item.quantity;
+
+                totalPrice += itemTotalPrice;
+
+                totalQuantity += item.quantity; 
+
+                if ( CategoryOfferPrice.find(offer => offer.category === item.category)) {
+
+                    let discountedPrice = item.price - (categoryOffer * item.price / 100);
+
+                    discountedPrices.push(discountedPrice); 
+                  
+                    
+                } else {
+                    discountedPrices.push(item.price); 
+                }
+            });
+
+
             const totalDiscount = (cartTotalPrice * PercentageOfCoupon) / 100;
 
             const discontAfterPrice = cartTotalPrice - totalDiscount;
-
-            req.flash("successMessage", 'Coupon applied successfully');
             const cartData = await Cart.find();
+            // req.flash("successMessage", 'Coupon applied successfully');
+            
 
             res.render("checkOutPage", { 
-
+   
                 discontAfterPrice: discontAfterPrice, 
                 cartData, 
                 userCart, 
@@ -589,6 +604,7 @@ exports.postCouponApply = async (req, res) => {
                 CategoryOfferPrice,
                 discountedPrices,
                 walletBalance,
+                finalPrice:finalPrice,
             })
 
 
@@ -619,9 +635,12 @@ exports.postCouponApply = async (req, res) => {
 
 
             
-            const existingCouponOrders = await Order.find({ "products.couponCode": refferalData.refferalCode });
-
-            if (existingCouponOrders.length > 0) {
+            const existingCouponOrders = await Order.findOne({
+                userId: UserSessionId,
+                "products.couponCode": refferalData.refferalCode
+              });
+             
+            if (existingCouponOrders) {
 
                 req.flash("errorMessage", 'Coupon already used');
                 return res.redirect("/checkout");
@@ -638,19 +657,35 @@ exports.postCouponApply = async (req, res) => {
 
             const userId = req.session.user;
             const userCart = await Cart.find({ userId: userId });
-
+            let finalPrice = 0;
             let totalPrice = 0;
             let totalQuantity = 0;
+            let discountedPrices = [];
             userCart.forEach(item => {
-                totalPrice += item.price * item.quantity;
-                totalQuantity += item.quantity;
+
+                let itemTotalPrice = item.price * item.quantity;
+
+                totalPrice += itemTotalPrice;
+
+                totalQuantity += item.quantity; 
+
+                if ( CategoryOfferPrice.find(offer => offer.category === item.category)) {
+
+                    let discountedPrice = item.price - (categoryOffer * item.price / 100);
+
+                    discountedPrices.push(discountedPrice); 
+                  
+                    
+                } else {
+                    discountedPrices.push(item.price); 
+                }
             });
 
             const totalDiscount = (cartTotalPrice * PercentageOfCoupon) / 100;
 
             const discontAfterPrice = cartTotalPrice - totalDiscount;
-
-            req.flash("successMessage", 'Coupon applied successfully');
+           
+            // req.flash("successMessage", 'Coupon applied successfully');
             const cartData = await Cart.find();
         
 
@@ -675,6 +710,8 @@ exports.postCouponApply = async (req, res) => {
                 couponCode,
                 CategoryOfferPrice,
                 discountedPrices, 
+                walletBalance,
+                finalPrice:finalPrice,
             
             })
 
@@ -694,13 +731,15 @@ exports.postCouponApply = async (req, res) => {
 exports.cancelCoupon = async (req, res) => {
     try {
 
+        if (req.session.refferalPercentage) {
+            delete req.session.refferalPercentage;
+        }
+        
         req.flash("successMessage", 'Coupon cancelled successfully');
         
         res.redirect("/checkout");
 
-        if (req.session.refferalPercentage) {
-            delete req.session.refferalPercentage;
-        }
+      
      
 
     } catch (err) {

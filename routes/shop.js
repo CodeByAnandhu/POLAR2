@@ -47,11 +47,13 @@ router.get("/addToWishlist/:id",sessionControll,addToWishlist);
 const {
     postWishList,
     deleteWishList,
+    postAddToCartInWishList,
 }=require("../controller/shopCtrl");
 
 
 router.post("/wishlist/:id",sessionControll,postWishList);
 router.post("/deleteWishList/:id",sessionControll,deleteWishList);
+router.post("/addToCartInWishList/:id",sessionControll,postAddToCartInWishList);
 
 //////////////////////////////////////////////////////////////
 

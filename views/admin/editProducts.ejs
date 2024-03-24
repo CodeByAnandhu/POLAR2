@@ -151,10 +151,10 @@
                     <input type="text" placeholder="" value="<%=items.price%>" name="price" min="1">
                 </div>
                
-                <div class="productOffer">
+                <!-- <div class="productOffer">
                     <label>Add Product Offer</label>
                     <input type="number" placeholder="" value="<%=items.productOffer%>" name="productOffer" max="100" min="0">
-                </div>
+                </div> -->
 
                 <div class="Discription">
                     <label>Discription</label>
@@ -251,8 +251,8 @@
                     img.onload = function() {
                         // Initialize Cropper on the image
                         var cropper = new Cropper(img, {
-                            aspectRatio: 4 / 4, 
-                            viewMode: 3, 
+                            aspectRatio: 7 / 7,
+                            viewMode: 2, 
                             autoCropArea: 1, 
                         });
                     };

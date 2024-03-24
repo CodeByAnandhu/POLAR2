@@ -133,7 +133,7 @@
                     <label for="productImage" id="productImagesLabel">Product Images:</label>
                     <div class="image-preview">
                         <label id="PreviewOfImage">Image Preview:</label>
-                        <img id="selectedImagePreview" src="" alt="Selected Image">
+                        <img id="selectedImagePreview" src="" >
                     </div>
                     
                     
@@ -211,9 +211,9 @@
                 img.onload = function() {
                     // Initialize Cropper on the image
                     var cropper = new Cropper(img, {
-                        aspectRatio: 4 / 3, // Example: 4:3 aspect ratio
-                        viewMode: 2, // Show the cropped area in the preview
-                        autoCropArea: 1, // Always start with a full crop area
+                        aspectRatio: 7 / 7,
+                        viewMode:  2, 
+                        autoCropArea: 1, 
                     });
                 };
 

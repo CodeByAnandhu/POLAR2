@@ -112,6 +112,9 @@ exports.AddProductPost = async (req, res) => {
           productImage = fileUrls;
       }
      
+      console.log("productImage", productImage);
+
+
       const addingTime = new Date(); 
 
       const data = {
@@ -222,6 +225,13 @@ exports.AddProductPost = async (req, res) => {
         req.flash("errorMessage", "Please fill the product price");
         return res.redirect(`/editProduct/${req.params.id}`);
       }
+
+      if(priceOfProduct < 0){
+        req.flash("errorMessage", "Negative price not allowed");
+        return res.redirect(`/editProduct/${req.params.id}`);
+      }
+
+
 
 
 

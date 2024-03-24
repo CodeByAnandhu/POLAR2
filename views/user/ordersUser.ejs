@@ -93,6 +93,9 @@
                      
                       <div class="productImg">
                        <img src="<%= element.productImage %>" alt="">
+                       <%if(element.productImage.length > 1){%>
+                        <img src="<%= element.productImage[0] %>" alt="">
+                        <%}%>
                         </div>
                          <div class="productDetails">
                           <!-- <p class="orderId">Order id:<%= items.orderNumber %></p> -->
