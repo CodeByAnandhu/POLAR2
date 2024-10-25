@@ -1,97 +1,177 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Stylish Tooltip</title>
-  <link rel="stylesheet" href="styles.css">
-</head>
-<body>
+    <title>Particle Effect</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
     <style>
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
         
-        .container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-}
+        body, #particles-container {
+            background-color: #000000   ;
+            font-family: "Poppins", sans-serif;
+            height: 100rem;
+        }
 
-.tooltip {
-  position: relative;
-  display: inline-block;
-  cursor: pointer;
-}
+        .card {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: #090f18;
+            position: absolute;
+            top: 50%;
+            left: 20%;
+            transform: translate(-50%, -50%);
+            width: 300px;
+            height: 300px;
+            border-radius: 16px;
+            /* box-shadow: 0 0 30px rgba(26, 26, 26, 0.1); */
+            overflow: hidden;
+            transition: 0.5s ease-in;
+            padding: 10px;
 
-.tooltip .tooltiptext {
-  visibility: hidden;
-  width: 220px;
-  background-color: #ffffff;
-  color: #19a551;
-  text-align: center;
-  border-radius: 29px;
-  box-shadow: 25px 25px 52px 2px rgba(201,201,201,0.48);
-  padding: 25px 0;
-  position: absolute;
-  z-index: 1;
-  bottom: 125%;
-  left: 50%;
-  margin-left: -105px;
-  opacity: 0;
-  transition: opacity 0.3s;
-  animation: tooltip-pop-in 0.30s ease forwards;
-}
+        }
+  
+        .card h2{
 
-.tooltip:hover .tooltiptext {
-  visibility: visible;
-  opacity: 1;
-  animation: tooltip-text-pop-in 0.30s ease forwards;
-}
+            color: #acc2ef;
+            font-weight: 600;
+           
+        }
 
-@keyframes tooltip-pop-in {
-  0% {
-    opacity: 0;
-    transform: translateY(-10px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
+        .card p{
 
-@keyframes tooltip-text-pop-in {
-  0% {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(-20px);
-  }
-}
+            color: #cee8ff;
+            font-size: 14px;    
+            padding: 20px;
 
-/* Custom styling */
-.tooltip {
-  padding: 10px;
-  border: 2px solid #333;
-  border-radius: 8px;
-  background-color: #fff;
-  color: #333;
-  font-weight: bold;
-  transition: all 0.3s ease-in-out;
-}
-
-.tooltip:hover {
-  background-color: #333;
-  color: #fff;
-}
-
+        }
 
     </style>
-  <div class="container">
-    <div class="tooltip">
-      Hover over me
-      <span class="tooltiptext">This is a stylish tooltip!</span>
+</head>
+<body>
+
+
+    <div class="card">
+      <h2>Hello World</h2>
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid placeat a laborum explicabo mollitia tempore odit quaerat nam hic deserunt.</p>
     </div>
-  </div>
+    
+    <div id="particles-container"></div>
+
+    <script>
+        particlesJS("particles-container", {
+    "particles": {
+        "number": {
+            "value": 80,
+            "density": {
+                "enable": true,
+                "value_area": 800
+            }
+        },
+        "color": {
+            "value": "#ffffff"
+        },
+        "shape": {
+            "type": "circle",
+            "stroke": {
+                "width": 0,
+                "color": "#000000"
+            },
+            "polygon": {
+                "nb_sides": 5
+            },
+            "image": {
+                "src": "",
+                "width": 100,
+                "height": 100
+            }
+        },
+        "opacity": {
+            "value": 0.5,
+            "random": false,
+            "anim": {
+                "enable": false,
+                "speed": 1,
+                "opacity_min": 0.1,
+                "sync": false
+            }
+        },
+        "size": {
+            "value": 5,
+            "random": true,
+            "anim": {
+                "enable": false,
+                "speed": 40,
+                "size_min": 0.1,
+                "sync": false
+            }
+        },
+        "line_linked": {
+            "enable": true,
+            "distance": 150,
+            "color": "#ffffff",
+            "opacity": 0.4,
+            "width": 1
+        },
+        "move": {
+            "enable": true,
+            "speed": 1,
+            "direction": "none",
+            "random": false,
+            "straight": false,
+            "out_mode": "out",
+            "bounce": false,
+            "attract": {
+                "enable": false,
+                "rotateX": 600,
+                "rotateY": 600
+            }
+        }
+    },
+    "interactivity": {
+        "detect_on": "canvas",
+        "events": {
+            "onhover": {
+                "enable": true,
+                "mode": "grab"
+            },
+            "onclick": {
+                "enable": true,
+                "mode": "push"
+            },
+            "resize": true
+        },
+        "modes": {
+            "grab": {
+                "distance": 140,
+                "line_linked": {
+                    "opacity": 1
+                }
+            },
+            "bubble": {
+                "distance": 400,
+                "size": 40,
+                "duration": 2,
+                "opacity": 8,
+                "speed": 3
+            },
+            "repulse": {
+                "distance": 200,
+                "duration": 0.4
+            },
+            "push": {
+                "particles_nb": 4
+            },
+            "remove": {
+                "particles_nb": 2
+            }
+        }
+    },
+    "retina_detect": true
+    }); </script>
+   
+
 </body>
 </html>

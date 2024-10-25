@@ -8,7 +8,7 @@
     "start": "nodemon index.js",
     "server": "nodemon index.js"
   },
-  "author": "",
+  "author": "AnandhuAjiGopinath",
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.1.1",

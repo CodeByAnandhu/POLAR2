@@ -487,7 +487,7 @@ exports.withdrawalAmount = async (req, res) => {
     }
 }
 
-exports.postCouponApply = async (req, res) => {
+exports.postCouponApply = async (req, res) => { 
     try {
 
         const usersId = req.session.user; 
