@@ -6,7 +6,7 @@ const ADMINDATA = require("../model/adminModel");
   const Auth = await ADMINDATA.find({_id:req.session.Admin});
     if (Auth&&req.session.Admin) {
      next();
-  } else {
+  } else { 
     res.redirect("/adminLogin");
   }
  }
